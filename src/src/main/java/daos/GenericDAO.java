@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 @SuppressWarnings("unchecked")
-public class GenericDAO<PK, T> {
+abstract class GenericDAO<PK, T> {
 
 	private EntityManager entityManager;
 
@@ -15,25 +15,15 @@ public class GenericDAO<PK, T> {
 	}
 
 	public void save(T entity) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(entity);
 		entityManager.getTransaction().commit();
-		entityManager.close();
-		// getTypeClass().getName();
 	}
 
 	public void update(T entity) {
-		entityManager.getTransaction().begin();
-		entityManager.getTransaction().commit();
 		entityManager.merge(entity);
-		entityManager.close();
 	}
 
 	public void delete(T entity) {
-		entityManager.getTransaction().begin();
-		entityManager.getTransaction().commit();
 		entityManager.remove(entity);
-		entityManager.close();
 	}
 
 	public List<T> findAll() {
