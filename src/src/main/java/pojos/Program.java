@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -13,7 +13,7 @@ public class Program {
 
 	public static void main(String[] args) {
 
-		factory = Persistence.createEntityManagerFactory("jpa-example");
+		factory = Persistence.createEntityManagerFactory("jpa");
 
 		Program p = new Program();
 		p.addUsuario("Poliana", "Oliveira", 'M', 16, "buum",
@@ -87,7 +87,7 @@ public class Program {
 		manager.persist(arthur);
 		manager.getTransaction().commit();
 
-		System.out.println("ID do usuário = " + arthur.getIDUsuario());
+		System.out.println("ID do usuário = " + arthur.getID());
 
 		manager.close();
 	}
@@ -106,7 +106,7 @@ public class Program {
 		manager.getTransaction().commit();
 
 		System.out
-				.println("ID do hemocentro = " + hemocentro.getIDHemocentro());
+				.println("ID do hemocentro = " + hemocentro.getID());
 
 		manager.close();
 	}
@@ -138,7 +138,7 @@ public class Program {
 		manager.persist(endereco);
 		manager.getTransaction().commit();
 
-		System.out.println("ID do hemocentro = " + endereco.getIDEndereco());
+		System.out.println("ID do hemocentro = " + endereco.getID());
 
 		manager.close();
 	}
@@ -164,7 +164,7 @@ public class Program {
 		manager.getTransaction().commit();
 
 		System.out
-				.println("ID do comentario = " + comentario.getIDComentario());
+				.println("ID do comentario = " + comentario.getID());
 
 		manager.close();
 	}
@@ -190,7 +190,7 @@ public class Program {
 		manager.persist(doacao);
 		manager.getTransaction().commit();
 
-		System.out.println("ID do doacao = " + doacao.getIDDoacao());
+		System.out.println("ID do doacao = " + doacao.getID());
 
 		manager.close();
 	}
@@ -222,7 +222,7 @@ public class Program {
 		manager.persist(evento);
 		manager.getTransaction().commit();
 
-		System.out.println("ID do evento = " + evento.getIDEvento());
+		System.out.println("ID do evento = " + evento.getID());
 
 		manager.close();
 	}
@@ -250,7 +250,7 @@ public class Program {
 		manager.getTransaction().commit();
 
 		System.out.println("ID da notificacao = "
-				+ notificacao.getIDNotificacao());
+				+ notificacao.getID());
 
 		manager.close();
 	}
@@ -276,7 +276,7 @@ public class Program {
 		manager.getTransaction().commit();
 
 		System.out.println("ID da tipo sanguineo = "
-				+ tipoSanguineo.getIDTipoSanguineo());
+				+ tipoSanguineo.getID());
 
 		manager.close();
 	}

@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import java.util.Collection;
 
@@ -12,31 +12,30 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Notificacao {
+public class Notificacao implements Entidade {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_notificacao")
-	private Long IDNotificacao;
+	@Column(name = "id_notificacao")
+	private Long ID;
 	private String Nome;
 	private String Descricao;
 	private String Tipo;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_evento")
+	@JoinColumn(name = "id_evento")
 	private Evento evento;
-	
+
 	@ManyToMany
-	@JoinTable(name="notificacao_tipoSanguineo", joinColumns=@JoinColumn(name="id_notificacao"),
-	inverseJoinColumns=@JoinColumn(name="id_tipo"))
+	@JoinTable(name = "notificacao_tipoSanguineo", joinColumns = @JoinColumn(name = "id_notificacao"), inverseJoinColumns = @JoinColumn(name = "id_tipo"))
 	private Collection<TipoSanguineo> tipoSanguineo;
-	
-	public Long getIDNotificacao() {
-		return IDNotificacao;
+
+	public Long getID() {
+		return ID;
 	}
 
-	public void setIDNotificacao(Long iDNotificacao) {
-		IDNotificacao = iDNotificacao;
+	public void setID(Long iDNotificacao) {
+		ID = iDNotificacao;
 	}
 
 	public String getNome() {

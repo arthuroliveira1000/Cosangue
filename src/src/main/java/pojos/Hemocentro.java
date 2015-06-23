@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import java.util.Collection;
 
@@ -10,29 +10,29 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Hemocentro {
+public class Hemocentro implements Entidade {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_hemocentro")
-	private Long IDHemocentro;
+	@Column(name = "id_hemocentro")
+	private Long ID;
 	private String Nome;
 	private String Telefone;
 	private String Login;
 	private String Senha;
-	
-	@OneToOne(mappedBy="hemocentro")
+
+	@OneToOne(mappedBy = "hemocentro")
 	private Endereco endereco;
-	
-	@OneToMany(mappedBy="hemocentro")
+
+	@OneToMany(mappedBy = "hemocentro")
 	private Collection<Evento> evento;
 
-	public Long getIDHemocentro() {
-		return IDHemocentro;
+	public Long getID() {
+		return ID;
 	}
 
-	public void setIDHemocentro(Long iDHemocentro) {
-		IDHemocentro = iDHemocentro;
+	public void setID(Long iDHemocentro) {
+		ID = iDHemocentro;
 	}
 
 	public String getNome() {

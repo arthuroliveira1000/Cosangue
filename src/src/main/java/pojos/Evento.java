@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -14,12 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Evento {
+public class Evento implements Entidade {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_evento")
-	private Long IDEvento;
+	@Column(name = "id_evento")
+	private Long ID;
 	private String Nome;
 	private String Tipo;
 	private String Descricao;
@@ -27,34 +27,32 @@ public class Evento {
 	private Time Horario;
 	private int Confirmados;
 	private int Reportacoes;
-	
-	@OneToOne(mappedBy="evento")
+
+	@OneToOne(mappedBy = "evento")
 	private Endereco endereco;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
-	@OneToMany(mappedBy="evento")
+
+	@OneToMany(mappedBy = "evento")
 	private Collection<Comentario> comentario;
-	
-	@OneToMany(mappedBy="evento")
+
+	@OneToMany(mappedBy = "evento")
 	private Collection<Notificacao> notificacao;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_hemocentro")
+	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;
-	
 
-	public Long getIDEvento() {
-		return IDEvento;
+	public Long getID() {
+		return ID;
 	}
 
-	public void setIDEvento(Long iDEvento) {
-		IDEvento = iDEvento;
+	public void setID(Long iDEvento) {
+		ID = iDEvento;
 	}
-	
-	
+
 	public String getNome() {
 		return Nome;
 	}
@@ -62,7 +60,7 @@ public class Evento {
 	public void setNome(String nome) {
 		Nome = nome;
 	}
-	
+
 	public String getTipo() {
 		return Tipo;
 	}
@@ -70,7 +68,7 @@ public class Evento {
 	public void setTipo(String tipo) {
 		Tipo = tipo;
 	}
-	
+
 	public String getDescricao() {
 		return Descricao;
 	}
@@ -78,7 +76,6 @@ public class Evento {
 	public void setDescricao(String descricao) {
 		Descricao = descricao;
 	}
-
 
 	public int getConfirmados() {
 		return Confirmados;
@@ -91,7 +88,7 @@ public class Evento {
 	public int getReportacoes() {
 		return Reportacoes;
 	}
-	
+
 	public void setReportacoes(int reportacoes) {
 		Reportacoes = reportacoes;
 	}
@@ -111,5 +108,5 @@ public class Evento {
 	public void setHorario(Time horario) {
 		Horario = horario;
 	}
-	
+
 }

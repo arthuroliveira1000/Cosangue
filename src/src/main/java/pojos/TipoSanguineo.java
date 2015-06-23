@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import java.util.Collection;
 
@@ -11,21 +11,20 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class TipoSanguineo {
+public class TipoSanguineo implements Entidade {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_tipo")
-	private Long IDTipoSanguineo;
+	@Column(name = "id_tipo")
+	private Long ID;
 	private String Descricao;
-	
+
 	@ManyToMany
-	@JoinTable(name="notificacao_tipoSanguineo", joinColumns=@JoinColumn(name="id_tipo"),
-	inverseJoinColumns=@JoinColumn(name="id_notificacao"))
+	@JoinTable(name = "notificacao_tipoSanguineo", joinColumns = @JoinColumn(name = "id_tipo"), inverseJoinColumns = @JoinColumn(name = "id_notificacao"))
 	private Collection<Notificacao> notificacao;
 
-	public long getIDTipoSanguineo() {
-		return IDTipoSanguineo;
+	public Long getID() {
+		return ID;
 	}
 
 	public String getDescricao() {
@@ -36,8 +35,8 @@ public class TipoSanguineo {
 		Descricao = descricao;
 	}
 
-	public void setIDTipoSanguineo(Long iDTipoSanguineo) {
-		IDTipoSanguineo = iDTipoSanguineo;
+	public void setID(Long iDTipoSanguineo) {
+		ID = iDTipoSanguineo;
 	}
 
 }

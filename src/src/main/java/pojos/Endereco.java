@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,12 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Endereco {
+public class Endereco implements Entidade{
 
 	@Id
 	@GeneratedValue
 	@Column(name="id_endereco")
-	private Long IDEndereco;
+	private Long ID;
 	private String Logradouro;
 	private String Bairro;
 	private int Numero;
@@ -34,12 +34,12 @@ public class Endereco {
 	@JoinColumn(name="id_evento")
 	private Evento evento;
 
-	public Long getIDEndereco() {
-		return IDEndereco;
+	public Long getID() {
+		return ID;
 	}
 
-	public void setIDEndereco(Long iDEndereco) {
-		IDEndereco = iDEndereco;
+	public void setID(Long iDEndereco) {
+		ID = iDEndereco;
 	}
 
 	public String getLogradouro() {

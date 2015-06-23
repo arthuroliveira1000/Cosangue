@@ -1,6 +1,4 @@
-package entitys;
-
-import java.util.Collection;
+package pojos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,32 +6,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Comentario {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_comentario")
-	private Long IDComentario;
+	@Column(name = "id_comentario")
+	private Long ID;
 	private String Mensagem;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_evento")
-	private Evento evento; 
-	
-	
-	public Long getIDComentario() {
-		return IDComentario;
+	@JoinColumn(name = "id_evento")
+	private Evento evento;
+
+	public Long getID() {
+		return ID;
 	}
 
-	public void setIDComentario(Long iDComentario) {
-		IDComentario = iDComentario;
+	public void setID(Long iDComentario) {
+		ID = iDComentario;
 	}
 
 	public String getMensagem() {
@@ -43,4 +39,5 @@ public class Comentario {
 	public void setMensagem(String mensagem) {
 		Mensagem = mensagem;
 	}
+
 }

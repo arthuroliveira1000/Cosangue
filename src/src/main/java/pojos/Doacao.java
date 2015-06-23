@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import java.sql.Date;
 
@@ -10,25 +10,26 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Doacao {
+public class Doacao implements Entidade {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_doacao")
-	private Long IDDoacao;
+	@Column(name = "id_doacao")
+	private Long ID;
 	private int Quantidade;
 	private Date Data;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
+
 	
-	public long getIDDoacao() {
-		return IDDoacao;
+	public Long getID() {
+		return ID;
 	}
 
-	public void setIDDoacao(Long iDDoacao) {
-		IDDoacao = iDDoacao;
+	public void setID(Long iDDoacao) {
+		ID = iDDoacao;
 	}
 
 	public int getQuantidade() {
@@ -46,4 +47,5 @@ public class Doacao {
 	public void setData(Date data) {
 		Data = data;
 	}
+
 }

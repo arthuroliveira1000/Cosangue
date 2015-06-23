@@ -1,4 +1,4 @@
-package entitys;
+package pojos;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -17,42 +17,42 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_usuario") 
-	private Long IDUsuario;
-	@Column(nullable=true)
+	@Column(name = "id_usuario")
+	private Long ID;
+	@Column(nullable = true)
 	private String Nome;
-	@Column(nullable=true)
+	@Column(nullable = true)
 	private String Sobrenome;
-	@Column(nullable=true)
+	@Column(nullable = true)
 	private char Sexo;
-	@Column(nullable=true)
+	@Column(nullable = true)
 	private int Idade;
 	private String Senha;
 	private String Login;
 	private Date DataNascimento;
-	
-	@OneToOne(mappedBy="usuario")
+
+	@OneToOne(mappedBy = "usuario")
 	private Endereco endereco;
-	
-	@OneToMany(mappedBy="usuario")
+
+	@OneToMany(mappedBy = "usuario")
 	private Collection<Evento> evento;
-	
-	@OneToMany(mappedBy="usuario")
+
+	@OneToMany(mappedBy = "usuario")
 	private Collection<Doacao> doacao;
-	
-	@OneToMany(mappedBy="usuario")
+
+	@OneToMany(mappedBy = "usuario")
 	private Collection<Comentario> comentario;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_tipo")
+	@JoinColumn(name = "id_tipo")
 	private TipoSanguineo tipo;
-	
-	public Long getIDUsuario() {
-		return IDUsuario;
+
+	public Long getID() {
+		return ID;
 	}
 
-	public void setIDUsuario(Long iDUsuario) {
-		IDUsuario = iDUsuario;
+	public void setID(Long iDUsuario) {
+		ID = iDUsuario;
 	}
 
 	public String getNome() {

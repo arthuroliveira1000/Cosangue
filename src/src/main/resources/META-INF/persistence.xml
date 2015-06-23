@@ -4,12 +4,12 @@
      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 
-	<persistence-unit name="jpa-example"> 
+	<persistence-unit name="jpa"> 
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<properties>
 			<!-- Configuring JDBC properties -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/hibernate" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/cosangue" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
