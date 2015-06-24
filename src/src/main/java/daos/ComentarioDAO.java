@@ -2,7 +2,7 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import pojos.Comentario;
+import entitys.Comentario;
 
 public class ComentarioDAO extends GenericDAO<Long, Comentario> {
 

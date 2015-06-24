@@ -2,7 +2,7 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import pojos.TipoSanguineo;
+import entitys.TipoSanguineo;
 
 public class TipoSanguineoDAO extends GenericDAO<Long, TipoSanguineo>{
 

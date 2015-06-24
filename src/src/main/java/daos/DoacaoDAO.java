@@ -2,7 +2,7 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import pojos.Doacao;
+import entitys.Doacao;
 
 public class DoacaoDAO extends GenericDAO <Long, Doacao>{
 

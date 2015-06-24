@@ -1,4 +1,4 @@
-package pojos;
+package entitys;
 
 public interface Entidade {
 
