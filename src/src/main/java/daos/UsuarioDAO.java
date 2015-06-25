@@ -2,7 +2,7 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import entitys.Usuario;
+import entities.Usuario;
 
 public class UsuarioDAO extends GenericDAO<Long, Usuario> {
 

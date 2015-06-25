@@ -2,7 +2,9 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-public class EventoDAO extends GenericDAO<Long, EventoDAO> {
+import entities.Evento;
+
+public class EventoDAO extends GenericDAO<Long, Evento> {
 
 	public EventoDAO(EntityManager entityManager) {
 		super(entityManager);

@@ -2,7 +2,9 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-public class EnderecoDAO extends GenericDAO<Long, EnderecoDAO> {
+import entities.Endereco;
+
+public class EnderecoDAO extends GenericDAO<Long, Endereco> {
 
 	public EnderecoDAO(EntityManager entityManager) {
 		super(entityManager);

@@ -2,7 +2,7 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import entitys.Hemocentro;
+import entities.Hemocentro;
 
 public class HemocentroDAO extends GenericDAO<Long, Hemocentro>{
 

@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /*
+ * @author gabriel   
  * This class encapsulates some work of EntityManager and EntityManagerFactory as rollback and commit, doing only the essential
  */
 
@@ -32,7 +33,7 @@ public class SimpleEntityManager {
 	}
 
 	/**
-	 * THIS METHOD NEEDS TO BE ALWAYS CALLED
+	 * THIS METHOD NEEDS TO BE ALWAYS CALLED TO CLOSE THE CONNECTION WITH THE BATABASE
 	 */
 	public void close() {
 		entityManager.close();

@@ -2,7 +2,7 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import entitys.Notificacao;
+import entities.Notificacao;
 
 public class NotificacaoDAO extends GenericDAO<Long, Notificacao>{
 
