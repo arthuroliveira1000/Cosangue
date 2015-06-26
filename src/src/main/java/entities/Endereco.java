@@ -8,11 +8,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Endereco implements Entidade{
+public class Endereco implements Entidade {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id_endereco")
+	@Column(name = "id_endereco")
 	private Long ID;
 	private String Logradouro;
 	private String Bairro;
@@ -21,18 +21,42 @@ public class Endereco implements Entidade{
 	private String UF;
 	private String Latitude;
 	private String Longitude;
-	
+
 	@OneToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
+
 	@OneToOne
-	@JoinColumn(name="id_hemocentro")
+	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;
-	
+
 	@OneToOne
-	@JoinColumn(name="id_evento")
+	@JoinColumn(name = "id_evento")
 	private Evento evento;
+
+	protected Endereco() {
+		super();
+	}
+
+	protected Endereco(String logradouro,
+			String bairro,
+			int numero, // VERIFICAR SE EVENTO E HEMOCENTRO E USUARIO ESTÃO COMO
+						// NULL
+			String cidade, String uF, String latitude, String longitude,
+			Usuario usuario, Hemocentro hemocentro, Evento evento) {
+		super();
+		Logradouro = logradouro;
+		Bairro = bairro;
+		Numero = numero;
+		Cidade = cidade;
+		UF = uF;
+		Latitude = latitude;
+		Longitude = longitude;
+		this.usuario = usuario;
+		this.hemocentro = hemocentro;
+		this.evento = evento;
+	}
+
 
 	public Long getID() {
 		return ID;

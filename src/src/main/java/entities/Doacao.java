@@ -23,7 +23,17 @@ public class Doacao implements Entidade {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	
+	protected Doacao() {
+		super();
+	}
+
+	protected Doacao(int quantidade, Date data, Usuario usuario) {
+		super();
+		Quantidade = quantidade;
+		Data = data;
+		this.usuario = usuario;
+	}
+
 	public Long getID() {
 		return ID;
 	}

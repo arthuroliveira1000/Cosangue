@@ -45,6 +45,30 @@ public class Evento implements Entidade {
 	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;
 
+	protected Evento() {
+		super();
+	}
+
+	protected Evento(String nome, String tipo, String descricao, Date data,
+			Time horario, int confirmados, int reportacoes, Endereco endereco,
+			Usuario usuario, Collection<Comentario> comentario,
+			Collection<Notificacao> notificacao, Hemocentro hemocentro) {
+		super();
+		Nome = nome;
+		Tipo = tipo;
+		Descricao = descricao;
+		Data = data;
+		Horario = horario;
+		Confirmados = confirmados;
+		Reportacoes = reportacoes;
+		this.endereco = endereco;
+		this.usuario = usuario;
+		this.comentario = comentario;
+		this.notificacao = notificacao;
+		this.hemocentro = hemocentro;
+	}
+
+
 	public Long getID() {
 		return ID;
 	}

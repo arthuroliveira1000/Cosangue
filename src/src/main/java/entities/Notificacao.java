@@ -30,6 +30,20 @@ public class Notificacao implements Entidade {
 	@JoinTable(name = "notificacao_tipoSanguineo", joinColumns = @JoinColumn(name = "id_notificacao"), inverseJoinColumns = @JoinColumn(name = "id_tipo"))
 	private Collection<TipoSanguineo> tipoSanguineo;
 
+	protected Notificacao() {
+		super();
+	}
+
+	protected Notificacao(String nome, String descricao, String tipo,
+			Evento evento, Collection<TipoSanguineo> tipoSanguineo) {
+		super();
+		Nome = nome;
+		Descricao = descricao;
+		Tipo = tipo;
+		this.evento = evento;
+		this.tipoSanguineo = tipoSanguineo;
+	}
+
 	public Long getID() {
 		return ID;
 	}

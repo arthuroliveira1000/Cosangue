@@ -19,6 +19,17 @@ public class TipoSanguineo implements Entidade {
 	private Long ID;
 	private String Descricao;
 
+	protected TipoSanguineo() {
+		super();
+	}
+
+	protected TipoSanguineo(String descricao,
+			Collection<Notificacao> notificacao) {
+		super();
+		Descricao = descricao;
+		this.notificacao = notificacao;
+	}
+
 	@ManyToMany
 	@JoinTable(name = "notificacao_tipoSanguineo", joinColumns = @JoinColumn(name = "id_tipo"), inverseJoinColumns = @JoinColumn(name = "id_notificacao"))
 	private Collection<Notificacao> notificacao;

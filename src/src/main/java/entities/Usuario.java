@@ -47,6 +47,30 @@ public class Usuario {
 	@JoinColumn(name = "id_tipo")
 	private TipoSanguineo tipo;
 
+	protected Usuario() {
+		super();
+	}
+
+	protected Usuario(String nome, String sobrenome, char sexo, int idade,
+			String senha, String login, Date dataNascimento, Endereco endereco,
+			Collection<Evento> evento, Collection<Doacao> doacao,
+			Collection<Comentario> comentario, TipoSanguineo tipo) {
+		super();
+		Nome = nome;
+		Sobrenome = sobrenome;
+		Sexo = sexo;
+		Idade = idade;
+		Senha = senha;
+		Login = login;
+		DataNascimento = dataNascimento;
+		this.endereco = endereco;
+		this.evento = evento;
+		this.doacao = doacao;
+		this.comentario = comentario;
+		this.tipo = tipo;
+	}
+
+
 	public Long getID() {
 		return ID;
 	}
@@ -109,6 +133,19 @@ public class Usuario {
 
 	public String getLogin() {
 		return Login;
+	}
+
+	
+	//CONSTRUTOR PARA TESTES
+	protected Usuario(String nome, String sobrenome, char sexo, int idade,
+			String senha, String login) {
+		super();
+		Nome = nome;
+		Sobrenome = sobrenome;
+		Sexo = sexo;
+		Idade = idade;
+		Senha = senha;
+		Login = login;
 	}
 
 }

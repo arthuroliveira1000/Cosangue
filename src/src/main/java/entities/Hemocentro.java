@@ -27,6 +27,21 @@ public class Hemocentro implements Entidade {
 	@OneToMany(mappedBy = "hemocentro")
 	private Collection<Evento> evento;
 
+	protected Hemocentro() {
+		super();
+	}
+
+	protected Hemocentro(String nome, String telefone, String login,
+			String senha, Endereco endereco, Collection<Evento> evento) {
+		super();
+		Nome = nome;
+		Telefone = telefone;
+		Login = login;
+		Senha = senha;
+		this.endereco = endereco;
+		this.evento = evento;
+	}
+
 	public Long getID() {
 		return ID;
 	}
