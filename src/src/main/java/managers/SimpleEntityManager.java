@@ -33,7 +33,8 @@ public class SimpleEntityManager {
 	}
 
 	/**
-	 * THIS METHOD NEEDS TO BE ALWAYS CALLED TO CLOSE THE CONNECTION WITH THE BATABASE
+	 * THIS METHOD NEEDS TO BE ALWAYS CALLED TO CLOSE THE CONNECTION WITH THE
+	 * BATABASE
 	 */
 	public void close() {
 		entityManager.close();
