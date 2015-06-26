@@ -15,7 +15,7 @@ abstract class GenericDAO<PK, T> {
 	}
 
 	public void save(T entity) {
-		entityManager.getTransaction().commit();
+		entityManager.persist(entity);
 	}
 
 	public void update(T entity) {
