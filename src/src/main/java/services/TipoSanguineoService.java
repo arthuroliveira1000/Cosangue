@@ -29,6 +29,32 @@ public class TipoSanguineoService {
 		}
 	}
 
+	public void delete(TipoSanguineo tipoSanguineo) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.delete(tipoSanguineo);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public void update(TipoSanguineo tipoSanguineo) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.update(tipoSanguineo);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public TipoSanguineo selectById(Long id) {
+		return dao.getById(id);
+	}
+
 	public List<TipoSanguineo> findAll() {
 		return dao.findAll(); // VERIFICAR SE NÃO RETORNA ERRO CASO LISTA FOR
 								// VAZIA

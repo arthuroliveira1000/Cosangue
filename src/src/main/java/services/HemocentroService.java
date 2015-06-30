@@ -4,6 +4,7 @@ import java.util.List;
 
 import managers.SimpleEntityManager;
 import daos.HemocentroDAO;
+import entities.Comentario;
 import entities.Hemocentro;
 
 public class HemocentroService {
@@ -27,6 +28,32 @@ public class HemocentroService {
 			e.printStackTrace();
 			simpleEntityManager.rollBack();
 		}
+	}
+
+	public void delete(Hemocentro hemocentro) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.delete(hemocentro);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public void update(Hemocentro hemocentro) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.update(hemocentro);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public Hemocentro selectById(Long id) {
+		return dao.getById(id);
 	}
 
 	public List<Hemocentro> findAll() {

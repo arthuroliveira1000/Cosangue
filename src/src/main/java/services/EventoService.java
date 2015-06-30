@@ -4,6 +4,7 @@ import java.util.List;
 
 import managers.SimpleEntityManager;
 import daos.EventoDAO;
+import entities.Comentario;
 import entities.Evento;
 
 public class EventoService {
@@ -27,6 +28,32 @@ public class EventoService {
 			e.printStackTrace();
 			simpleEntityManager.rollBack();
 		}
+	}
+
+	public void delete(Evento evento) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.delete(evento);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public void update(Evento evento) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.update(evento);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public Evento selectById(Long id) {
+		return dao.getById(id);
 	}
 
 	public List<Evento> findAll() {

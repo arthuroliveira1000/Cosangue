@@ -29,6 +29,32 @@ public class EnderecoService {
 		}
 	}
 
+	public void delete(Endereco endereco) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.delete(endereco);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public void update(Endereco endereco) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.update(endereco);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public Endereco selectById(Long id) {
+		return dao.getById(id);
+	}
+
 	public List<Endereco> findAll() {
 		return dao.findAll(); // VERIFICAR SE NÃO RETORNA ERRO CASO LISTA FOR
 								// VAZIA

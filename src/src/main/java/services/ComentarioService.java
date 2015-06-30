@@ -28,6 +28,32 @@ public class ComentarioService {
 		}
 	}
 
+	public void delete(Comentario comentario) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.delete(comentario);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public void update(Comentario comentario) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.update(comentario);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public Comentario selectById(Long id) {
+		return dao.getById(id);
+	}
+
 	public List<Comentario> findAll() {
 		return dao.findAll(); // VERIFICAR SE NÃO RETORNA ERRO CASO LISTA FOR
 								// VAZIA

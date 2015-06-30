@@ -29,6 +29,32 @@ public class NotificacaoService {
 		}
 	}
 
+	public void delete(Notificacao notificacao) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.delete(notificacao);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public void update(Notificacao notificacao) {
+		try {
+			simpleEntityManager.beginTransaction();
+			dao.update(notificacao);
+			simpleEntityManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			simpleEntityManager.rollBack();
+		}
+	}
+
+	public Notificacao selectById(Long id) {
+		return dao.getById(id);
+	}
+
 	public List<Notificacao> findAll() {
 		return dao.findAll(); // VERIFICAR SE NÃO RETORNA ERRO CASO LISTA FOR
 								// VAZIA
