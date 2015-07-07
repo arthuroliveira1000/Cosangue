@@ -5,22 +5,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /*
- * @author gabriel   
- * This class encapsulates some work of EntityManager and EntityManagerFactory as rollback and commit, doing only the essential
+ * @author gabriel  
  */
 
 public class SimpleEntityManager {
 
 	private EntityManager entityManager;
 	private EntityManagerFactory factory;
+	private final String PERSISTENCEUNITNAME = "jpa";
 
-	public SimpleEntityManager(EntityManagerFactory factory) {
-		this.factory = factory;
+	public SimpleEntityManager() {
+		factory = Persistence.createEntityManagerFactory(PERSISTENCEUNITNAME);
 		this.entityManager = factory.createEntityManager();
 	}
 
-	public SimpleEntityManager(String persistenceUnitName) {
-		factory = Persistence.createEntityManagerFactory(persistenceUnitName);
+	public SimpleEntityManager(EntityManagerFactory factory) {
+		this.factory = factory;
 		this.entityManager = factory.createEntityManager();
 	}
 
@@ -32,10 +32,6 @@ public class SimpleEntityManager {
 		entityManager.getTransaction().commit();
 	}
 
-	/**
-	 * THIS METHOD NEEDS TO BE ALWAYS CALLED TO CLOSE THE CONNECTION WITH THE
-	 * BATABASE
-	 */
 	public void close() {
 		entityManager.close();
 		factory.close();
