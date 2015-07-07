@@ -7,14 +7,14 @@ import daos.ComentarioDAO;
 import entities.Comentario;
 
 public class ComentarioService {
-	private ComentarioDAO dao;
-	private SimpleEntityManager simpleEntityManager;
 
-	public ComentarioService(SimpleEntityManager simpleEntityManager) {
-		super();
-		this.simpleEntityManager = simpleEntityManager;
-		this.dao = new ComentarioDAO(simpleEntityManager.getEntityManager());
-	}
+	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+	private ComentarioDAO dao = new ComentarioDAO(
+			simpleEntityManager.getEntityManager());
+	
+	/*
+	 * LEMBRAR DE FECHAR A CONEXÃO NOS MÉTODOS QUANDO DECIDIR O FRAMEWORK
+	 * */
 
 	public void save(Comentario comentario) {
 		try {
@@ -33,25 +33,36 @@ public class ComentarioService {
 			simpleEntityManager.beginTransaction();
 			dao.delete(comentario);
 			simpleEntityManager.commit();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			simpleEntityManager.rollBack();
+
 		}
 	}
 
 	public void update(Comentario comentario) {
+
 		try {
 			simpleEntityManager.beginTransaction();
 			dao.update(comentario);
 			simpleEntityManager.commit();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			simpleEntityManager.rollBack();
+
 		}
 	}
 
 	public Comentario selectById(Long id) {
-		return dao.getById(id);
+		Comentario comentario = null;
+
+		simpleEntityManager.beginTransaction();
+		comentario = dao.getById(id);
+		simpleEntityManager.commit();
+		return comentario;
+
 	}
 
 	public List<Comentario> findAll() {

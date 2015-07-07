@@ -4,19 +4,13 @@ import java.util.List;
 
 import managers.SimpleEntityManager;
 import daos.EventoDAO;
-import entities.Comentario;
 import entities.Evento;
 
 public class EventoService {
 
-	private EventoDAO dao;
-	private SimpleEntityManager simpleEntityManager;
-
-	public EventoService(SimpleEntityManager simpleEntityManager) {
-		super();
-		this.simpleEntityManager = simpleEntityManager;
-		this.dao = new EventoDAO(simpleEntityManager.getEntityManager());
-	}
+	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+	private EventoDAO dao = new EventoDAO(
+			simpleEntityManager.getEntityManager());
 
 	public void save(Evento evento) {
 		try {

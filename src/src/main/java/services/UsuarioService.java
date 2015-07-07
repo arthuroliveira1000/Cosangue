@@ -8,14 +8,9 @@ import entities.Usuario;
 
 public class UsuarioService {
 
-	private UsuarioDAO dao;
-	private SimpleEntityManager simpleEntityManager;
-
-	public UsuarioService(SimpleEntityManager simpleEntityManager) {
-		super();
-		this.simpleEntityManager = simpleEntityManager;
-		this.dao = new UsuarioDAO(simpleEntityManager.getEntityManager());
-	}
+	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+	private UsuarioDAO dao = new UsuarioDAO(
+			simpleEntityManager.getEntityManager());
 
 	public void save(Usuario usuario) {
 		try {

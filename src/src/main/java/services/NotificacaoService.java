@@ -8,14 +8,9 @@ import entities.Notificacao;
 
 public class NotificacaoService {
 
-	private NotificacaoDAO dao;
-	private SimpleEntityManager simpleEntityManager;
-
-	public NotificacaoService(SimpleEntityManager simpleEntityManager) {
-		super();
-		this.simpleEntityManager = simpleEntityManager;
-		this.dao = new NotificacaoDAO(simpleEntityManager.getEntityManager());
-	}
+	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+	private NotificacaoDAO dao = new NotificacaoDAO(
+			simpleEntityManager.getEntityManager());
 
 	public void save(Notificacao notificacao) {
 		try {

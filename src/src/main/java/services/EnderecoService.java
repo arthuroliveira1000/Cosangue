@@ -8,14 +8,9 @@ import entities.Endereco;
 
 public class EnderecoService {
 
-	private EnderecoDAO dao;
-	private SimpleEntityManager simpleEntityManager;
-
-	public EnderecoService(SimpleEntityManager simpleEntityManager) {
-		super();
-		this.simpleEntityManager = simpleEntityManager;
-		this.dao = new EnderecoDAO(simpleEntityManager.getEntityManager());
-	}
+	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+	private EnderecoDAO dao = new EnderecoDAO(
+			simpleEntityManager.getEntityManager());
 
 	public void save(Endereco endereco) {
 		try {

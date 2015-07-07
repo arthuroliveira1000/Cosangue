@@ -4,19 +4,13 @@ import java.util.List;
 
 import managers.SimpleEntityManager;
 import daos.HemocentroDAO;
-import entities.Comentario;
 import entities.Hemocentro;
 
 public class HemocentroService {
 
-	private HemocentroDAO dao;
-	private SimpleEntityManager simpleEntityManager;
-
-	public HemocentroService(SimpleEntityManager simpleEntityManager) {
-		super();
-		this.simpleEntityManager = simpleEntityManager;
-		this.dao = new HemocentroDAO(simpleEntityManager.getEntityManager());
-	}
+	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+	private HemocentroDAO dao = new HemocentroDAO(
+			simpleEntityManager.getEntityManager());
 
 	public void save(Hemocentro hemocentro) {
 		try {

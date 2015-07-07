@@ -8,14 +8,9 @@ import entities.TipoSanguineo;
 
 public class TipoSanguineoService {
 
-	private TipoSanguineoDAO dao;
-	private SimpleEntityManager simpleEntityManager;
-
-	public TipoSanguineoService(SimpleEntityManager simpleEntityManager) {
-		super();
-		this.simpleEntityManager = simpleEntityManager;
-		this.dao = new TipoSanguineoDAO(simpleEntityManager.getEntityManager());
-	}
+	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+	private TipoSanguineoDAO dao = new TipoSanguineoDAO(
+			simpleEntityManager.getEntityManager());
 
 	public void save(TipoSanguineo tipoSanguineo) {
 		try {
