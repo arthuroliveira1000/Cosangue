@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,21 +17,23 @@ public class Doacao implements Entidade {
 	@GeneratedValue
 	@Column(name = "id_doacao")
 	private Long ID;
-	private int Quantidade;
-	private Date Data;
+	@Column(name = "quantidade")
+	private int quantidade;
+	@Column(name = "data")
+	private Date data;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	protected Doacao() {
+	public Doacao() {
 		super();
 	}
 
-	protected Doacao(int quantidade, Date data, Usuario usuario) {
+	public Doacao(int quantidade, Date data, Usuario usuario) {
 		super();
-		Quantidade = quantidade;
-		Data = data;
+		this.quantidade = quantidade;
+		this.data = data;
 		this.usuario = usuario;
 	}
 
@@ -39,23 +42,23 @@ public class Doacao implements Entidade {
 	}
 
 	public void setID(Long iDDoacao) {
-		ID = iDDoacao;
+		this.ID = iDDoacao;
 	}
 
 	public int getQuantidade() {
-		return Quantidade;
+		return quantidade;
 	}
 
 	public void setQuantidade(int quantidade) {
-		Quantidade = quantidade;
+		this.quantidade = quantidade;
 	}
 
 	public Date getData() {
-		return Data;
+		return data;
 	}
 
 	public void setData(Date data) {
-		Data = data;
+		this.data = data;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,20 +18,21 @@ public class TipoSanguineo implements Entidade {
 	@GeneratedValue
 	@Column(name = "id_tipo")
 	private Long ID;
-	private String Descricao;
+	@Column(name = "descricao")
+	private String descricao;
 
-	protected TipoSanguineo() {
+	public TipoSanguineo() {
 		super();
 	}
 
-	protected TipoSanguineo(String descricao,
+	public TipoSanguineo(String descricao,
 			Collection<Notificacao> notificacao) {
 		super();
-		Descricao = descricao;
+		this.descricao = descricao;
 		this.notificacao = notificacao;
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "notificacao_tipoSanguineo", joinColumns = @JoinColumn(name = "id_tipo"), inverseJoinColumns = @JoinColumn(name = "id_notificacao"))
 	private Collection<Notificacao> notificacao;
 
@@ -38,16 +40,16 @@ public class TipoSanguineo implements Entidade {
 		return ID;
 	}
 
+	public void setID(Long iDTipoSanguineo) {
+		this.ID = iDTipoSanguineo;
+	}
+
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
-	}
-
-	public void setID(Long iDTipoSanguineo) {
-		ID = iDTipoSanguineo;
+		this.descricao = descricao;
 	}
 
 }

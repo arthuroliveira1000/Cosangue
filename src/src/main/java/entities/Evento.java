@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,54 +21,60 @@ public class Evento implements Entidade {
 	@GeneratedValue
 	@Column(name = "id_evento")
 	private Long ID;
-	private String Nome;
-	private String Tipo;
-	private String Descricao;
-	private Date Data;
-	private Time Horario;
-	private int Confirmados;
-	private int Reportacoes;
+	@Column(name = "nome")
+	private String nome;
+	@Column(name = "tipo")
+	private String tipo;
+	@Column(name = "descricao")
+	private String descricao;
+	@Column(name = "data")
+	private Date data;
+	@Column(name = "horario")
+	private Time horario;
+	@Column(name = "confirmados")
+	private int confirmados;
+	@Column(name = "reportacoes")
+	private int reportacoes;
 
-	@OneToOne(mappedBy = "evento")
+	@OneToOne(mappedBy = "evento", fetch = FetchType.LAZY, optional = true)
 	private Endereco endereco;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "evento")
+	@OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
 	private Collection<Comentario> comentario;
 
-	@OneToMany(mappedBy = "evento")
+	@OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
 	private Collection<Notificacao> notificacao;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;
 
-	protected Evento() {
+	public Evento() {
 		super();
 	}
 
-	protected Evento(String nome, String tipo, String descricao, Date data,
+	public Evento(String nome, String tipo, String descricao, Date data,
 			Time horario, int confirmados, int reportacoes, Endereco endereco,
 			Usuario usuario, Collection<Comentario> comentario,
 			Collection<Notificacao> notificacao, Hemocentro hemocentro) {
 		super();
-		Nome = nome;
-		Tipo = tipo;
-		Descricao = descricao;
-		Data = data;
-		Horario = horario;
-		Confirmados = confirmados;
-		Reportacoes = reportacoes;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.descricao = descricao;
+		this.data = data;
+		this.horario = horario;
+		this.confirmados = confirmados;
+		this.reportacoes = reportacoes;
 		this.endereco = endereco;
 		this.usuario = usuario;
 		this.comentario = comentario;
 		this.notificacao = notificacao;
 		this.hemocentro = hemocentro;
 	}
-
 
 	public Long getID() {
 		return ID;
@@ -78,59 +85,59 @@ public class Evento implements Entidade {
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public String getTipo() {
-		return Tipo;
+		return tipo;
 	}
 
 	public void setTipo(String tipo) {
-		Tipo = tipo;
+		this.tipo = tipo;
 	}
 
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
 
 	public int getConfirmados() {
-		return Confirmados;
+		return confirmados;
 	}
 
 	public void setConfirmados(int confirmados) {
-		Confirmados = confirmados;
+		this.confirmados = confirmados;
 	}
 
 	public int getReportacoes() {
-		return Reportacoes;
+		return reportacoes;
 	}
 
 	public void setReportacoes(int reportacoes) {
-		Reportacoes = reportacoes;
+		this.reportacoes = reportacoes;
 	}
 
 	public Date getData() {
-		return Data;
+		return data;
 	}
 
 	public void setData(Date data) {
-		Data = data;
+		this.data = data;
 	}
 
 	public Time getHorario() {
-		return Horario;
+		return horario;
 	}
 
 	public void setHorario(Time horario) {
-		Horario = horario;
+		this.horario = horario;
 	}
 
 }

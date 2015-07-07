@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,56 +14,70 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Usuario {
+public class Usuario implements Entidade {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id_usuario")
 	private Long ID;
-	@Column(nullable = true)
-	private String Nome;
-	@Column(nullable = true)
-	private String Sobrenome;
-	@Column(nullable = true)
-	private char Sexo;
-	@Column(nullable = true)
-	private int Idade;
-	private String Senha;
-	private String Login;
-	private Date DataNascimento;
+	@Column(name = "nome")
+	private String nome;
+	@Column(name = "sobrenome", nullable = true)
+	private String sobrenome;
+	@Column(name = "sexo")
+	private char sexo;
+	@Column(name = "idade")
+	private int idade;
+	@Column(name = "senha")
+	private String senha;
+	@Column(name = "login")
+	private String login;
+	@Column(name = "dataNascimento")
+	private Date dataNascimento;
 
-	@OneToOne(mappedBy = "usuario")
+	@OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Endereco endereco;
 
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Collection<Evento> evento;
 
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Collection<Doacao> doacao;
 
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Collection<Comentario> comentario;
 
 	@ManyToOne
 	@JoinColumn(name = "id_tipo")
 	private TipoSanguineo tipo;
 
-	protected Usuario() {
+	public Usuario() {
 		super();
 	}
 
-	protected Usuario(String nome, String sobrenome, char sexo, int idade,
+	public Usuario(String nome, String sobrenome, char sexo, int idade,
+			String senha, String login) {
+		super();
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.sexo = sexo;
+		this.idade = idade;
+		this.senha = senha;
+		this.login = login;
+	}
+
+	public Usuario(String nome, String sobrenome, char sexo, int idade,
 			String senha, String login, Date dataNascimento, Endereco endereco,
 			Collection<Evento> evento, Collection<Doacao> doacao,
 			Collection<Comentario> comentario, TipoSanguineo tipo) {
 		super();
-		Nome = nome;
-		Sobrenome = sobrenome;
-		Sexo = sexo;
-		Idade = idade;
-		Senha = senha;
-		Login = login;
-		DataNascimento = dataNascimento;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.sexo = sexo;
+		this.idade = idade;
+		this.senha = senha;
+		this.login = login;
+		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
 		this.evento = evento;
 		this.doacao = doacao;
@@ -70,82 +85,67 @@ public class Usuario {
 		this.tipo = tipo;
 	}
 
-
 	public Long getID() {
 		return ID;
 	}
 
 	public void setID(Long iDUsuario) {
-		ID = iDUsuario;
+		this.ID = iDUsuario;
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public char getSexo() {
-		return Sexo;
+		return sexo;
 	}
 
 	public void setSexo(char sexo) {
-		Sexo = sexo;
+		this.sexo = sexo;
 	}
 
 	public int getIdade() {
-		return Idade;
+		return idade;
 	}
 
 	public void setIdade(int idade) {
-		Idade = idade;
+		this.idade = idade;
 	}
 
 	public Date getDataNascimento() {
-		return DataNascimento;
+		return dataNascimento;
 	}
 
 	public void setDataNascimento(Date dataNascimento) {
-		DataNascimento = dataNascimento;
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getSobrenome() {
-		return Sobrenome;
+		return sobrenome;
 	}
 
 	public void setSobrenome(String sobrenome) {
-		Sobrenome = sobrenome;
+		this.sobrenome = sobrenome;
 	}
 
 	public void setSenha(String senha) {
-		Senha = senha;
+		this.senha = senha;
 	}
 
 	public void setLogin(String login) {
-		Login = login;
+		this.login = login;
 	}
 
 	public String getSenha() {
-		return Senha;
+		return senha;
 	}
 
 	public String getLogin() {
-		return Login;
+		return login;
 	}
-
-	
-	//CONSTRUTOR PARA TESTES
-	protected Usuario(String nome, String sobrenome, char sexo, int idade,
-			String senha, String login) {
-		super();
-		Nome = nome;
-		Sobrenome = sobrenome;
-		Sexo = sexo;
-		Idade = idade;
-		Senha = senha;
-		Login = login;
-	}
-
 }

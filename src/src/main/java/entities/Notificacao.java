@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,28 +19,31 @@ public class Notificacao implements Entidade {
 	@GeneratedValue
 	@Column(name = "id_notificacao")
 	private Long ID;
-	private String Nome;
-	private String Descricao;
-	private String Tipo;
+	@Column(name = "nome")
+	private String nome;
+	@Column(name = "descricao")
+	private String descricao;
+	@Column(name = "tipo")
+	private String tipo;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_evento")
 	private Evento evento;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "notificacao_tipoSanguineo", joinColumns = @JoinColumn(name = "id_notificacao"), inverseJoinColumns = @JoinColumn(name = "id_tipo"))
 	private Collection<TipoSanguineo> tipoSanguineo;
 
-	protected Notificacao() {
+	public Notificacao() {
 		super();
 	}
 
-	protected Notificacao(String nome, String descricao, String tipo,
+	public Notificacao(String nome, String descricao, String tipo,
 			Evento evento, Collection<TipoSanguineo> tipoSanguineo) {
 		super();
-		Nome = nome;
-		Descricao = descricao;
-		Tipo = tipo;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.tipo = tipo;
 		this.evento = evento;
 		this.tipoSanguineo = tipoSanguineo;
 	}
@@ -49,31 +53,31 @@ public class Notificacao implements Entidade {
 	}
 
 	public void setID(Long iDNotificacao) {
-		ID = iDNotificacao;
+		this.ID = iDNotificacao;
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
 
 	public String getTipo() {
-		return Tipo;
+		return tipo;
 	}
 
 	public void setTipo(String tipo) {
-		Tipo = tipo;
+		this.tipo = tipo;
 	}
 
 }

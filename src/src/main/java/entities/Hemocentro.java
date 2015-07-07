@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,28 +17,32 @@ public class Hemocentro implements Entidade {
 	@GeneratedValue
 	@Column(name = "id_hemocentro")
 	private Long ID;
-	private String Nome;
-	private String Telefone;
-	private String Login;
-	private String Senha;
+	@Column(name = "nome")
+	private String nome;
+	@Column(name = "telefone")
+	private String telefone;
+	@Column(name = "login")
+	private String login;
+	@Column(name = "senha")
+	private String senha;
 
-	@OneToOne(mappedBy = "hemocentro")
+	@OneToOne(mappedBy = "hemocentro", fetch = FetchType.LAZY, optional = true)
 	private Endereco endereco;
 
-	@OneToMany(mappedBy = "hemocentro")
+	@OneToMany(mappedBy = "hemocentro", fetch = FetchType.LAZY)
 	private Collection<Evento> evento;
 
-	protected Hemocentro() {
+	public Hemocentro() {
 		super();
 	}
 
-	protected Hemocentro(String nome, String telefone, String login,
+	public Hemocentro(String nome, String telefone, String login,
 			String senha, Endereco endereco, Collection<Evento> evento) {
 		super();
-		Nome = nome;
-		Telefone = telefone;
-		Login = login;
-		Senha = senha;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.login = login;
+		this.senha = senha;
 		this.endereco = endereco;
 		this.evento = evento;
 	}
@@ -47,39 +52,39 @@ public class Hemocentro implements Entidade {
 	}
 
 	public void setID(Long iDHemocentro) {
-		ID = iDHemocentro;
+		this.ID = iDHemocentro;
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public String getTelefone() {
-		return Telefone;
+		return telefone;
 	}
 
 	public void setTelefone(String telefone) {
-		Telefone = telefone;
+		this.telefone = telefone;
 	}
 
 	public String getLogin() {
-		return Login;
+		return login;
 	}
 
 	public void setLogin(String login) {
-		Login = login;
+		this.login = login;
 	}
 
 	public String getSenha() {
-		return Senha;
+		return senha;
 	}
 
 	public void setSenha(String senha) {
-		Senha = senha;
+		this.senha = senha;
 	}
 
 }

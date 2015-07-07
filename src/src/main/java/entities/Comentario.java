@@ -2,42 +2,43 @@ package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Comentario {
+public class Comentario implements Entidade {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id_comentario")
 	private Long ID;
-	private String Mensagem;
+	@Column(name = "mensagem")
+	private String mensagem;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_evento")
 	private Evento evento;
 
-	protected Comentario() {
+	public Comentario() {
 		super();
 	}
 
-	protected Comentario(String mensagem, Usuario usuario, Evento evento) {
+	public Comentario(String mensagem, Usuario usuario, Evento evento) {
 		super();
-		Mensagem = mensagem;
+		this.mensagem = mensagem;
 		this.usuario = usuario;
 		this.evento = evento;
 	}
 
-	protected Comentario(String mensagem) {
-		super();
-		Mensagem = mensagem;
+	public Comentario(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 	public Long getID() {
@@ -45,15 +46,15 @@ public class Comentario {
 	}
 
 	public void setID(Long iD) {
-		ID = iD;
+		this.ID = iD;
 	}
 
 	public String getMensagem() {
-		return Mensagem;
+		return mensagem;
 	}
 
 	public void setMensagem(String mensagem) {
-		Mensagem = mensagem;
+		this.mensagem = mensagem;
 	}
 
 	public Usuario getUsuario() {

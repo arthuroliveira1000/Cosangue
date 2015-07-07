@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,88 +15,119 @@ public class Endereco implements Entidade {
 	@GeneratedValue
 	@Column(name = "id_endereco")
 	private Long ID;
-	private String Logradouro;
-	private String Bairro;
-	private int Numero;
-	private String Cidade;
+	@Column(name = "logradouro")
+	private String logradouro;
+	@Column(name = "bairro")
+	private String bairro;
+	@Column(name = "numero")
+	private int numero;
+	@Column(name = "cidade")
+	private String cidade;
+	@Column(name = "UF")
 	private String UF;
-	private String Latitude;
-	private String Longitude;
+	@Column(name = "latitude")
+	private String latitude;
+	@Column(name = "longitude")
+	private String longitude;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_evento")
 	private Evento evento;
 
-	protected Endereco() {
+	public Endereco() {
 		super();
 	}
-
-	protected Endereco(String logradouro,
-			String bairro,
-			int numero, // VERIFICAR SE EVENTO E HEMOCENTRO E USUARIO ESTÃO COMO
-						// NULL
+	
+	//ENDERECO DE USUARIO
+	public Endereco(String logradouro, String bairro, int numero,
 			String cidade, String uF, String latitude, String longitude,
-			Usuario usuario, Hemocentro hemocentro, Evento evento) {
+			Usuario usuario) {
 		super();
-		Logradouro = logradouro;
-		Bairro = bairro;
-		Numero = numero;
-		Cidade = cidade;
-		UF = uF;
-		Latitude = latitude;
-		Longitude = longitude;
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.UF = uF;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.usuario = usuario;
+	}
+	//ENDEREÇO DE HEMOCENTRO
+	public Endereco(String logradouro, String bairro, int numero,
+			String cidade, String uF, String latitude, String longitude,
+			Hemocentro hemocentro) {
+		super();
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.UF = uF;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.hemocentro = hemocentro;
+	}
+	
+	// ENDEREÇO DE EVENTO
+	public Endereco(String logradouro, String bairro, int numero,
+			String cidade, String uF, String latitude, String longitude,
+			Evento evento) {
+		super();
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.UF = uF;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.evento = evento;
 	}
-
 
 	public Long getID() {
 		return ID;
 	}
 
 	public void setID(Long iDEndereco) {
-		ID = iDEndereco;
+		this.ID = iDEndereco;
 	}
 
 	public String getLogradouro() {
-		return Logradouro;
+		return logradouro;
 	}
 
 	public void setLogradouro(String logradouro) {
-		Logradouro = logradouro;
+		this.logradouro = logradouro;
 	}
 
 	public String getBairro() {
-		return Bairro;
+		return bairro;
 	}
 
 	public void setBairro(String bairro) {
-		Bairro = bairro;
+		this.bairro = bairro;
 	}
 
 	public int getNumero() {
-		return Numero;
+		return numero;
 	}
 
 	public void setNumero(int numero) {
-		Numero = numero;
+		this.numero = numero;
 	}
 
 	public String getCidade() {
-		return Cidade;
+		return cidade;
 	}
 
 	public void setCidade(String cidade) {
-		Cidade = cidade;
+		this.cidade = cidade;
 	}
 
 	public String getUF() {
@@ -103,23 +135,23 @@ public class Endereco implements Entidade {
 	}
 
 	public void setUF(String uF) {
-		UF = uF;
+		this.UF = uF;
 	}
 
 	public String getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 
 	public void setLatitude(String latitude) {
-		Latitude = latitude;
+		this.latitude = latitude;
 	}
 
 	public String getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	public void setLongitude(String longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
 
 }
