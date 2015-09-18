@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="app_name">Cosangue</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_abertura">Abertura</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="bt_entrar">Entrar</string>
+    <string name="bt_cadastre_se">Cadastre-se</string>
+    <string name="bt_entrar_com_facebook">Entrar com Facebook</string>
+    <string name="et_usuario">Usuário</string>
+    <string name="et_senha">Senha</string>
+    <string name="icon_user">icon_user</string>
+    <string name="title_activity_cadastro">Cadastro</string>
+    <string name="action_proximo">action_proximo</string>
+    <string name="marca_horizontal">Marca_vertical</string>
+    <string name="title_activity_pagina_inicial">PaginaInicial</string>
+    <string name="logo">logo</string>
+</resources>
