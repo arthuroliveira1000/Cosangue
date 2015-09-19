@@ -182,22 +182,21 @@ public class Usuario implements Entidade {
 			this.login = json.getString("login");
 		if (json.has("senha"))
 			this.senha = json.getString("senha");
-		/*
-		 * if (json.has("dataNascimento")) String dataJson =
-		 * json.getString("dataNascimento"); this.dataNascimento = (Date)
-		 * formater.parse();
-		 */
 		return this;
 	}
 
-	public JSONObject toJSON() {
+	public JSONObject paraJSON() {
 		JSONObject json = new JSONObject();
-		json.put("nome", this.nome);
 		json.put("id", this.ID);
+		json.put("nome", this.nome);
+		json.put("sobrenome", sobrenome);
+		json.put("sexo", sexo);
+		json.put("login", this.login);
+		json.put("senha", this.senha);
 		return json;
 	}
 
-	public JSONObject userToJSON() {
+	public JSONObject usuarioParaJSON() {
 		JSONObject json = new JSONObject();
 		json.put("id", this.ID);
 		json.put("login", this.login);
