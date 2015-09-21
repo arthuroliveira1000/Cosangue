@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tcc.cosangueapp" >
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- permite acesso do aplicativo a internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo_pequeno"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- Main Activity -->
+        <activity
+            android:name="tcc.cosangueapp.Abertura"
+            android:label="@string/title_activity_abertura"
+            android:theme="@style/NoActionBarTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="tcc.cosangueapp.Inicio"
+            android:label="@string/title_activity_inicio"
+            android:theme="@style/NoActionBarTheme" />
+        <activity
+            android:name="tcc.cosangueapp.PaginaInicial"
+            android:label="@string/title_activity_pagina_inicial" />
+        <activity
+            android:name="tcc.cosangueapp.Cadastro"
+            android:label="@string/title_activity_cadastro"
+            android:parentActivityName="tcc.cosangueapp.Inicio" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Parent activity meta-data to support API level 7+ -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tcc.cosangueapp.Inicio" />
+        </activity>
+    </application>
+
+</manifest>
