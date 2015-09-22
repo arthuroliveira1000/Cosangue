@@ -54,29 +54,24 @@ public class UsuarioWS extends WSTemplate {
 		}
 		return null;
 	}
-
-	/*@GET
-	@Path("/login/{jsonUsuario}")
+	
+	@GET
+	@Path("/login/{login}")
 	@Produces(Json.UTF8JSON)
 	@Consumes(Json.UTF8JSON)
-	public String login(@PathParam("jsonUsuario") JSONObject jsonUsuario) {
-		Usuario usuario = new Usuario();
+	public Usuario login(@PathParam("login") Usuario usuario) {
 		try {
-			usuario = usuario.fromJSON(jsonUsuario);
-			if (usuario != null) {
-				Usuario retorno = (Usuario) dao.verificaLogin(usuario).get(0);
-				if (retorno != null) {
-					JSONObject json = null;
-					json = retorno.usuarioParaJSON();
-					return json.toString();
-				}
+			List<Usuario> retorno = dao.verificaLogin(usuario);
+			if (retorno != null) {
+				System.out.println("Usuario existe, login pertitido :)");
+				return usuario;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-*/
+
 	/*
 	 * @GET
 	 * 
