@@ -1,8 +1,7 @@
 package pojos;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.json.JSONObject;
 
+@XmlRootElement
 @Entity
 public class Usuario implements Entidade {
 
@@ -35,8 +36,9 @@ public class Usuario implements Entidade {
 	private String senha;
 	@Column(name = "login")
 	private String login;
-	@Column(name = "dataNascimento")
-	private Date dataNascimento;
+	/*@Column(name = "dataNascimento")
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;*/
 
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Endereco endereco;
@@ -58,7 +60,7 @@ public class Usuario implements Entidade {
 		super();
 	}
 
-	public Usuario(String nome, String sobrenome, String sexo, int idade,
+	/*public Usuario(String nome, String sobrenome, String sexo, int idade,
 			String login, String senha) {
 		super();
 		this.nome = nome;
@@ -67,11 +69,32 @@ public class Usuario implements Entidade {
 		this.idade = idade;
 		this.login = login;
 		this.senha = senha;
-	}
+	}*/
+	
 
 	public Usuario(String nome) {
 		super();
 		this.nome = nome;
+	}
+
+	public Usuario(Long iD, String nome, String sobrenome, String sexo,
+			int idade, String senha, String login,
+			Endereco endereco, Collection<Evento> evento,
+			Collection<Doacao> doacao, Collection<Comentario> comentario,
+			TipoSanguineo tipo) {
+		super();
+		ID = iD;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.sexo = sexo;
+		this.idade = idade;
+		this.senha = senha;
+		this.login = login;
+		this.endereco = endereco;
+		this.evento = evento;
+		this.doacao = doacao;
+		this.comentario = comentario;
+		this.tipo = tipo;
 	}
 
 	public Usuario(Long ID) {
@@ -90,7 +113,6 @@ public class Usuario implements Entidade {
 		this.idade = idade;
 		this.senha = senha;
 		this.login = login;
-		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
 		this.evento = evento;
 		this.doacao = doacao;
@@ -130,14 +152,6 @@ public class Usuario implements Entidade {
 		this.idade = idade;
 	}
 
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public String getSobrenome() {
 		return sobrenome;
 	}
@@ -168,8 +182,6 @@ public class Usuario implements Entidade {
 	}
 
 	public Usuario fromJSON(JSONObject json) {
-		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
-
 		if (json.has("ID"))
 			this.ID = json.getLong("ID");
 		if (json.has("nome"))
@@ -183,24 +195,5 @@ public class Usuario implements Entidade {
 		if (json.has("senha"))
 			this.senha = json.getString("senha");
 		return this;
-	}
-
-	public JSONObject paraJSON() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.ID);
-		json.put("nome", this.nome);
-		json.put("sobrenome", sobrenome);
-		json.put("sexo", sexo);
-		json.put("login", this.login);
-		json.put("senha", this.senha);
-		return json;
-	}
-
-	public JSONObject usuarioParaJSON() {
-		JSONObject json = new JSONObject();
-		json.put("id", this.ID);
-		json.put("login", this.login);
-		json.put("senha", this.senha);
-		return json;
 	}
 }
