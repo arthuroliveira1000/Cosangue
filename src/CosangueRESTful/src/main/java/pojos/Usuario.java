@@ -36,9 +36,6 @@ public class Usuario implements Entidade {
 	private String senha;
 	@Column(name = "login")
 	private String login;
-	/*@Column(name = "dataNascimento")
-	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;*/
 
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Endereco endereco;
@@ -60,17 +57,12 @@ public class Usuario implements Entidade {
 		super();
 	}
 
-	/*public Usuario(String nome, String sobrenome, String sexo, int idade,
-			String login, String senha) {
-		super();
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.sexo = sexo;
-		this.idade = idade;
-		this.login = login;
-		this.senha = senha;
-	}*/
-	
+	/*
+	 * public Usuario(String nome, String sobrenome, String sexo, int idade,
+	 * String login, String senha) { super(); this.nome = nome; this.sobrenome =
+	 * sobrenome; this.sexo = sexo; this.idade = idade; this.login = login;
+	 * this.senha = senha; }
+	 */
 
 	public Usuario(String nome) {
 		super();
@@ -78,10 +70,9 @@ public class Usuario implements Entidade {
 	}
 
 	public Usuario(Long iD, String nome, String sobrenome, String sexo,
-			int idade, String senha, String login,
-			Endereco endereco, Collection<Evento> evento,
-			Collection<Doacao> doacao, Collection<Comentario> comentario,
-			TipoSanguineo tipo) {
+			int idade, String senha, String login, Endereco endereco,
+			Collection<Evento> evento, Collection<Doacao> doacao,
+			Collection<Comentario> comentario, TipoSanguineo tipo) {
 		super();
 		ID = iD;
 		this.nome = nome;

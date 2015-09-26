@@ -1,7 +1,5 @@
 package services;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,7 +12,7 @@ import managers.SimpleEntityManager;
 import pojos.Usuario;
 import daos.UsuarioDAO;
 
-@Path("teste")
+@Path("usuario")
 public class UsuarioWS extends WSTemplate {
 
 	private SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
@@ -27,8 +25,8 @@ public class UsuarioWS extends WSTemplate {
 	@Consumes(Json.UTF8JSON)
 	public Usuario inserir(Usuario usuario) {
 		try {
-			List<Usuario> retorno = dao.verificaLogin(usuario);
-			if (retorno.isEmpty()) {
+			Usuario retorno = dao.verificaLogin(usuario);
+			if (retorno == null) {
 				Usuario user = insert(usuario);
 				return user;
 			} else {
@@ -54,31 +52,21 @@ public class UsuarioWS extends WSTemplate {
 		}
 		return null;
 	}
-	
+
 	@GET
-	@Path("/login/{login}")
+	@Path("/login/{login}/{senha}")
 	@Produces(Json.UTF8JSON)
-	@Consumes(Json.UTF8JSON)
-	public Usuario login(@PathParam("login") Usuario usuario) {
+	public Usuario login(@PathParam("login") String login,
+			@PathParam("senha") String senha) {
 		try {
-			List<Usuario> retorno = dao.verificaLogin(usuario);
+			Usuario retorno = dao.autenticaLogin(login, senha);
 			if (retorno != null) {
 				System.out.println("Usuario existe, login pertitido :)");
-				return usuario;
+				return retorno;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
-	/*
-	 * @GET
-	 * 
-	 * @Produces("text/plain") public String showHelloWord() { return
-	 * "Olá mundo"; }
-	 */
-
-
-
 }
