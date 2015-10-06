@@ -1,0 +1,7 @@
+*.lock
+*.xmi
+*.dat
+*.xml
+*.log
+*.properties
+.metadata/
