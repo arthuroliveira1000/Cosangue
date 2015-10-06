@@ -4,10 +4,10 @@
     tools:context="tcc.aplicativo.Cadastro">
 
 
-    <!-- Proximo -> action item bar -->
+    <!-- Proximo action item bar -->
     <item
         android:id="@+id/action_proximo"
-        android:icon="@drawable/abc_ic_go_search_api_mtrl_alpha"
+        android:icon="@drawable/done_icon"
         android:title="@string/action_proximo"
         app:showAsAction="always"
          />

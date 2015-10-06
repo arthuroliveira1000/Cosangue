@@ -1,10 +1,202 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="tcc.aplicativo.Cadastro">
+<?xml version="1.0" encoding="utf-8"?>
 
 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="0dp"
+    android:background="#FAFAFA"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:weightSum="1">
 
-</RelativeLayout>
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tb_cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!--
+        <View
+            android:layout_width="400dp"
+            android:layout_height="2dip"
+            android:layout_marginLeft="0dip"
+            android:layout_marginRight="0dip"
+            android:background="@color/primarydark" />
+            -->
+
+    <!-- Nome Label -->
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/et_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/account"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/account"
+            android:drawableTint="@color/primary"
+            android:elegantTextHeight="false"
+            android:hint="@string/nome"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Nome do Usuário Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/user_icon"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/user_icon"
+            android:drawableTint="@color/primary"
+            android:hint="@string/login"
+            android:inputType="text"
+            android:maxLength="20"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!--Idade Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_idade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/age_icon"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/age_icon"
+            android:drawableTint="@color/primary"
+            android:hint="@string/idade"
+            android:inputType="number"
+            android:maxLength="2"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <!-- Password Label -->
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/password_icon"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/password_icon"
+            android:drawableTint="@color/primary"
+            android:hint="@string/senha"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Repeated Password Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_senha_novamente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/password_icon"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/password_icon"
+            android:drawableTint="@color/primary"
+            android:hint="@string/confirmacao_senha"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+        <RadioGroup
+            android:id="@+id/rg_sexo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp">
+
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_masculino"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/primary"
+                android:hint="@string/masculino"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:orientation="horizontal"/>
+
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_feminino"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/primary"
+                android:hint="@string/feminino"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:orientation="horizontal"/>
+        </RadioGroup>
+
+
+</LinearLayout>
