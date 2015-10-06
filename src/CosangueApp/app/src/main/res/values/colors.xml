@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="primary" type="color">#D83B31</item>
+    <item name="primarydark" type="color">#d50000</item>
+    <item name="accent" type="color">#FAFAFA</item>
+    <item name="navegationbar" type="color">#212121</item>
+    <item name="facebook" type="color">#3b5998</item>
+
+</resources>

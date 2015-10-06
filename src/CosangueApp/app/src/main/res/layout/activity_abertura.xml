@@ -30,6 +30,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/tipografia_branca_logo"
-        android:contentDescription="tipografia"
+        android:contentDescription="Tipografia da Marca"
        />
 </RelativeLayout>

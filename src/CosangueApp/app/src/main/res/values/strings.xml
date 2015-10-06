@@ -6,10 +6,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="bt_entrar">Entrar</string>
-    <string name="bt_cadastre_se">Cadastre-se</string>
+    <string name="tv_cadastre_se">Cadastre-se</string>
     <string name="bt_entrar_com_facebook">Entrar com Facebook</string>
-    <string name="et_usuario">Usuário</string>
-    <string name="et_senha">Senha</string>
+    <string name="et_usuario">E-MAIL</string>
+    <string name="et_senha">SENHA</string>
     <string name="icon_user">icon_user</string>
     <string name="title_activity_cadastro">Cadastro</string>
     <string name="action_proximo">action_proximo</string>
@@ -17,4 +17,33 @@
     <string name="title_activity_pagina_inicial">PaginaInicial</string>
     <string name="logo">logo</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main_page">MainPage</string>
+
+    <string name="title_perfil">Perfil</string>
+    <string name="title_hemocentro">Hemocentro</string>
+    <string name="title_doacoes">Doações</string>
+    <string name="title_eventos">eventos</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Entrar">Entrar</string>
+    <string name="Cadastro">Ainda não tem uma conta? Cadastre-se!</string>
+    <string name="Entrar_com_facebook">Entrar com Facebook</string>
+    <string name="Tipografia">Tipografia da Marca</string>
+    <string name="Sexo">Sexo</string>
+    <string name="Mensagem">Faça parte da comunidade!</string>
+    <string name="nome">Nome</string>
+    <string name="login">Nome de Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="confirmacao_senha">Repita sua senha</string>
+    <string name="idade">Idade</string>
+    <string name="masculino">Masculino</string>
+    <string name="feminino">Feminino</string>
+    <string name="title_activity_cadastro_login">CadastroLogin</string>
+
 </resources>

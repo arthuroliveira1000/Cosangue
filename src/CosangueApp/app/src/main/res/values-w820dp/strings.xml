@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Sexo">Sexo</string>
+    <string name="Mensagem">Faça parte da comunidade!</string>
+    <string name="nome">Nome</string>
+    <string name="login">Nome de Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="confirmacao_senha">Repita sua senha</string>
+    <string name="idade">Idade</string>
+    <string name="masculino">Masculino</string>
+    <string name="feminino">Feminino</string>
+</resources>

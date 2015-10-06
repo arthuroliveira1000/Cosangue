@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Icone">Logo</string>
-    <string name="Entrar">New Button</string>
+    <string name="Entrar">Entrar</string>
     <string name="Cadastrese">New Button</string>
     <string name="bt_entrar">Entrar</string>
     <string name="bt_cadastre_se">Cadastre-se</string>
@@ -11,4 +11,26 @@
     <string name="icon_user">icon_user</string>
     <string name="action_proximo">action_proximo</string>
     <string name="marca_horizontal">Marca_vertical</string>
+
+
+    <string name="app_name">Cosangue</string>
+    <string-array name="itens_array_navegation_drawer">
+        <item>Perfil</item>
+        <item>Eventos</item>
+        <item>Doações</item>
+        <item>Hemocentro</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="Sexo">Sexo</string>
+    <string name="Mensagem">Faça parte da comunidade!</string>
+    <string name="nome">Nome</string>
+    <string name="login">Nome de Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="confirmacao_senha">Repita sua senha</string>
+    <string name="idade">Idade</string>
+    <string name="masculino">Masculino</string>
+    <string name="feminino">Feminino</string>
 </resources>
