@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Buttons">
+    <style name="buttons">
         <item name="android:minWidth">150dp</item>
-        <item name="android:height">36dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:textColor">#FAFAFA</item>
         <item name="android:background">#F44336</item>
     </style>
