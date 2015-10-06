@@ -26,8 +26,6 @@ public class Usuario implements Entidade {
 	private Long ID;
 	@Column(name = "nome")
 	private String nome;
-	@Column(name = "sobrenome", nullable = true)
-	private String sobrenome;
 	@Column(name = "sexo")
 	private String sexo;
 	@Column(name = "idade")
@@ -69,14 +67,13 @@ public class Usuario implements Entidade {
 		this.nome = nome;
 	}
 
-	public Usuario(Long iD, String nome, String sobrenome, String sexo,
-			int idade, String senha, String login, Endereco endereco,
-			Collection<Evento> evento, Collection<Doacao> doacao,
-			Collection<Comentario> comentario, TipoSanguineo tipo) {
+	public Usuario(Long iD, String nome, String sexo, int idade, String senha,
+			String login, Endereco endereco, Collection<Evento> evento,
+			Collection<Doacao> doacao, Collection<Comentario> comentario,
+			TipoSanguineo tipo) {
 		super();
 		ID = iD;
 		this.nome = nome;
-		this.sobrenome = sobrenome;
 		this.sexo = sexo;
 		this.idade = idade;
 		this.senha = senha;
@@ -93,13 +90,12 @@ public class Usuario implements Entidade {
 		this.ID = ID;
 	}
 
-	public Usuario(String nome, String sobrenome, String sexo, int idade,
-			String senha, String login, Date dataNascimento, Endereco endereco,
+	public Usuario(String nome, String sexo, int idade, String senha,
+			String login, Date dataNascimento, Endereco endereco,
 			Collection<Evento> evento, Collection<Doacao> doacao,
 			Collection<Comentario> comentario, TipoSanguineo tipo) {
 		super();
 		this.nome = nome;
-		this.sobrenome = sobrenome;
 		this.sexo = sexo;
 		this.idade = idade;
 		this.senha = senha;
@@ -143,14 +139,6 @@ public class Usuario implements Entidade {
 		this.idade = idade;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
@@ -177,8 +165,6 @@ public class Usuario implements Entidade {
 			this.ID = json.getLong("ID");
 		if (json.has("nome"))
 			this.nome = json.getString("nome");
-		if (json.has("sobrenome"))
-			this.sobrenome = json.getString("sobrenome");
 		if (json.has("sexo"))
 			this.sexo = json.getString("sexo");
 		if (json.has("login"))
