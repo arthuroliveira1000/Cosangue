@@ -49,7 +49,6 @@ public class UsuarioDAO extends GenericDAO<Long, Usuario> {
 			if (retorno.isEmpty()) {
 				return null;
 			} else {
-
 				// System.out.println(retorno.get(0).getIdade());
 				// System.out.println(retorno.get(0).getNome());
 				// System.out.println(retorno.get(0).getLogin());
@@ -61,6 +60,6 @@ public class UsuarioDAO extends GenericDAO<Long, Usuario> {
 			entityManager.getTransaction().rollback();
 			return null;
 		}
-
 	}
+	
 }

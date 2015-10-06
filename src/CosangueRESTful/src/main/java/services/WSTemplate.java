@@ -45,7 +45,42 @@ public class WSTemplate {
 			clean();
 		}
 	}
-
+	
+	/*protected <T> T delete(T object) {
+		EntityManager manager = factory.createEntityManager();
+		try {
+			manager.getTransaction().begin();
+			manager.remove(object);
+			manager.getTransaction().commit();
+			return object;
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+			return null;
+		} finally {
+			object = null;
+			manager.close();
+			manager = null;
+			clean();
+		}
+	}
+	
+	protected <T> T update(T object) {
+		EntityManager manager = factory.createEntityManager();
+		try {
+			manager.getTransaction().begin();
+			manager.merge(object);
+			manager.getTransaction().commit();
+			manager.close();
+			return object;
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+			e.printStackTrace();
+			return null;
+		} finally {
+			manager = null;
+			clean();
+		}
+	}*/
 	public void clean() {
 		System.gc();
 	}

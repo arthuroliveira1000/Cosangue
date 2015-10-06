@@ -20,7 +20,7 @@ public class UsuarioWS extends WSTemplate {
 			simpleEntityManager.getEntityManager());
 
 	@POST
-	@Path("/inserir")
+	//@Path("/inserir")
 	@Produces(Json.UTF8JSON)
 	@Consumes(Json.UTF8JSON)
 	public Usuario inserir(Usuario usuario) {
@@ -54,7 +54,7 @@ public class UsuarioWS extends WSTemplate {
 	}
 
 	@GET
-	@Path("/login/{login}/{senha}")
+	@Path("/{login}/{senha}")
 	@Produces(Json.UTF8JSON)
 	public Usuario login(@PathParam("login") String login,
 			@PathParam("senha") String senha) {
@@ -69,4 +69,41 @@ public class UsuarioWS extends WSTemplate {
 		}
 		return null;
 	}
+	
+	/*@PUT
+	@Path("/atualiza")
+	@Produces(Json.UTF8JSON)
+	@Consumes(Json.UTF8JSON)
+	public Usuario atualizar(Usuario usuario) {
+		try {
+			Usuario verifica = dao.verificaLogin(usuario);
+			if (verifica != null) {
+				Usuario user = update(usuario);
+				return user;
+			} else {
+				System.out.println("O usuario foi alterado");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@DELETE
+	@Path("/remove/{ID}")
+	@Produces(Json.UTF8JSON)
+	public Usuario remove(@PathParam("ID") Long ID) {
+		try {
+			Usuario verifica = selectOne(Usuario.class, ID);
+			if (verifica != null) {
+				Usuario user = remove(ID);
+				return user;
+			} else {
+				System.out.println("O usuario foi removido");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}*/
 }
