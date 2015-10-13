@@ -1,21 +1,25 @@
 package entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Comentario implements Entidade {
+public class Comentario implements Serializable {
 
+	private static final long serialVersionUID = -1061192105325892559L;
+	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_comentario")
-	private Long ID;
-	@Column(name = "mensagem")
+	private Long id;
 	private String mensagem;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
@@ -23,30 +27,27 @@ public class Comentario implements Entidade {
 	private Usuario usuario;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "id_evento")
-	private Evento evento;
+	@JoinColumn(name = "id_acao")
+	private Acao acao;
 
 	public Comentario() {
 		super();
 	}
 
-	public Comentario(String mensagem, Usuario usuario, Evento evento) {
+	public Comentario(Long id, String mensagem, Usuario usuario, Acao acao) {
 		super();
+		this.id = id;
 		this.mensagem = mensagem;
 		this.usuario = usuario;
-		this.evento = evento;
+		this.acao = acao;
 	}
 
-	public Comentario(String mensagem) {
-		this.mensagem = mensagem;
+	public Long getId() {
+		return id;
 	}
 
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		this.ID = iD;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getMensagem() {
@@ -65,12 +66,16 @@ public class Comentario implements Entidade {
 		this.usuario = usuario;
 	}
 
-	public Evento getEvento() {
-		return evento;
+	public Acao getAcao() {
+		return acao;
 	}
 
-	public void setEvento(Evento evento) {
-		this.evento = evento;
+	public void setAcao(Acao acao) {
+		this.acao = acao;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

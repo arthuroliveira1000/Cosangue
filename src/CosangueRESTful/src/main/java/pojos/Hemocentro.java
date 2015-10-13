@@ -1,11 +1,13 @@
 package pojos;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -13,48 +15,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-public class Hemocentro implements Entidade {
+public class Hemocentro implements Serializable {
+
+	private static final long serialVersionUID = -8117345146225594913L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_hemocentro")
-	private Long ID;
-	@Column(name = "nome")
+	private Long id;
+	@Column(length = 200)
 	private String nome;
-	@Column(name = "telefone")
+	@Column(length = 40)
 	private String telefone;
-	@Column(name = "login")
+	@Column(length = 30)
 	private String login;
-	@Column(name = "senha")
+	@Column(length = 30)
 	private String senha;
 
 	@OneToOne(mappedBy = "hemocentro", fetch = FetchType.LAZY, optional = true)
 	private Endereco endereco;
 
-	@OneToMany(mappedBy = "hemocentro", fetch = FetchType.LAZY)
-	private Collection<Evento> evento;
+	@OneToMany(mappedBy = "hemocentro", fetch = FetchType.LAZY, targetEntity = Acao.class)
+	private List<Acao> acao;
 
 	public Hemocentro() {
 		super();
 	}
 
-	public Hemocentro(String nome, String telefone, String login, String senha,
-			Endereco endereco, Collection<Evento> evento) {
+	public Hemocentro(Long id, String nome, String telefone, String login,
+			String senha, Endereco endereco, List<Acao> acao) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.login = login;
 		this.senha = senha;
 		this.endereco = endereco;
-		this.evento = evento;
+		this.acao = acao;
 	}
 
-	public Long getID() {
-		return ID;
+	public Long getId() {
+		return id;
 	}
 
-	public void setID(Long iDHemocentro) {
-		this.ID = iDHemocentro;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -87,6 +92,26 @@ public class Hemocentro implements Entidade {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Acao> getAcao() {
+		return acao;
+	}
+
+	public void setAcao(List<Acao> acao) {
+		this.acao = acao;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

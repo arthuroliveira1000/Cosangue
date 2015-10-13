@@ -1,28 +1,34 @@
 package pojos;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-public class Doacao implements Entidade {
+public class Doacao implements Serializable {
+
+	private static final long serialVersionUID = 5429710953608386278L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_doacao")
-	private Long ID;
-	@Column(name = "quantidade")
-	private int quantidade;
-	@Column(name = "data")
-	private Date data;
+	private Long id;
+	@Column(length = 10)
+	private int quantidadeDoacao;
+	@Temporal(TemporalType.DATE)
+	private Date dataDoacao;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_usuario")
@@ -32,35 +38,49 @@ public class Doacao implements Entidade {
 		super();
 	}
 
-	public Doacao(int quantidade, Date data, Usuario usuario) {
+	public Doacao(Long id, int quantidadeDoacao, Date dataDoacao,
+			Usuario usuario) {
 		super();
-		this.quantidade = quantidade;
-		this.data = data;
+		this.id = id;
+		this.quantidadeDoacao = quantidadeDoacao;
+		this.dataDoacao = dataDoacao;
 		this.usuario = usuario;
 	}
 
-	public Long getID() {
-		return ID;
+	public Long getId() {
+		return id;
 	}
 
-	public void setID(Long iDDoacao) {
-		this.ID = iDDoacao;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public int getQuantidade() {
-		return quantidade;
+	public int getQuantidadeDoacao() {
+		return quantidadeDoacao;
 	}
 
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
+	public void setQuantidadeDoacao(int quantidadeDoacao) {
+		this.quantidadeDoacao = quantidadeDoacao;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDataDoacao() {
+		return dataDoacao;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataDoacao(Date dataDoacao) {
+		this.dataDoacao = dataDoacao;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

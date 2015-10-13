@@ -1,45 +1,48 @@
 package entities;
 
-import java.sql.Date;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-public class Usuario implements Entidade {
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 5286418095498767539L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	private Long ID;
-	@Column(name = "nome")
+	private Long id;
+	@Column(length = 200)
 	private String nome;
-	@Column(name = "sobrenome", nullable = true)
-	private String sobrenome;
-	@Column(name = "sexo")
-	private char sexo;
-	@Column(name = "idade")
-	private int idade;
-	@Column(name = "senha")
-	private String senha;
-	@Column(name = "login")
-	private String login;
-	@Column(name = "dataNascimento")
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
+	@Column(length = 1)
+	private char genero;
+	@Column(length = 30)
+	private String senha;
+	@Column(length = 30)
+	private String login;
+	@Enumerated
+	private Sangue tipoSanguineo;
 
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-	private Collection<Evento> evento;
+	private Collection<Acao> acao;
 
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Collection<Doacao> doacao;
@@ -47,50 +50,34 @@ public class Usuario implements Entidade {
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Collection<Comentario> comentario;
 
-	@ManyToOne
-	@JoinColumn(name = "id_tipo")
-	private TipoSanguineo tipo;
-
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String nome, String sobrenome, char sexo, int idade,
-			String senha, String login) {
+	public Usuario(Long id, String nome, Date dataNascimento, char genero,
+			String senha, String login, Sangue tipoSanguineo,
+			Endereco endereco, Collection<Acao> acao,
+			Collection<Doacao> doacao, Collection<Comentario> comentario) {
 		super();
+		this.id = id;
 		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.sexo = sexo;
-		this.idade = idade;
-		this.senha = senha;
-		this.login = login;
-	}
-
-	public Usuario(String nome, String sobrenome, char sexo, int idade,
-			String senha, String login, Date dataNascimento, Endereco endereco,
-			Collection<Evento> evento, Collection<Doacao> doacao,
-			Collection<Comentario> comentario, TipoSanguineo tipo) {
-		super();
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.sexo = sexo;
-		this.idade = idade;
-		this.senha = senha;
-		this.login = login;
 		this.dataNascimento = dataNascimento;
+		this.genero = genero;
+		this.senha = senha;
+		this.login = login;
+		this.tipoSanguineo = tipoSanguineo;
 		this.endereco = endereco;
-		this.evento = evento;
+		this.acao = acao;
 		this.doacao = doacao;
 		this.comentario = comentario;
-		this.tipo = tipo;
 	}
 
-	public Long getID() {
-		return ID;
+	public Long getId() {
+		return id;
 	}
 
-	public void setID(Long iDUsuario) {
-		this.ID = iDUsuario;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -101,22 +88,6 @@ public class Usuario implements Entidade {
 		this.nome = nome;
 	}
 
-	public char getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(char sexo) {
-		this.sexo = sexo;
-	}
-
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
-
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -125,27 +96,72 @@ public class Usuario implements Entidade {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
+	public char getGenero() {
+		return genero;
 	}
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public void setGenero(char genero) {
+		this.genero = genero;
 	}
 
 	public String getSenha() {
 		return senha;
 	}
 
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getLogin() {
 		return login;
 	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public Sangue getTipoSanguineo() {
+		return tipoSanguineo;
+	}
+
+	public void setTipoSanguineo(Sangue tipoSanguineo) {
+		this.tipoSanguineo = tipoSanguineo;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public Collection<Acao> getAcao() {
+		return acao;
+	}
+
+	public void setAcao(Collection<Acao> acao) {
+		this.acao = acao;
+	}
+
+	public Collection<Doacao> getDoacao() {
+		return doacao;
+	}
+
+	public void setDoacao(Collection<Doacao> doacao) {
+		this.doacao = doacao;
+	}
+
+	public Collection<Comentario> getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(Collection<Comentario> comentario) {
+		this.comentario = comentario;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

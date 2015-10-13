@@ -1,9 +1,12 @@
 package pojos;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -11,25 +14,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-public class Endereco implements Entidade {
+public class Endereco implements Serializable {
+
+	private static final long serialVersionUID = -3468067506024353507L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_endereco")
-	private Long ID;
-	@Column(name = "logradouro")
+	private Long id;
+	@Column(length = 200)
 	private String logradouro;
-	@Column(name = "bairro")
+	@Column(length = 100)
 	private String bairro;
 	@Column(name = "numero")
-	private int numero;
-	@Column(name = "cidade")
+	private int nr;
+	@Column(length = 100)
 	private String cidade;
-	@Column(name = "UF")
-	private String UF;
-	@Column(name = "latitude")
+	@Column(name = "UF", length = 2)
+	private String uf;
 	private String latitude;
-	@Column(name = "longitude")
 	private String longitude;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = true)
@@ -41,64 +44,36 @@ public class Endereco implements Entidade {
 	private Hemocentro hemocentro;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "id_evento")
-	private Evento evento;
+	@JoinColumn(name = "id_acao")
+	private Acao acao;
 
 	public Endereco() {
 		super();
 	}
 
-	// ENDERECO DE USUARIO
-	public Endereco(String logradouro, String bairro, int numero,
-			String cidade, String uF, String latitude, String longitude,
-			Usuario usuario) {
+	public Endereco(Long id, String logradouro, String bairro, int nr,
+			String cidade, String uf, String latitude, String longitude,
+			Usuario usuario, Hemocentro hemocentro, Acao acao) {
 		super();
+		this.id = id;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
-		this.numero = numero;
+		this.nr = nr;
 		this.cidade = cidade;
-		this.UF = uF;
+		this.uf = uf;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.usuario = usuario;
-	}
-
-	// ENDEREÇO DE HEMOCENTRO
-	public Endereco(String logradouro, String bairro, int numero,
-			String cidade, String uF, String latitude, String longitude,
-			Hemocentro hemocentro) {
-		super();
-		this.logradouro = logradouro;
-		this.bairro = bairro;
-		this.numero = numero;
-		this.cidade = cidade;
-		this.UF = uF;
-		this.latitude = latitude;
-		this.longitude = longitude;
 		this.hemocentro = hemocentro;
+		this.acao = acao;
 	}
 
-	// ENDEREÇO DE EVENTO
-	public Endereco(String logradouro, String bairro, int numero,
-			String cidade, String uF, String latitude, String longitude,
-			Evento evento) {
-		super();
-		this.logradouro = logradouro;
-		this.bairro = bairro;
-		this.numero = numero;
-		this.cidade = cidade;
-		this.UF = uF;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.evento = evento;
+	public Long getId() {
+		return id;
 	}
 
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iDEndereco) {
-		this.ID = iDEndereco;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getLogradouro() {
@@ -117,12 +92,12 @@ public class Endereco implements Entidade {
 		this.bairro = bairro;
 	}
 
-	public int getNumero() {
-		return numero;
+	public int getNr() {
+		return nr;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setNr(int nr) {
+		this.nr = nr;
 	}
 
 	public String getCidade() {
@@ -133,12 +108,12 @@ public class Endereco implements Entidade {
 		this.cidade = cidade;
 	}
 
-	public String getUF() {
-		return UF;
+	public String getUf() {
+		return uf;
 	}
 
-	public void setUF(String uF) {
-		this.UF = uF;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 	public String getLatitude() {
@@ -155,6 +130,34 @@ public class Endereco implements Entidade {
 
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Hemocentro getHemocentro() {
+		return hemocentro;
+	}
+
+	public void setHemocentro(Hemocentro hemocentro) {
+		this.hemocentro = hemocentro;
+	}
+
+	public Acao getAcao() {
+		return acao;
+	}
+
+	public void setAcao(Acao acao) {
+		this.acao = acao;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
