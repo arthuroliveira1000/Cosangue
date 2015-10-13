@@ -2,9 +2,9 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import entities.TipoSanguineo;
+import entities.Sangue;
 
-public class TipoSanguineoDAO extends GenericDAO<Long, TipoSanguineo>{
+public class TipoSanguineoDAO extends GenericDAO<Long, Sangue>{
 
 	public TipoSanguineoDAO(EntityManager entityManager) {
 		super(entityManager);

@@ -4,7 +4,7 @@ import java.util.List;
 
 import managers.SimpleEntityManager;
 import daos.TipoSanguineoDAO;
-import entities.TipoSanguineo;
+import entities.Sangue;
 
 public class TipoSanguineoService {
 
@@ -12,7 +12,7 @@ public class TipoSanguineoService {
 	private TipoSanguineoDAO dao = new TipoSanguineoDAO(
 			simpleEntityManager.getEntityManager());
 
-	public void save(TipoSanguineo tipoSanguineo) {
+	public void save(Sangue tipoSanguineo) {
 		try {
 			simpleEntityManager.beginTransaction();
 			// FAZER VALIDAÇÃO DE CAMPOS NULOS, ETC
@@ -24,7 +24,7 @@ public class TipoSanguineoService {
 		}
 	}
 
-	public void delete(TipoSanguineo tipoSanguineo) {
+	public void delete(Sangue tipoSanguineo) {
 		try {
 			simpleEntityManager.beginTransaction();
 			dao.delete(tipoSanguineo);
@@ -35,7 +35,7 @@ public class TipoSanguineoService {
 		}
 	}
 
-	public void update(TipoSanguineo tipoSanguineo) {
+	public void update(Sangue tipoSanguineo) {
 		try {
 			simpleEntityManager.beginTransaction();
 			dao.update(tipoSanguineo);
@@ -46,11 +46,11 @@ public class TipoSanguineoService {
 		}
 	}
 
-	public TipoSanguineo selectById(Long id) {
+	public Sangue selectById(Long id) {
 		return dao.getById(id);
 	}
 
-	public List<TipoSanguineo> findAll() {
+	public List<Sangue> findAll() {
 		return dao.findAll(); // VERIFICAR SE NÃO RETORNA ERRO CASO LISTA FOR
 								// VAZIA
 	}

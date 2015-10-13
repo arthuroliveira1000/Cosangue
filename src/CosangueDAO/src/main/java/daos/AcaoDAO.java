@@ -2,11 +2,11 @@ package daos;
 
 import javax.persistence.EntityManager;
 
-import pojos.Evento;
+import entities.Acao;
 
-public class EventoDAO extends GenericDAO<Long, Evento> {
+public class AcaoDAO extends GenericDAO<Long, Acao> {
 
-	public EventoDAO(EntityManager entityManager) {
+	public AcaoDAO(EntityManager entityManager) {
 		super(entityManager);
 		// TODO Auto-generated constructor stub
 	}

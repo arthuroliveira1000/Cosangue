@@ -4,18 +4,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/*
- * @author gabriel  
- */
-
 public class SimpleEntityManager {
 
-	private EntityManager entityManager;
-	private EntityManagerFactory factory;
-	private final String PERSISTENCEUNITNAME = "jpa";
+	protected EntityManager entityManager;
+	protected EntityManagerFactory factory;
+	protected final String PERSISTENCE_UNIT_NAME = "jpa";
 
 	public SimpleEntityManager() {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCEUNITNAME);
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		this.entityManager = factory.createEntityManager();
 	}
 
