@@ -3,6 +3,7 @@ package services;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -66,19 +67,25 @@ public class UsuarioWS extends WSTemplate {
 		return null;
 	}
 
+	@PUT
+	@Produces(Json.UTF8JSON)
+	@Consumes(Json.UTF8JSON)
+	public Usuario atualizar(Usuario usuario) {
+		try {
+			Usuario verifica = selectOne(Usuario.class, usuario.getId());
+			if (verifica != null) {
+				Usuario user = insert(usuario);
+				return user;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	/*
-	 * @PUT
-	 * 
-	 * @Path("/atualiza")
-	 * 
-	 * @Produces(Json.UTF8JSON)
-	 * 
-	 * @Consumes(Json.UTF8JSON) public Usuario atualizar(Usuario usuario) { try
-	 * { Usuario verifica = dao.verificaLogin(usuario); if (verifica != null) {
-	 * Usuario user = update(usuario); return user; } else {
-	 * System.out.println("O usuario foi alterado"); } } catch (Exception e) {
-	 * e.printStackTrace(); } return null; }
-	 * 
 	 * @DELETE
 	 * 
 	 * @Path("/remove/{ID}")

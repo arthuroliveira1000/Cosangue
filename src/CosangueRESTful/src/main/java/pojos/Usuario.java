@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,12 +16,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Usuario implements Serializable {
 
@@ -34,13 +38,13 @@ public class Usuario implements Serializable {
 	private String nome;
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
-	@Column(length = 1)
-	private char genero;
+	@Enumerated(EnumType.STRING)
+	private Genero genero;
 	@Column(length = 30)
 	private String senha;
 	@Column(length = 30)
 	private String login;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Sangue tipoSanguineo;
 
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER)
@@ -62,7 +66,7 @@ public class Usuario implements Serializable {
 		super();
 	}
 
-	public Usuario(Long id, String nome, Date dataNascimento, char genero,
+	public Usuario(Long id, String nome, Date dataNascimento, Genero genero,
 			String senha, String login, Sangue tipoSanguineo,
 			Endereco endereco, List<Acao> acao, List<Doacao> doacao,
 			List<Comentario> comentario) {
@@ -104,11 +108,11 @@ public class Usuario implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public char getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(char genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 
