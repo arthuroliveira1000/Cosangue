@@ -45,14 +45,25 @@ public class WSTemplate extends SimpleEntityManager {
 	 * manager.remove(object); manager.getTransaction().commit(); return object;
 	 * } catch (Exception e) { manager.getTransaction().rollback(); return null;
 	 * } finally { object = null; manager.close(); manager = null; clean(); } }
-	 * 
-	 * protected <T> T update(T object) { EntityManager manager =
-	 * factory.createEntityManager(); try { manager.getTransaction().begin();
-	 * manager.merge(object); manager.getTransaction().commit();
-	 * manager.close(); return object; } catch (Exception e) {
-	 * manager.getTransaction().rollback(); e.printStackTrace(); return null; }
-	 * finally { manager = null; clean(); } }
 	 */
+	
+	protected <T> T update(T object) {
+		try {
+			beginTransaction();
+			entityManager.merge(object);
+			commit();
+			close();
+			return object;
+		} catch (Exception e) {
+			rollBack();
+			e.printStackTrace();
+			return null;
+		} finally {
+			entityManager = null;
+			clean();
+		}
+	}
+
 	public void clean() {
 		System.gc();
 	}
