@@ -20,32 +20,29 @@
             android:layout_height="100dp"
             android:layout_marginBottom="24dp"
             android:contentDescription="@string/Tipografia"
-            android:src="@drawable/tipografia_branca_logo" />
+            android:src="@drawable/tipografia_branca" />
 
-        <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            >
+            android:layout_marginTop="8dp">
 
             <EditText
                 android:id="@+id/et_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/conta_icone"
+                android:drawablePadding="16dp"
+                android:drawableStart="@drawable/conta_icone"
+                android:drawableTint="@color/accent"
                 android:hint="@string/login"
                 android:inputType="text"
                 android:maxLength="20"
-                android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:drawablePadding="16dp"
-                android:drawableTint="@color/accent"
-                android:drawableStart="@drawable/user_icon"
-                android:drawableLeft="@drawable/user_icon"/>
+                android:paddingTop="16dp" />
         </android.support.design.widget.TextInputLayout>
 
-        <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,16 +53,16 @@
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/senha_icone"
+                android:drawablePadding="16dp"
+                android:drawableStart="@drawable/senha_icone"
+                android:drawableTint="@color/accent"
+                android:drawableTintMode="src_in"
                 android:hint="@string/senha"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:drawablePadding="16dp"
-                android:drawableTint="@color/accent"
-                android:drawableTintMode="src_in"
-                android:drawableStart="@drawable/password_icon"
-                android:drawableLeft="@drawable/password_icon"/>
+                android:paddingTop="16dp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -76,7 +73,8 @@
             android:backgroundTint="@color/accent"
             android:padding="12dp"
             android:text="@string/Entrar"
-            android:textColor="@color/primary" />
+            android:textColor="@color/primary"
+            android:color="@color/accent"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_entrar_com_facebook"
@@ -87,7 +85,8 @@
             android:backgroundTint="@color/facebook"
             android:padding="12dp"
             android:text="@string/Entrar_com_facebook"
-            android:textColor="@color/accent" />
+            android:textColor="@color/accent"
+            android:color="@color/facebook"/>
 
         <TextView
             android:id="@+id/tv_cadastro_usuario"
@@ -96,7 +95,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="@string/Cadastro"
-            android:textSize="16sp" />
-
+            android:textSize="16sp"
+            android:color="@color/accent"/>
     </LinearLayout>
 </ScrollView>

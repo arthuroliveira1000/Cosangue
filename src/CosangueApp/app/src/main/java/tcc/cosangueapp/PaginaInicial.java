@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -18,67 +16,51 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import tcc.cosangueapp.pojos.Usuario;
+
 public class PaginaInicial extends AppCompatActivity {
 
+    Bundle bdUsuarioLogado;
+    Usuario usuario;
     private Toolbar mToolbar;
-    private Drawer navegationDrawerLeft;
-    private Drawer navegationDrawerRight;
-    private AccountHeader headerNavegationLeft;
-    private int mPositionClicked;
+    private Drawer navegationDrawer;
+    private AccountHeader headerNavegationDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_inicial);
 
-        // TOOLBAR (setSupportActionBar permite o que ele trabalhe como um actionBar)
         mToolbar = (Toolbar) findViewById(R.id.tb_pagina_inicial);
         mToolbar.setTitle("Faça parte da Comunidade!");
 
         setSupportActionBar(mToolbar);
 
-        createHeaderToNavegationDrawer();
+        criaHeaderParaNavegationDrawer();
 
-        createNavegationDrawerLeft(savedInstanceState);
+        criaNavegationDrawer(savedInstanceState);
 
-        addItemsToNavegationDrawer();
+        addItemsNoNavegationDrawer();
 
     }
 
-    //DECIDIR SE VAMOS USAR O MENU DO ACTIONBAR OU NÃO, CASO NÃO RETIRAR OS DOIS MÉTODOS DE BAIXO
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_pagina_inicial, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void inicializaComponentes() {
+        bdUsuarioLogado = getIntent().getExtras();
+        usuario = (Usuario) bdUsuarioLogado.getSerializable("usuario");
     }
 
 
-    private void createHeaderToNavegationDrawer() {
+    private void criaHeaderParaNavegationDrawer() {
         // HEADER OF THE NAVEGATION DRAWER
 
         // Create the AccountHeader
-        headerNavegationLeft = new AccountHeaderBuilder()
+        headerNavegationDrawer = new AccountHeaderBuilder()
                 .withActivity(this)
                         //diminue o tamanho do header, mostra compactado - > .withCompactStyle(true)
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(R.drawable.profile)
+                        new ProfileDrawerItem().withName(usuario.getNome()).withEmail(usuario.getLogin()).withIcon(R.drawable.profile)
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -95,12 +77,12 @@ public class PaginaInicial extends AppCompatActivity {
                 .build();
     }
 
-    private void createNavegationDrawerLeft(Bundle savedInstanceState) {
+    private void criaNavegationDrawer(Bundle savedInstanceState) {
         // NAVEGATION DRAWER LEFT
-        navegationDrawerLeft = new DrawerBuilder()
+        navegationDrawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(mToolbar)
-                .withAccountHeader(headerNavegationLeft)
+                .withAccountHeader(headerNavegationDrawer)
                 .withDisplayBelowStatusBar(true)
                 .withActionBarDrawerToggleAnimated(true)
                 .withDrawerGravity(Gravity.LEFT)
@@ -126,27 +108,8 @@ public class PaginaInicial extends AppCompatActivity {
                 })
                 .build();
 
-    }
 
-    private void addItemsToNavegationDrawer() {
-        //ADICIONANDO ITENS A NAVEGATION DRAWER
-        // criar icones com cor diferenciada para quando estiver selecionada ex.: account_selected
-        navegationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Perfil").withIcon(R.drawable.account));
-        navegationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Hemocentro").withIcon(R.drawable.ambulance));
-        navegationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Eventos").withIcon(R.drawable.calendar));
-        navegationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Doações").withIcon(R.drawable.doacao));
-        navegationDrawerLeft.addItem(new DividerDrawerItem());
-        navegationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Configurações").withIcon(R.drawable.settings));
-        //navegationDrawerLeft.addItem(new SectionDrawerItem().withName("Só pra dividir, sem ação"));
-
-
-        // Exemplo switchDrawerItem  -> navegationDrawerLeft.addItem(new SwitchDrawerItem().withName("Notificação").withChecked(true).withOnCheckedChangeListener(mOnOnCheckedChangeListener));
-        //Exemplo ToggleDrawerItem - > navegationDrawerLeft.addItem(new ToggleDrawerItem().withName("News").withChecked(true).withOnCheckedChangeListener(mOnOnCheckedChangeListener));
-
-    }
-
-}
-   /*
+        /*
 
    CASO PRECISEMOS USAR O BOTÃO DE CHECK, NESSE MÉTODO É SETADO O QUE ACONTECE QUANDO O BOTÃO É ALTERADO
 
@@ -159,3 +122,24 @@ public class PaginaInicial extends AppCompatActivity {
         }
     };
 */
+
+    }
+
+    private void addItemsNoNavegationDrawer() {
+        // criar icones com cor diferenciada para quando estiver selecionada ex.: account_selected
+        navegationDrawer.addItem(new PrimaryDrawerItem().withName("Perfil").withIcon(R.drawable.account));
+        navegationDrawer.addItem(new PrimaryDrawerItem().withName("Hemocentro").withIcon(R.drawable.ambulance));
+        navegationDrawer.addItem(new PrimaryDrawerItem().withName("Eventos").withIcon(R.drawable.calendar));
+        navegationDrawer.addItem(new PrimaryDrawerItem().withName("Doações").withIcon(R.drawable.doacao));
+        navegationDrawer.addItem(new DividerDrawerItem());
+        navegationDrawer.addItem(new PrimaryDrawerItem().withName("Configurações").withIcon(R.drawable.settings));
+        //navegationDrawerLeft.addItem(new SectionDrawerItem().withName("Só pra dividir, sem ação"));
+
+
+        // Exemplo switchDrawerItem  -> navegationDrawerLeft.addItem(new SwitchDrawerItem().withName("Notificação").withChecked(true).withOnCheckedChangeListener(mOnOnCheckedChangeListener));
+        //Exemplo ToggleDrawerItem - > navegationDrawerLeft.addItem(new ToggleDrawerItem().withName("News").withChecked(true).withOnCheckedChangeListener(mOnOnCheckedChangeListener));
+
+    }
+
+}
+

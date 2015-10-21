@@ -7,4 +7,7 @@
     <item name="navegationbar" type="color">#212121</item>
     <item name="facebook" type="color">#3b5998</item>
 
+    <color name="primary_text_material_light">#fffcfc</color>
+    <color name="primary_text_default_material_dark">#ffffff</color>
+    <color name="windowBackground">#f0e6e6</color>
 </resources>

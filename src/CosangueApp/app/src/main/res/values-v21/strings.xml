@@ -33,4 +33,5 @@
     <string name="idade">Idade</string>
     <string name="masculino">Masculino</string>
     <string name="feminino">Feminino</string>
+    <string name="tipoSanguineo">Tipo Sanguíneo</string>
 </resources>

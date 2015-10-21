@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="0dp"
-    android:background="#FAFAFA"
+    android:background="@color/primary"
     android:orientation="vertical"
     android:paddingBottom="20dp"
     android:weightSum="1">
@@ -16,9 +16,11 @@
         android:id="@+id/tb_cadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="#1000000"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
+        android:textAlignment="center"
+        android:title="Crie já sua conta!"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -38,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
         <EditText
             android:id="@+id/et_nome"
@@ -46,9 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/account"
             android:drawablePadding="16dp"
-            android:drawableStart="@drawable/account"
             android:drawableTint="@color/primary"
             android:elegantTextHeight="false"
             android:hint="@string/nome"
@@ -58,14 +58,12 @@
             android:paddingTop="16dp" />
     </android.support.design.widget.TextInputLayout>
 
-    <!-- Nome do Usuário Label -->
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginRight="10dp">
 
         <EditText
             android:id="@+id/et_login"
@@ -73,9 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/user_icon"
             android:drawablePadding="16dp"
-            android:drawableStart="@drawable/user_icon"
             android:drawableTint="@color/primary"
             android:hint="@string/login"
             android:inputType="text"
@@ -84,42 +80,50 @@
             android:paddingTop="16dp" />
     </android.support.design.widget.TextInputLayout>
 
-    <!--Idade Label -->
-    <android.support.design.widget.TextInputLayout
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp">
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginRight="10dp">
 
-        <EditText
-            android:id="@+id/et_idade"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/age_icon"
+            android:layout_marginRight="10dp">
+
+            <EditText
+                android:id="@+id/et_idade"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:drawablePadding="16dp"
+                android:hint="@string/idade"
+                android:inputType="number"
+                android:maxLength="2"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Spinner
             android:drawablePadding="16dp"
-            android:drawableStart="@drawable/age_icon"
-            android:drawableTint="@color/primary"
-            android:hint="@string/idade"
-            android:inputType="number"
-            android:maxLength="2"
-            android:paddingBottom="16dp"
-            android:paddingTop="16dp" />
-    </android.support.design.widget.TextInputLayout>
+            android:hint="@string/tipoSanguineo"
+            android:id="@+id/sp_tipo_sanguineo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
 
-
-    <!-- Password Label -->
+    </LinearLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginRight="10dp">
 
         <EditText
             android:id="@+id/et_senha"
@@ -127,9 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/password_icon"
             android:drawablePadding="16dp"
-            android:drawableStart="@drawable/password_icon"
             android:drawableTint="@color/primary"
             android:hint="@string/senha"
             android:inputType="textPassword"
@@ -138,65 +140,54 @@
             android:paddingTop="16dp" />
     </android.support.design.widget.TextInputLayout>
 
-    <!-- Repeated Password Label -->
-    <android.support.design.widget.TextInputLayout
+
+    <RadioGroup
+        android:id="@+id/rg_sexo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rb_masculino"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawablePadding="16dp"
+            android:drawableTint="@color/primary"
+            android:hint="@string/masculino"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingTop="20dp"
+            android:textSize="18dp" />
+
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rb_feminino"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawablePadding="16dp"
+            android:drawableTint="@color/primary"
+            android:hint="@string/feminino"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:textAlignment="center"
+            android:textSize="18dp" />
+
+    </RadioGroup>
+
+    <android.widget.DatePicker
+        android:id="@+id/dt_nascimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp">
-
-        <EditText
-            android:id="@+id/et_senha_novamente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/password_icon"
-            android:drawablePadding="16dp"
-            android:drawableStart="@drawable/password_icon"
-            android:drawableTint="@color/primary"
-            android:hint="@string/confirmacao_senha"
-            android:inputType="textPassword"
-            android:maxLength="20"
-            android:paddingBottom="16dp"
-            android:paddingTop="16dp" />
-    </android.support.design.widget.TextInputLayout>
-
-
-        <RadioGroup
-            android:id="@+id/rg_sexo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="15dp">
-
-
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/rb_masculino"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:drawablePadding="16dp"
-                android:drawableTint="@color/primary"
-                android:hint="@string/masculino"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
-                android:orientation="horizontal"/>
-
-
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/rb_feminino"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:drawablePadding="16dp"
-                android:drawableTint="@color/primary"
-                android:hint="@string/feminino"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
-                android:orientation="horizontal"/>
-        </RadioGroup>
-
+        android:background="@color/primary"
+        android:backgroundTint="@color/accent"
+        android:calendarTextColor="@color/accent"
+        android:foreground="@color/primary"
+        android:visibility="visible"></android.widget.DatePicker>
 
 </LinearLayout>

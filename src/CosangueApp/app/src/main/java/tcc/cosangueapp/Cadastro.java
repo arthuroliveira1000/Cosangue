@@ -8,30 +8,33 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import java.net.DatagramPacket;
 
+import tcc.cosangueapp.daos.UsuarioDAO;
 import tcc.cosangueapp.pojos.Usuario;
 
 
 public class Cadastro extends AppCompatActivity {
 
-    final String URL = "http://192.168.0.103:8080/CosangueRESTful/usuario/inserir/{usuario}";
     EditText etLogin;
     EditText etSenha;
-    EditText etConfirmacaoSenha;
     EditText etNome;
     EditText etIdade;
     RadioButton rbMasculino;
     RadioButton rbFeminino;
     boolean valid;
     Usuario usuario;
+    UsuarioDAO usuarioDAO;
     private Toolbar mToolbar;
+    Spinner spTipoSanguineo;
+    DatePicker dpDataNascimento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +43,8 @@ public class Cadastro extends AppCompatActivity {
         inicializaComponentes();
         validaCampos();
 
-
     }
 
-
-    //METHODS OF MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -69,7 +69,6 @@ public class Cadastro extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // INSTANCIA OS COMPONENTES USADOS
     private void inicializaComponentes() {
         mToolbar = (Toolbar) findViewById(R.id.tb_cadastro);
         mToolbar.setTitle("Cadastre-se");
@@ -77,17 +76,19 @@ public class Cadastro extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         etLogin = (EditText) findViewById(R.id.et_login);
         etSenha = (EditText) findViewById(R.id.et_senha);
-        etConfirmacaoSenha = (EditText) findViewById(R.id.et_senha_novamente);
         etNome = (EditText) findViewById(R.id.et_nome);
         etIdade = (EditText) findViewById(R.id.et_idade);
         rbMasculino = (RadioButton) findViewById(R.id.rb_masculino);
         rbFeminino = (RadioButton) findViewById(R.id.rb_feminino);
+        spTipoSanguineo = (Spinner) findViewById(R.id.sp_tipo_sanguineo);
+        dpDataNascimento = (DatePicker) findViewById(R.id.dt_nascimento);
         valid = true;
         usuario = new Usuario();
 
     }
 
-    //VERIFICA SE SEXO ESTÁ SELECIONADO
+   
+
     public String sexoSelecionado() {
         if (rbMasculino.isChecked()) {
             return "M";
@@ -98,7 +99,6 @@ public class Cadastro extends AppCompatActivity {
         return null;
     }
 
-    // VALIDA CAMPOS DE INPUT
     public Boolean validaCampos() {
 
         valid = true;
@@ -109,20 +109,6 @@ public class Cadastro extends AppCompatActivity {
                 if (etSenha.length() > 0 && etSenha.length() < 4) {
                     etSenha.setError("Digite uma Senha Entre 4 e 30 Dígitos!");
                     valid = false;
-                }
-
-            }
-        });
-
-        // VERIFICANDO SE CONFIRMAÇÃO DE SENHA É IGUAL A SENHA
-        etConfirmacaoSenha.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (etSenha.length() >= 4 && etConfirmacaoSenha.length() > 0) {
-                    if (!(etConfirmacaoSenha.getText().toString().equals(etSenha.getText().toString()))) {
-                        etConfirmacaoSenha.setError("Senhas não Correspondem!");
-                        valid = false;
-                    }
                 }
 
             }
@@ -154,7 +140,6 @@ public class Cadastro extends AppCompatActivity {
         });
 
         // VERIFICANDO SE LOGIN É MAIOR QUE 5 DIGITOS
-
         etLogin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -187,42 +172,21 @@ public class Cadastro extends AppCompatActivity {
         return usuario;
     }
 
-
-    //****************************************************
-
     private class HttpRequestTask extends AsyncTask<Usuario, String, Usuario> {
-
-        //retornará um usuário
-        //ferramenta usada pra fazer toda a comunicação com ws através do framework do Spring para Android
-
 
         @Override
         protected Usuario doInBackground(Usuario... params) {
 
             try {
-                RestTemplate restTemplate = new RestTemplate();
-                //utiliza a biblioteca do jackson para converter os dados recebidos e enviados
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                //ver o que faz
-                restTemplate.setRequestFactory(
-                        new HttpComponentsClientHttpRequestFactory());
-                //url que será acessada, tipo do retorno e parametro que o método do ws determinda
-
-
-
-                Usuario usuarioRetornado = restTemplate.getForObject(URL, Usuario.class, params);
-
-
-                return usuarioRetornado;
+                usuarioDAO = new UsuarioDAO();
+                Usuario retorno = usuarioDAO.cadastro(params);
+                return retorno;
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
-
             return null;
         }
 
-
-        //usuario do parametro abaixo é o retorno do metodo de cima, doInBackground
         @Override
         protected void onPostExecute(Usuario usuario) {
             if (usuario != null) {
