@@ -36,8 +36,7 @@ public class Usuario implements Serializable {
 	private Long id;
 	@Column(length = 200)
 	private String nome;
-	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
+	private String dataNascimento;
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
 	@Column(length = 30)
@@ -45,7 +44,7 @@ public class Usuario implements Serializable {
 	@Column(length = 30)
 	private String login;
 	@Enumerated(EnumType.STRING)
-	private Sangue tipoSanguineo;
+	private TipoSanguineo tipoSanguineo;
 
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private Endereco endereco;
@@ -66,8 +65,8 @@ public class Usuario implements Serializable {
 		super();
 	}
 
-	public Usuario(Long id, String nome, Date dataNascimento, Genero genero,
-			String senha, String login, Sangue tipoSanguineo,
+	public Usuario(Long id, String nome, String dataNascimento, Genero genero,
+			String senha, String login, TipoSanguineo tipoSanguineo,
 			Endereco endereco, List<Acao> acao, List<Doacao> doacao,
 			List<Comentario> comentario) {
 		super();
@@ -100,11 +99,11 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -132,11 +131,11 @@ public class Usuario implements Serializable {
 		this.login = login;
 	}
 
-	public Sangue getTipoSanguineo() {
+	public TipoSanguineo getTipoSanguineo() {
 		return tipoSanguineo;
 	}
 
-	public void setTipoSanguineo(Sangue tipoSanguineo) {
+	public void setTipoSanguineo(TipoSanguineo tipoSanguineo) {
 		this.tipoSanguineo = tipoSanguineo;
 	}
 

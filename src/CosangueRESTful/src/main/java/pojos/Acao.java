@@ -32,8 +32,7 @@ public class Acao implements Serializable {
 	private String nome;
 	@Column(length = 600)
 	private String descricao;
-	@Temporal(TemporalType.DATE)
-	private Date dataHorario;
+	private String dataHorario;
 	@Column(length = 1000)
 	private int nParticipantes;
 	@Column(length = 1000)
@@ -41,7 +40,9 @@ public class Acao implements Serializable {
 	@Enumerated
 	private Categoria categoria;
 	@Enumerated
-	private Sangue tipo;
+	private TipoSanguineo tipo;
+	@Enumerated
+	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
 	private Endereco endereco;
@@ -61,10 +62,11 @@ public class Acao implements Serializable {
 		super();
 	}
 
-	public Acao(Long id, String nome, String descricao, Date dataHorario,
+	public Acao(Long id, String nome, String descricao, String dataHorario,
 			int nParticipantes, int nReportacoes, Categoria categoria,
-			Sangue tipo, Endereco endereco, Usuario usuario,
-			List<Comentario> comentario, Hemocentro hemocentro) {
+			TipoSanguineo tipo, Endereco endereco, Usuario usuario,
+			List<Comentario> comentario, Hemocentro hemocentro,
+			Hemocomponentes hemocomponente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -78,6 +80,7 @@ public class Acao implements Serializable {
 		this.usuario = usuario;
 		this.comentario = comentario;
 		this.hemocentro = hemocentro;
+		this.hemocomponente = hemocomponente;
 	}
 
 	public Long getId() {
@@ -104,11 +107,12 @@ public class Acao implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Date getDataHorario() {
+	public String getDataHorario() {
 		return dataHorario;
 	}
 
-	public void setDataHorario(Date dataHorario) {
+	// //"05/09/2013 06:30:07"
+	public void setDataHorario(String dataHorario) {
 		this.dataHorario = dataHorario;
 	}
 
@@ -136,11 +140,11 @@ public class Acao implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public Sangue getTipo() {
+	public TipoSanguineo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Sangue tipo) {
+	public void setTipo(TipoSanguineo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -174,6 +178,14 @@ public class Acao implements Serializable {
 
 	public void setComentario(List<Comentario> comentario) {
 		this.comentario = comentario;
+	}
+
+	public Hemocomponentes getHemocomponente() {
+		return hemocomponente;
+	}
+
+	public void setHemocomponente(Hemocomponentes hemocomponente) {
+		this.hemocomponente = hemocomponente;
 	}
 
 	public static long getSerialversionuid() {

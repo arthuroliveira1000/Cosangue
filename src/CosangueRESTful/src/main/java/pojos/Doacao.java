@@ -27,8 +27,7 @@ public class Doacao implements Serializable {
 	private Long id;
 	@Column(length = 10)
 	private int quantidadeDoacao;
-	@Temporal(TemporalType.DATE)
-	private Date dataDoacao;
+	private String dataDoacao;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_usuario")
@@ -38,7 +37,7 @@ public class Doacao implements Serializable {
 		super();
 	}
 
-	public Doacao(Long id, int quantidadeDoacao, Date dataDoacao,
+	public Doacao(Long id, int quantidadeDoacao, String dataDoacao,
 			Usuario usuario) {
 		super();
 		this.id = id;
@@ -63,11 +62,11 @@ public class Doacao implements Serializable {
 		this.quantidadeDoacao = quantidadeDoacao;
 	}
 
-	public Date getDataDoacao() {
+	public String getDataDoacao() {
 		return dataDoacao;
 	}
-
-	public void setDataDoacao(Date dataDoacao) {
+	//yyyy-MM-dd
+	public void setDataDoacao(String dataDoacao) {
 		this.dataDoacao = dataDoacao;
 	}
 
