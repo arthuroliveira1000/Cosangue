@@ -1,146 +1,65 @@
 package tcc.cosangueapp.pojos;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.Collection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
-// To ignore any unknown properties in JSON input without exception:
+import tcc.cosangueapp.utils.DateUtils;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Usuario implements Serializable {
 
-    private Long ID;
+    private Long id;
     private String nome;
-    private String sexo;
-    private int idade;
+    private String dataNascimento;
+    private Genero genero;
     private String senha;
     private String login;
+    private TipoSanguineo tipoSanguineo;
+
+    private Endereco endereco;
+
+    private List<Acao> acao;
+
+    private List<Doacao> doacao;
+
+    private List<Comentario> comentario;
 
     public Usuario() {
         super();
     }
 
-
-    /*  private Endereco endereco;
-
-      private Collection<Evento> evento;
-
-      private Collection<Doacao> doacao;
-
-      private Collection<Comentario> comentario;
-
-      private TipoSanguineo tipo;
-
-      public Usuario() {
-          super();
-      }
-**/
-      public Usuario(String nome, String sexo, int idade,
-                     String login, String senha) {
-          super();
-          this.nome = nome;
-          this.sexo = sexo;
-          this.idade = idade;
-          this.login = login;
-          this.senha = senha;
-      }
-
-      public Usuario(String nome) {
-          super();
-          this.nome = nome;
-      }
-
-      public Usuario(Long ID) {
-          super();
-          this.ID = ID;
-      }
-/**    public Usuario(String nome, String sobrenome, String sexo, int idade,
-                     String senha, String login, Endereco endereco,
-                     Collection<Evento> evento, Collection<Doacao> doacao,
-                     Collection<Comentario> comentario, TipoSanguineo tipo) {
-          super();
-          this.nome = nome;
-          this.sobrenome = sobrenome;
-          this.sexo = sexo;
-          this.idade = idade;
-          this.senha = senha;
-          this.login = login;
-          this.endereco = endereco;
-          this.evento = evento;
-          this.doacao = doacao;
-          this.comentario = comentario;
-          this.tipo = tipo;
-      }
-
-      public Long getID() {
-          return ID;
-      }
-
-      public void setID(Long iDUsuario) {
-          this.ID = iDUsuario;
-      }
-
-
-
-      public String getSobrenome() {
-          return sobrenome;
-      }
-
-      public void setSobrenome(String sobrenome) {
-          this.sobrenome = sobrenome;
-      }
-
-      public void setSenha(String senha) {
-          this.senha = senha;
-      }
-
-      public void setLogin(String login) {
-          this.login = login;
-      }
-
-      public String getSenha() {
-          return senha;
-      }
-
-      public String getLogin() {
-          return login;
-      }
-
-      public Usuario(String login, String senha) {
-          this.login = login;
-          this.senha = senha;
-      }
-  */
-    public void setSenha(String senha) {
+    public Usuario(Long id, String nome, String dataNascimento, Genero genero,
+                   String senha, String login, TipoSanguineo tipoSanguineo,
+                   Endereco endereco, List<Acao> acao, List<Doacao> doacao,
+                   List<Comentario> comentario) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
         this.senha = senha;
-    }
-
-    public void setLogin(String login) {
         this.login = login;
+        this.tipoSanguineo = tipoSanguineo;
+        this.endereco = endereco;
+        this.acao = acao;
+        this.doacao = doacao;
+        this.comentario = comentario;
     }
 
-    public String getSenha() {
-        return senha;
+    public Long getId() {
+        return id;
     }
 
-    public String getLogin() {
-        return login;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public Usuario(String login, String senha) {
-        this.login = login;
-        this.senha = senha;
-    }
-
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long iDUsuario) {
-        this.ID = iDUsuario;
-    }
-
 
     public String getNome() {
         return nome;
@@ -150,19 +69,75 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = DateUtils.dateToString(dataNascimento);
     }
 
-    public int getIdade() {
-        return idade;
+    public Genero getGenero() {
+        return genero;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public TipoSanguineo getTipoSanguineo() {
+        return tipoSanguineo;
+    }
+
+    public void setTipoSanguineo(TipoSanguineo tipoSanguineo) {
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Doacao> getDoacao() {
+        return doacao;
+    }
+
+    public void setDoacao(List<Doacao> doacao) {
+        this.doacao = doacao;
+    }
+
+    public List<Comentario> getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(List<Comentario> comentario) {
+        this.comentario = comentario;
+    }
+
+    public List<Acao> getAcao() {
+        return acao;
+    }
+
+    public void setAcao(List<Acao> acao) {
+        this.acao = acao;
     }
 }
