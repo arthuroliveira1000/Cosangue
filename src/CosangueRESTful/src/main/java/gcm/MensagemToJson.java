@@ -1,4 +1,4 @@
-package pushmessages;
+package gcm;
 
 import java.util.HashMap;
 import java.util.Map;

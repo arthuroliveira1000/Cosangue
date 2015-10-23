@@ -1,5 +1,7 @@
 package services;
 
+import gcm.GoogleCloudMessaging;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,7 +11,6 @@ import javax.ws.rs.Produces;
 
 import json.Json;
 import pojos.Acao;
-import pushmessages.GoogleCloudMessaging;
 
 public class AcaoWS extends TemplateWS {
 

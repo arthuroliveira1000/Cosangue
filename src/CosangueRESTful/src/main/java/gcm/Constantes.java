@@ -1,4 +1,4 @@
-package pushmessages;
+package gcm;
 
 public interface Constantes {
 

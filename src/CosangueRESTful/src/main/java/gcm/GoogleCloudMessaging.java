@@ -1,4 +1,4 @@
-package pushmessages;
+package gcm;
 
 import java.io.IOException;
 import java.io.OutputStream;
