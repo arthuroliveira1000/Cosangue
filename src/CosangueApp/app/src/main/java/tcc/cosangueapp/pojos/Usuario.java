@@ -1,12 +1,8 @@
 package tcc.cosangueapp.pojos;
 
-import android.util.Log;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +18,7 @@ public class Usuario implements Serializable {
     private String senha;
     private String login;
     private TipoSanguineo tipoSanguineo;
+    private String registrationId;
 
     private Endereco endereco;
 
@@ -38,7 +35,7 @@ public class Usuario implements Serializable {
     public Usuario(Long id, String nome, String dataNascimento, Genero genero,
                    String senha, String login, TipoSanguineo tipoSanguineo,
                    Endereco endereco, List<Acao> acao, List<Doacao> doacao,
-                   List<Comentario> comentario) {
+                   List<Comentario> comentario, String registrationId) {
         super();
         this.id = id;
         this.nome = nome;
@@ -51,6 +48,7 @@ public class Usuario implements Serializable {
         this.acao = acao;
         this.doacao = doacao;
         this.comentario = comentario;
+        this.registrationId = registrationId;
     }
 
     public Long getId() {
@@ -75,6 +73,14 @@ public class Usuario implements Serializable {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = DateUtils.dateToString(dataNascimento);
+    }
+
+    public String getregistrationId() {
+        return registrationId;
+    }
+
+    public void setregistrationId(String registrationId) {
+        this.registrationId = registrationId;
     }
 
     public Genero getGenero() {
