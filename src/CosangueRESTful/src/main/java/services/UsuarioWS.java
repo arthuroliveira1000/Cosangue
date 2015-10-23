@@ -13,7 +13,7 @@ import pojos.Usuario;
 import daos.UsuarioDAO;
 
 @Path("usuario")
-public class UsuarioWS extends WSTemplate {
+public class UsuarioWS extends TemplateWS {
 
 	private UsuarioDAO dao = new UsuarioDAO();
 

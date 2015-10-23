@@ -38,7 +38,7 @@ public class Endereco implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-
+	
 	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;

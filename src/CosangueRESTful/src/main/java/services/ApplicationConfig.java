@@ -18,7 +18,7 @@ public class ApplicationConfig extends Application {
 	}
 
 	private void addRestResourceClasses(Set<Class<?>> resources) {
-		resources.add(WSTemplate.class);
+		resources.add(TemplateWS.class);
 		resources.add(UsuarioWS.class);
 	}
 

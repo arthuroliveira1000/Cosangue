@@ -13,10 +13,10 @@ public class UsuarioDAO extends SimpleEntityManager {
 	public Usuario verificaLogin(Usuario usuario) {
 		try {
 			beginTransaction();
-			Query buscaUsuario = entityManager
+			final Query query = entityManager
 					.createQuery("Select u from Usuario u where u.login like :login");
-			buscaUsuario.setParameter("login", usuario.getLogin());
-			List<Usuario> retorno = buscaUsuario.getResultList();
+			query.setParameter("login", usuario.getLogin());
+			List<Usuario> retorno = query.getResultList();
 			commit();
 			if (retorno.isEmpty()) {
 				return null;
@@ -35,17 +35,36 @@ public class UsuarioDAO extends SimpleEntityManager {
 	public Usuario autenticaLogin(String login, String senha) {
 		try {
 			beginTransaction();
-			Query buscaUsuario = entityManager
+			final Query query = entityManager
 					.createQuery("SELECT u FROM Usuario u WHERE u.login LIKE :login AND senha LIKE :senha");
-			buscaUsuario.setParameter("login", login);
-			buscaUsuario.setParameter("senha", senha);
+			query.setParameter("login", login);
+			query.setParameter("senha", senha);
 			// System.out.println(login);
-			List<Usuario> retorno = buscaUsuario.getResultList();
+			List<Usuario> retorno = query.getResultList();
 			commit();
 			if (retorno.isEmpty()) {
 				return null;
 			} else {
 				return retorno.get(0);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollBack();
+			return null;
+		}
+	}
+
+	public List<Usuario> listaRegistrosUsuarios() {
+		try {
+			beginTransaction();
+			final Query query = entityManager
+					.createQuery("Select u from Usuario u");
+			List<Usuario> retorno = query.getResultList();
+			commit();
+			if (retorno.isEmpty()) {
+				return null;
+			} else {
+				return retorno;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

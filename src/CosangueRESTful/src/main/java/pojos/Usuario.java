@@ -1,7 +1,6 @@
 package pojos;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,8 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,6 +42,8 @@ public class Usuario implements Serializable {
 	private String login;
 	@Enumerated(EnumType.STRING)
 	private TipoSanguineo tipoSanguineo;
+	@Column(name = "registration_id")
+	private String registrationId;
 
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private Endereco endereco;
@@ -68,7 +67,7 @@ public class Usuario implements Serializable {
 	public Usuario(Long id, String nome, String dataNascimento, Genero genero,
 			String senha, String login, TipoSanguineo tipoSanguineo,
 			Endereco endereco, List<Acao> acao, List<Doacao> doacao,
-			List<Comentario> comentario) {
+			List<Comentario> comentario, String registrationId) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -81,6 +80,7 @@ public class Usuario implements Serializable {
 		this.acao = acao;
 		this.doacao = doacao;
 		this.comentario = comentario;
+		this.registrationId = registrationId;
 	}
 
 	public Long getId() {
@@ -169,6 +169,14 @@ public class Usuario implements Serializable {
 
 	public void setAcao(List<Acao> acao) {
 		this.acao = acao;
+	}
+
+	public String getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
 	}
 
 	public static long getSerialversionuid() {

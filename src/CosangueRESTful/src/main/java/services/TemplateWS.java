@@ -2,7 +2,7 @@ package services;
 
 import managers.SimpleEntityManager;
 
-public class WSTemplate extends SimpleEntityManager {
+public class TemplateWS extends SimpleEntityManager {
 
 	protected <T> T insert(T object) {
 		try {
