@@ -72,13 +72,8 @@ public class UsuarioWS extends TemplateWS {
 	@Consumes(Json.UTF8JSON)
 	public Usuario atualizar(Usuario usuario) {
 		try {
-			Usuario verifica = selectOne(Usuario.class, usuario.getId());
-			if (verifica != null) {
-				Usuario user = insert(usuario);
-				return user;
-			} else {
-				return null;
-			}
+			Usuario user = update(usuario);
+			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
