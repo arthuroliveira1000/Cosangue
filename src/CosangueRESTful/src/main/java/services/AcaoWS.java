@@ -3,11 +3,15 @@ package services;
 import gcm.GoogleCloudMessaging;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import json.Json;
 import pojos.Acao;
@@ -38,6 +42,31 @@ public class AcaoWS extends TemplateWS {
 				return acao;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@PUT
+	@Produces(Json.UTF8JSON)
+	@Consumes(Json.UTF8JSON)
+	public Acao atualizar(Acao acao) {
+		try {
+			Acao atualizaAcao = update(acao);
+			return atualizaAcao;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deletar(Acao acao){
+		try{
+			delete(acao);
+			return Response.status(200).entity("Açao excluída com sucesso").build();
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 		return null;
