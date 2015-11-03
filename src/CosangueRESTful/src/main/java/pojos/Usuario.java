@@ -23,6 +23,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
+
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 5286418095498767539L;

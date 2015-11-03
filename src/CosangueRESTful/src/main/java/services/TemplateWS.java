@@ -46,7 +46,7 @@ public class TemplateWS extends SimpleEntityManager {
 	 * } catch (Exception e) { manager.getTransaction().rollback(); return null;
 	 * } finally { object = null; manager.close(); manager = null; clean(); } }
 	 */
-	
+
 	protected <T> T update(T object) {
 		try {
 			beginTransaction();

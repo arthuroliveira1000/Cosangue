@@ -54,6 +54,40 @@ public class UsuarioDAO extends SimpleEntityManager {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public Usuario inseriRegistrationId(Long id, String registrationId) {
+		try {
+			beginTransaction();
+			Usuario retorno = entityManager.find(Usuario.class, id);
+			retorno.setRegistrationId(registrationId);
+			entityManager.merge(retorno);
+			commit();
+			return retorno;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollBack();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Usuario removeRegistrationId(Long id) {
+		try {
+			beginTransaction();
+			Usuario retorno = entityManager.find(Usuario.class, id);
+			retorno.setRegistrationId(null);
+			entityManager.merge(retorno);
+			commit();
+			return retorno;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollBack();
+			return null;
+		}
+	}
+
 	public List<Usuario> listaRegistrosUsuarios() {
 		try {
 			beginTransaction();

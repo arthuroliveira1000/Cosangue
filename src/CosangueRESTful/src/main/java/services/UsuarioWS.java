@@ -69,15 +69,28 @@ public class UsuarioWS extends TemplateWS {
 
 	@PUT
 	@Produces(Json.UTF8JSON)
-	@Consumes(Json.UTF8JSON)
-	public Usuario atualizar(Usuario usuario) {
+	@Path("/{id}/{registration_id}")
+	public Usuario inseriRegistrationId(@PathParam("id") Long id,
+			@PathParam("registration_id") String registrationId) {
 		try {
-			Usuario user = update(usuario);
-			return user;
+			Usuario user = dao.inseriRegistrationId(id, registrationId);
+			if (user != null) {
+				return user;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@PUT
+	@Path("/{id}")
+	public void removeRegistrationId(@PathParam("id") Long id) {
+		try {
+			Usuario user = dao.removeRegistrationId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*
