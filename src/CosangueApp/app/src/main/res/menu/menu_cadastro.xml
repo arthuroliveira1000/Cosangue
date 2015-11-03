@@ -7,7 +7,7 @@
     <!-- Proximo action item bar -->
     <item
         android:id="@+id/action_proximo"
-        android:icon="@drawable/done_icon"
+        android:icon="@drawable/proximo_icone"
         android:title="@string/action_proximo"
         app:showAsAction="always"
          />

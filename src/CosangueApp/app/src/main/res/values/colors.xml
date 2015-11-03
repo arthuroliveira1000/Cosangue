@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="primary" type="color">#D83B31</item>
-    <item name="primarydark" type="color">#d50000</item>
+    <item name="primary" type="color">#F44336</item>
+    <item name="primarydark" type="color">#D32F2F</item>
     <item name="accent" type="color">#FAFAFA</item>
     <item name="navegationbar" type="color">#212121</item>
     <item name="facebook" type="color">#3b5998</item>
-
-    <color name="primary_text_material_light">#fffcfc</color>
-    <color name="primary_text_default_material_dark">#ffffff</color>
-    <color name="windowBackground">#f0e6e6</color>
+    <color name="primary_text_material_light">#37474f</color>
+    <color name="primary_text_default_material_dark">#f9f9f9</color>
+    <color name="windowBackground">#fcfcfc</color>
 </resources>

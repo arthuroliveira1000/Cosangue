@@ -10,4 +10,33 @@
     <string name="masculino">Masculino</string>
     <string name="feminino">Feminino</string>
     <string name="tipoSanguineo">Tipo Sanguíneo</string>
+
+
+
+    <!-- Títulos das Informações sobre Doação de Sangue   -->
+    <string name="mensagem_titulo_sangue" formatted="false">O Que é Sangue?</string>
+    <string name="mensagem_titulo_porquedoar" formatted="false">Por que Doar Sangue?</string>
+    <string name="mensagem_titulo_requisitos" formatted="false">O que é Preciso para Doar?</string>
+    <string name="mensagem_titulo_impedimentostemporarios" formatted="false">Alguns Impedimentos Temporários</string>
+    <string name="mensagem_titulo_impedimentosdefinitivos" formatted="false">Alguns Impedimentos Definitivos</string>
+    <string name="mensagem_titulo_fonte">Fonte</string>
+
+    <!-- Summary das Informações sobre Doação de Sangue   -->
+    <string name="mensagem_summary_sangue" formatted="false">sangue humano</string>
+    <string name="mensagem_summary_porquedoar" formatted="false">Doar sangue é simples e rápido</string>
+    <string name="mensagem_summary_requisitos" formatted="false">Descubra os requisitos para a doação</string>
+    <string name="mensagem_summary_impedimentostemporarios" formatted="false">Saiba quais são os impedimentos temporários</string>
+    <string name="mensagem_summary_impedimentosdefinitivos" formatted="false">Saiba quais são os impedimentos definitivos</string>
+    <string name="mensagem_summary_fonte" formatted="false">HEMORGS</string>
+
+
+    <!-- Conteúdos das Informações sobre Doação de Sangue-->
+    <string name="mensagem_sangue" formatted="false">O sangue humano é composto por plasma, hemácias, leucócitos e plaquetas. É um tecido vivo que circula pelo corpo, levando oxigênio e nutrientes a todos os órgãos. Ele é classificado em grupos e subgrupos: ABO (A, B, AB e O) e os Rh (positivo e negativo). Na população brasileira, os percentuais são de aproximadamente 45% de tipo O e 42% tipo A. O grupo B representa 10% e o AB com apenas 3%. Em termos de fator RH, os tipos negativos são os mais raros. Em caso de transfusão, o ideal é que o paciente receba sangue do mesmo tipo que o seu. Em urgências, quando muitas vezes não há tempo para tipificar o sangue, é que se usa o SANGUE UNIVERSAL "O -". Isso é uma dificuldade crônica para os hemocentros e bancos de sangue, já que apenas 9% da população brasileira têm esse tipo sanguíneo. Na Região Sul, por questões de formação racial, a situação é ainda mais crítica: apenas entre 4% e 5% das pessoas são "O -".</string>
+    <string name="mensagem_porquedoar" formatted="false">Muitas pessoas não sabem que doar sangue é simples, rápido e não dói. Desconhecem que todo ser humano em boas condições de saúde pode doar sangue sem qualquer risco ou prejuízo a sua saúde. Todos os dias, infelizmente, acontecem acidentes. Pessoas sofrem cirurgias de urgência. Elas aguardam que pessoas façam um gesto de solidariedade e doem sangue para reabilitar a vida. Não só os acidentados precisam de transfusões. Quem sofre queimaduras e os hemofílicos, por exemplo, também necessitam delas. Se cada cidadão saudável doasse sangue pelo menos duas vezes por ano não seriam necessárias campanhas emergenciais para coletas de reposição de estoques. O sangue não tem substituto e por isso a doação voluntária é fundamental. Uma simples doação pode salvar muitas vidas. Inclusive a sua.</string>
+    <string name="mensagem_requisitos" formatted="false">Estar em boas condições de saúde. Levar documento oficial de identidade com foto. Ter idade entre 16 e 69 anos. Menores de 18 anos precisam de autorização de pais ou responsáveis legais. Pesar 50 Kg ou mais. Não estar em jejum, mas com alimentação não gordurosa. Ter dormido pelo menos 6 horas antes da doação. Não ter ingerido bebidas alcoólicas nas 12 horas anteriores à doação</string>
+    <string name="mensagem_impedimentostemporarios" formatted="false">Gripe ou febre. Gravidez. 90 dias após parto normal e 180 dias após cesariana. Tatuagem ou acupuntura nos últimos 12 meses. Exposição à situação de risco para a AIDS (múltiplos parceiros sexuais, ter parceiros usuários de drogas).</string>
+    <string name="mensagem_impedimentosdefinitivos" formatted="false">Doença de Chagas ou Malária. Hepatite após os 10 anos de idade. Ser portador dos vírus HIV (Aids), HCV (Hepatite C), HBC (Hepatite B), HTLV. Uso de drogas injetáveis</string>
+    <string name="mensagem_fonte" formatted="false">http://www.hemocentro.rs.gov.br</string>
+
+
 </resources>
