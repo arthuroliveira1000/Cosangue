@@ -1,5 +1,8 @@
 package pojos;
 
+import javax.xml.bind.annotation.XmlEnum;
+
+@XmlEnum(String.class)
 public enum Categoria {
 	COLETA_EXTERNA("Coleta Externa"),
 	PALESTRA("Palestra"),

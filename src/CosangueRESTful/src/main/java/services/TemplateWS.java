@@ -38,19 +38,28 @@ public class TemplateWS extends SimpleEntityManager {
 			clean();
 		}
 	}
-
-	/*
-	 * protected <T> T delete(T object) { EntityManager manager =
-	 * factory.createEntityManager(); try { manager.getTransaction().begin();
-	 * manager.remove(object); manager.getTransaction().commit(); return object;
-	 * } catch (Exception e) { manager.getTransaction().rollback(); return null;
-	 * } finally { object = null; manager.close(); manager = null; clean(); } }
-	 */
-
+	
 	protected <T> T update(T object) {
 		try {
 			beginTransaction();
 			entityManager.merge(object);
+			commit();
+			close();
+			return object;
+		} catch (Exception e) {
+			rollBack();
+			e.printStackTrace();
+			return null;
+		} finally {
+			entityManager = null;
+			clean();
+		}
+	}
+	
+	protected <T> T delete(T object) {
+		try {
+			beginTransaction();
+			entityManager.remove(object);
 			commit();
 			close();
 			return object;
