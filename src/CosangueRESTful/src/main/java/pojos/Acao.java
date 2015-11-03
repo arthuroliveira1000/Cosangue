@@ -1,11 +1,11 @@
 package pojos;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -37,11 +35,11 @@ public class Acao implements Serializable {
 	private int nParticipantes;
 	@Column(length = 1000)
 	private int nReportacoes;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private TipoSanguineo tipo;
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
