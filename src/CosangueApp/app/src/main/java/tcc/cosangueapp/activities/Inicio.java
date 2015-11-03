@@ -1,6 +1,7 @@
-package tcc.cosangueapp;
+package tcc.cosangueapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import tcc.cosangueapp.R;
 import tcc.cosangueapp.daos.UsuarioDAO;
 import tcc.cosangueapp.pojos.Usuario;
+import tcc.cosangueapp.utils.Constantes;
 
 public class Inicio extends AppCompatActivity {
 
@@ -22,6 +25,8 @@ public class Inicio extends AppCompatActivity {
     TextView tvCadastrar;
     Button btEntrarComFacebook;
     UsuarioDAO usuarioDAO;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,7 @@ public class Inicio extends AppCompatActivity {
 
     }
 
-    public void inicializaComponentes() {
+    private void inicializaComponentes() {
         etUsuario = (EditText) findViewById(R.id.et_user);
         etSenha = (EditText) findViewById(R.id.et_password);
         btEntrar = (Button) findViewById(R.id.btn_entrar);
@@ -43,7 +48,8 @@ public class Inicio extends AppCompatActivity {
         btEntrarComFacebook = (Button) findViewById(R.id.btn_entrar_com_facebook);
     }
 
-    public void acaoBtCadastrar() {
+
+    private void acaoBtCadastrar() {
         tvCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +59,7 @@ public class Inicio extends AppCompatActivity {
         });
     }
 
-    public void acaoBtEntrar() {
+    private void acaoBtEntrar() {
         btEntrar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +74,7 @@ public class Inicio extends AppCompatActivity {
         });
     }
 
-    public void acaoBtEntrarComFacebook() {
+    private void acaoBtEntrarComFacebook() {
         btEntrarComFacebook.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +84,7 @@ public class Inicio extends AppCompatActivity {
         });
     }
 
-    public boolean validaCampos(String login, String senha) {
+    private boolean validaCampos(String login, String senha) {
         boolean valid = true;
 
         if (senha.isEmpty() || senha.length() < 4) {
@@ -95,7 +101,6 @@ public class Inicio extends AppCompatActivity {
             etUsuario.setError(null);
         }
 
-
         return valid;
     }
 
@@ -103,7 +108,6 @@ public class Inicio extends AppCompatActivity {
 
         @Override
         protected Usuario doInBackground(String... params) {
-
             try {
                 usuarioDAO = new UsuarioDAO();
                 Usuario retorno = usuarioDAO.login(params);
@@ -117,6 +121,16 @@ public class Inicio extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario) {
             if (usuario != null) {
+                preferences =  getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, 0);
+                editor = preferences.edit();
+
+                editor.putString("id", Long.toString(usuario.getId()));
+                editor.putString("login", usuario.getLogin());
+                editor.putString("nome", usuario.getNome());
+                editor.putString("genero", usuario.getGenero().toString());
+
+                editor.commit();
+
                 Intent abreTelaInicial = new Intent(Inicio.this, PaginaInicial.class);
                 Bundle usuarioLogado = new Bundle();
                 usuarioLogado.putSerializable("usuario", usuario);

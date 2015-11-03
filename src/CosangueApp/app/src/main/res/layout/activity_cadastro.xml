@@ -4,8 +4,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="0dp"
-    android:background="@color/primary"
     android:orientation="vertical"
     android:paddingBottom="20dp"
     android:weightSum="1">
@@ -16,31 +16,18 @@
         android:id="@+id/tb_cadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1000000"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:textAlignment="center"
-        android:title="Crie já sua conta!"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <!--
-        <View
-            android:layout_width="400dp"
-            android:layout_height="2dip"
-            android:layout_marginLeft="0dip"
-            android:layout_marginRight="0dip"
-            android:background="@color/primarydark" />
-            -->
-
-    <!-- Nome Label -->
+        android:background="@color/primary"
+        app:theme="@style/AppTheme"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        app:theme="@style/MaterialDrawerTheme.Light">
 
         <EditText
             android:id="@+id/et_nome"
@@ -86,36 +73,37 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="80dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="15dp">
 
             <EditText
                 android:id="@+id/et_idade"
-                android:layout_width="80dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:drawablePadding="16dp"
                 android:hint="@string/idade"
                 android:inputType="number"
                 android:maxLength="2"
                 android:orientation="horizontal"
                 android:paddingBottom="16dp"
-                android:paddingTop="16dp" />
+                android:paddingTop="16dp"
+                android:drawablePadding="16dp"
+                android:elegantTextHeight="false" />
         </android.support.design.widget.TextInputLayout>
 
         <Spinner
             android:drawablePadding="16dp"
-            android:hint="@string/tipoSanguineo"
             android:id="@+id/sp_tipo_sanguineo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:paddingTop="13dp" />
+
 
     </LinearLayout>
 
@@ -123,7 +111,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
 
         <EditText
             android:id="@+id/et_senha"
@@ -147,7 +136,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:orientation="horizontal"
-        android:paddingTop="20dp">
+        android:paddingTop="16dp"
+        android:textAlignment="center"
+        android:theme="@style/AppTheme"
+        android:layout_gravity="center_horizontal">
 
 
         <android.support.v7.widget.AppCompatRadioButton
@@ -160,7 +152,9 @@
             android:orientation="horizontal"
             android:paddingBottom="16dp"
             android:paddingTop="20dp"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal" />
 
 
         <android.support.v7.widget.AppCompatRadioButton
@@ -174,20 +168,16 @@
             android:paddingBottom="16dp"
             android:paddingTop="16dp"
             android:textAlignment="center"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:layout_weight="1" />
 
     </RadioGroup>
 
-    <android.widget.DatePicker
-        android:id="@+id/dt_nascimento"
-        android:layout_width="match_parent"
+    <DatePicker
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/primary"
-        android:backgroundTint="@color/accent"
-        android:calendarTextColor="@color/accent"
-        android:foreground="@color/primary"
-        android:visibility="visible"></android.widget.DatePicker>
+        android:id="@+id/dt_nascimento"
+        android:layout_gravity="center_horizontal" />
+
 
 </LinearLayout>

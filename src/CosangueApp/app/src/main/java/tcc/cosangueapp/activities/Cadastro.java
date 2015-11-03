@@ -1,10 +1,12 @@
-package tcc.cosangueapp;
+package tcc.cosangueapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +17,14 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.net.DatagramPacket;
+import java.util.Calendar;
 
+import tcc.cosangueapp.R;
 import tcc.cosangueapp.daos.UsuarioDAO;
+import tcc.cosangueapp.pojos.Genero;
+import tcc.cosangueapp.pojos.TipoSanguineo;
 import tcc.cosangueapp.pojos.Usuario;
+import tcc.cosangueapp.utils.Constantes;
 
 
 public class Cadastro extends AppCompatActivity {
@@ -32,9 +38,10 @@ public class Cadastro extends AppCompatActivity {
     boolean valid;
     Usuario usuario;
     UsuarioDAO usuarioDAO;
-    private Toolbar mToolbar;
     Spinner spTipoSanguineo;
     DatePicker dpDataNascimento;
+    ArrayAdapter<TipoSanguineo> adapter;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,19 +89,24 @@ public class Cadastro extends AppCompatActivity {
         rbFeminino = (RadioButton) findViewById(R.id.rb_feminino);
         spTipoSanguineo = (Spinner) findViewById(R.id.sp_tipo_sanguineo);
         dpDataNascimento = (DatePicker) findViewById(R.id.dt_nascimento);
+        adapter = new ArrayAdapter<TipoSanguineo>(this, android.R.layout.simple_spinner_item, TipoSanguineo.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spTipoSanguineo.setAdapter(adapter);
         valid = true;
         usuario = new Usuario();
-
     }
 
-   
+    public String tipoSanguineoSelecionado() {
+        String tipoSanguineoSelecionado = spTipoSanguineo.getSelectedItem().toString();
+        return tipoSanguineoSelecionado;
+    }
 
-    public String sexoSelecionado() {
+    public Genero generoSelecionado() {
         if (rbMasculino.isChecked()) {
-            return "M";
+            return Genero.MASCULINO;
         }
         if (rbFeminino.isChecked()) {
-            return "F";
+            return Genero.FEMININO;
         }
         return null;
     }
@@ -156,7 +168,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     public void efetuaCadastro() {
-        if (sexoSelecionado() == null || validaCampos() == false) {
+        if (generoSelecionado() == null || validaCampos() == false) {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_LONG).show();
         } else {
             new HttpRequestTask().execute(novoUsuario());
@@ -167,9 +179,27 @@ public class Cadastro extends AppCompatActivity {
         usuario.setLogin(etLogin.getText().toString());
         usuario.setSenha(etSenha.getText().toString());
         usuario.setNome(etNome.getText().toString());
-        usuario.setIdade(Integer.parseInt(etIdade.getText().toString()));
-        usuario.setSexo(sexoSelecionado());
+
+        int idTipoSanguineo = (int) spTipoSanguineo.getSelectedItemId();
+        TipoSanguineo tipoSelecionado = TipoSanguineo.values()[idTipoSanguineo];
+        usuario.setTipoSanguineo(tipoSelecionado);
+        usuario.setGenero(generoSelecionado());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(this.dpDataNascimento.getYear(), this.dpDataNascimento.getMonth(), this.dpDataNascimento.getDayOfMonth());
+        usuario.setDataNascimento(calendar.getTime());
+        Log.i("DEBUG", usuario.getGenero().toString());
+        Log.i("DEBUG", usuario.getDataNascimento().toString());
+        Log.i("DEBUG", usuario.getTipoSanguineo().toString());
+
         return usuario;
+    }
+
+    public void abreTelaInicial(Usuario usuario) {
+        Intent abreTelaInicial = new Intent(Cadastro.this, PaginaInicial.class);
+        Bundle usuarioLogado = new Bundle();
+        usuarioLogado.putSerializable("usuario", usuario);
+        abreTelaInicial.putExtras(usuarioLogado);
+        startActivity(abreTelaInicial);
     }
 
     private class HttpRequestTask extends AsyncTask<Usuario, String, Usuario> {
@@ -179,7 +209,7 @@ public class Cadastro extends AppCompatActivity {
 
             try {
                 usuarioDAO = new UsuarioDAO();
-                Usuario retorno = usuarioDAO.cadastro(params);
+                Usuario retorno = usuarioDAO.post(params);
                 return retorno;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -190,11 +220,16 @@ public class Cadastro extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario) {
             if (usuario != null) {
-                Intent abreTelaInicial = new Intent(Cadastro.this, PaginaInicial.class);
-                Bundle usuarioLogado = new Bundle();
-                usuarioLogado.putSerializable("usuario", usuario);
-                abreTelaInicial.putExtras(usuarioLogado);
-                startActivity(abreTelaInicial);
+                SharedPreferences preferences =  getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, 0);
+                SharedPreferences.Editor editor = preferences.edit();
+
+                editor.putString("id", Long.toString(usuario.getId()));
+                editor.putString("login", usuario.getLogin());
+                editor.putString("nome", usuario.getNome());
+                editor.putString("genero", usuario.getGenero().toString());
+
+                editor.commit();
+                abreTelaInicial(usuario);
             } else {
                 Toast.makeText(Cadastro.this, "Escolha outro nome de usuário!", Toast.LENGTH_LONG).show();
             }

@@ -9,8 +9,9 @@ public class SimpleRestTemplate {
 
     protected RestTemplate restTemplate = new RestTemplate();
 
-    public SimpleRestTemplate() {
+    protected RestTemplate inicializaRestTemplate() {
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+        return restTemplate;
     }
 }
