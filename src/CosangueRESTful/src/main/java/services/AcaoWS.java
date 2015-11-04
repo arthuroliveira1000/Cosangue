@@ -24,7 +24,7 @@ public class AcaoWS extends TemplateWS {
 	public Acao inserir(Acao acao) {
 		try {
 			Acao novaAcao = insert(acao);
-			// GoogleCloudMessaging.ExecutaPost(novaAcao);
+			GoogleCloudMessaging.ExecutaPost(novaAcao);
 			return novaAcao;
 		} catch (Exception e) {
 			e.printStackTrace();
