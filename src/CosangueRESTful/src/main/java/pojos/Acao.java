@@ -48,7 +48,7 @@ public class Acao implements Serializable {
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-
+	
 	@OneToMany(mappedBy = "acao", fetch = FetchType.LAZY)
 	private List<Comentario> comentario;
 
