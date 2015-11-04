@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import json.Json;
 import pojos.Acao;
+
 @Path("acao")
 public class AcaoWS extends TemplateWS {
 
@@ -24,7 +25,9 @@ public class AcaoWS extends TemplateWS {
 	public Acao inserir(Acao acao) {
 		try {
 			Acao novaAcao = insert(acao);
-			// GoogleCloudMessaging.ExecutaPost(novaAcao);
+			if (novaAcao != null) {
+				GoogleCloudMessaging.ExecutaPost(novaAcao);
+			}
 			return novaAcao;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +49,7 @@ public class AcaoWS extends TemplateWS {
 		}
 		return null;
 	}
-	
+
 	@PUT
 	@Produces(Json.UTF8JSON)
 	@Consumes(Json.UTF8JSON)
@@ -59,14 +62,15 @@ public class AcaoWS extends TemplateWS {
 		}
 		return null;
 	}
-	
+
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deletar(Acao acao){
-		try{
+	public Response deletar(Acao acao) {
+		try {
 			delete(acao);
-			return Response.status(200).entity("Açao excluída com sucesso").build();
-		} catch (Exception e){
+			return Response.status(200).entity("Açao excluída com sucesso")
+					.build();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
