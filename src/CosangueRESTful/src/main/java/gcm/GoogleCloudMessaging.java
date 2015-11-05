@@ -73,17 +73,10 @@ public class GoogleCloudMessaging {
 		Map<String, String> mensagem;
 		List<Usuario> devicesCadastrados = usuarioDAO.listaRegistrosUsuarios();
 
-		if (!devicesCadastrados.isEmpty()) {
+		if (devicesCadastrados != null) {
 			// formata a mensagem
-			if (novaAcao.getNome().isEmpty()) {
-				mensagem = MensagemToJson
-						.mensagemFormatada("Evento sem título!");
-				System.out.println("Mensagem formatada!");
-			} else {
-				mensagem = MensagemToJson.mensagemFormatada(novaAcao.getNome());
-				System.out.println("Mensagem formatada!");
-			}
-
+			mensagem = MensagemToJson.mensagemFormatada(novaAcao);
+			System.out.println("Mensagem formatada!");
 			// verifica se o hemocentro criou a ação e envia para todos os
 			// usuários
 			if (novaAcao.getHemocentro() != null) {
@@ -117,6 +110,7 @@ public class GoogleCloudMessaging {
 					}
 				}
 			}
+			System.out.println("Criador da ação não especificada!");
 		} else {
 			System.out.println("Nenhum device cadastrado!");
 		}
