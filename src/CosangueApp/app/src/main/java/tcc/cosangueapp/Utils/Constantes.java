@@ -2,10 +2,10 @@ package tcc.cosangueapp.utils;
 
 public interface Constantes {
 
-    final String URL_USUARIO_LOGIN = "http://192.168.0.105:8080/CosangueRESTful/usuario/{login}/{senha}";
-    final String URL_USUARIO = "http://192.168.0.105:8080/CosangueRESTful/usuario";
-    final String URL_USUARIO_ID = "http://192.168.0.105:8080/CosangueRESTful/usuario/{id}";
-    final String URL_USUARIO_ATUALIZA_REG_ID = "http://192.168.0.105:8080/CosangueRESTful/usuario/{id}/{registration_id}";
+    final String URL_USUARIO_LOGIN = "http://192.168.0.102:8080/CosangueRESTful/usuario/{login}/{senha}";
+    final String URL_USUARIO = "http://192.168.0.102:8080/CosangueRESTful/usuario";
+    final String URL_USUARIO_ID = "http://192.168.0.102:8080/CosangueRESTful/usuario/{id}";
+    final String URL_USUARIO_ATUALIZA_REG_ID = "http://192.168.0.102:8080/CosangueRESTful/usuario/{id}/{registration_id}";
 
 
 

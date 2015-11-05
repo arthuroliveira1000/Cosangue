@@ -39,4 +39,18 @@
     <string name="mensagem_fonte" formatted="false">http://www.hemocentro.rs.gov.br</string>
 
 
+
+    <!--Titulos dos dados das ações-->
+    <string name="tv_evento_categoria" formatted="false">Categoria</string>
+    <string name="tv_evento_data" formatted="false">Data</string>
+    <string name="tv_evento_horario" formatted="false">Horário</string>
+    <string name="tv_evento_descricao" formatted="false">Descrição</string>
+    <string name="tv_evento_confirmados" formatted="false">Compareceção</string>
+    <string name="tv_evento_reportacoes" formatted="false">Reportações</string>
+    <string name="tv_evento_nome" formatted="false">Evento</string>
+    <string name="tv_evento_hemocomponentes" formatted="false">Hemocomponente Solicitado</string>
+    <string name="tv_evento_tipo_sanguineo" formatted="false">Tipo Sanguíneo Solicitado</string>
+    <string name="tv_evento_local">Local</string>
+    <string name="tv_evento_solicitacoes">Solicitações</string>
+
 </resources>

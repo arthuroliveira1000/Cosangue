@@ -34,6 +34,7 @@ import java.io.File;
 
 import tcc.cosangueapp.R;
 import tcc.cosangueapp.daos.UsuarioDAO;
+import tcc.cosangueapp.fragments.EventosDetalhesFragment;
 import tcc.cosangueapp.fragments.HemocentroFragment;
 import tcc.cosangueapp.fragments.PaginaInicialFragment;
 import tcc.cosangueapp.gcm.GCloudMessaging;
@@ -220,7 +221,7 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
                                 replaceFragment(new HemocentroFragment());
                             }
                             if (position == 3) { // Eventos
-                                replaceFragment(new PaginaInicialFragment());
+                                replaceFragment(new EventosDetalhesFragment());
 
                             }
                             if (position == 4) { // Doações
