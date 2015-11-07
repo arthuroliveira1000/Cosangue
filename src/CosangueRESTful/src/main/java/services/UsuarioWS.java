@@ -87,7 +87,7 @@ public class UsuarioWS extends TemplateWS {
 	@Path("/{id}")
 	public void removeRegistrationId(@PathParam("id") Long id) {
 		try {
-			Usuario user = dao.removeRegistrationId(id);
+			dao.removeRegistrationId(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

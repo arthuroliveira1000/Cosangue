@@ -30,7 +30,8 @@ public class Acao implements Serializable {
 	private String nome;
 	@Column(length = 600)
 	private String descricao;
-	private String dataHorario;
+	private String data;
+	private String horario;
 	@Column(length = 1000)
 	private int nParticipantes;
 	@Column(length = 1000)
@@ -48,7 +49,7 @@ public class Acao implements Serializable {
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
+
 	@OneToMany(mappedBy = "acao", fetch = FetchType.LAZY)
 	private List<Comentario> comentario;
 
@@ -60,16 +61,16 @@ public class Acao implements Serializable {
 		super();
 	}
 
-	public Acao(Long id, String nome, String descricao, String dataHorario,
+	public Acao(Long id, String nome, String descricao, String data,
 			int nParticipantes, int nReportacoes, Categoria categoria,
 			TipoSanguineo tipo, Endereco endereco, Usuario usuario,
 			List<Comentario> comentario, Hemocentro hemocentro,
-			Hemocomponentes hemocomponente) {
+			Hemocomponentes hemocomponente, String horario) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.dataHorario = dataHorario;
+		this.data = data;
 		this.nParticipantes = nParticipantes;
 		this.nReportacoes = nReportacoes;
 		this.categoria = categoria;
@@ -79,6 +80,7 @@ public class Acao implements Serializable {
 		this.comentario = comentario;
 		this.hemocentro = hemocentro;
 		this.hemocomponente = hemocomponente;
+		this.horario = horario;
 	}
 
 	public Long getId() {
@@ -105,13 +107,12 @@ public class Acao implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public String getDataHorario() {
-		return dataHorario;
+	public String getData() {
+		return data;
 	}
 
-	// //"05/09/2013 06:30:07"
-	public void setDataHorario(String dataHorario) {
-		this.dataHorario = dataHorario;
+	public void setData(String data) {
+		this.data = data;
 	}
 
 	public int getnParticipantes() {
@@ -184,6 +185,14 @@ public class Acao implements Serializable {
 
 	public void setHemocomponente(Hemocomponentes hemocomponente) {
 		this.hemocomponente = hemocomponente;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
 	}
 
 	public static long getSerialversionuid() {

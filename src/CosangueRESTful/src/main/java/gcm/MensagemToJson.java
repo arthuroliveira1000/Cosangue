@@ -15,14 +15,19 @@ public class MensagemToJson {
 			params.put("nome", acao.getNome());
 		if (acao.getDescricao() != null)
 			params.put("descricao", acao.getDescricao());
-		if (acao.getDataHorario() != null)
-			params.put("data", acao.getDataHorario());
+		if (acao.getData() != null)
+			params.put("data", acao.getData());
+		if (acao.getHorario() != null)
+			params.put("horario", acao.getHorario());
 		if (acao.getCategoria() != null)
 			params.put("categoria", acao.getCategoria().toString());
 		if (acao.getHemocomponente() != null)
 			params.put("hemocomponente", acao.getHemocomponente().toString());
 		if (acao.getTipo() != null)
 			params.put("tiposanguineo", acao.getTipo().toString());
+		
+		if(acao.getEndereco() != null) {
+		
 		if (acao.getEndereco().getId() != null)
 			params.put("id_endereco", acao.getEndereco().getId().toString());
 		if (acao.getEndereco().getLogradouro() != null)
@@ -39,6 +44,7 @@ public class MensagemToJson {
 			params.put("latitude", acao.getEndereco().getLatitude());
 		if (acao.getEndereco().getLongitude() != null)
 			params.put("longitude", acao.getEndereco().getLongitude());
+		}
 		System.out.println("Mensagem Enviada: " + params.toString());
 		return params;
 	}

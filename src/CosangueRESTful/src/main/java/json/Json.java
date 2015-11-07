@@ -17,7 +17,7 @@ public class Json {
 	
 	/*O padrão é MediaType.APPLICATION_JSON
 	 *Criei esse com UTF-8 para não ter problemas com acentos e tal*/
-	public static final String UTF8JSON = MediaType.APPLICATION_JSON + ";charset=utf-8";
+	public static final String UTF8JSON = MediaType.APPLICATION_JSON + ";charset=UTF-8";
 
 	private static String readAll(Reader reader) throws IOException {
 		StringBuilder text = new StringBuilder();
