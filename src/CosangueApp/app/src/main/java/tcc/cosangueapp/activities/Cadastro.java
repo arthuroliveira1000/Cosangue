@@ -168,7 +168,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     public void efetuaCadastro() {
-        if (generoSelecionado() == null || validaCampos() == false) {
+        if (generoSelecionado() == null || validaCampos() == false || etSenha.getText().length() == 0) {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_LONG).show();
         } else {
             new HttpRequestTask().execute(novoUsuario());

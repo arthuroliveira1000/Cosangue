@@ -1,10 +1,12 @@
 package tcc.cosangueapp.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Date;
 
 import tcc.cosangueapp.utils.DateUtils;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Doacao implements Serializable {
 
     private Long id;

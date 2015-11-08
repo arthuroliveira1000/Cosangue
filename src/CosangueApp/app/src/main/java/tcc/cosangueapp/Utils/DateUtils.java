@@ -16,6 +16,15 @@ public class DateUtils {
         return dataFormatada;
     }
 
+    final static public String timeToString(Date data) {
+        //"05/09/2013"
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+        String dataFormatada = format.format(data);
+        Log.i("DATA String", dataFormatada);
+        return dataFormatada;
+    }
+
+
     final static public Date stringToDate(String dataStr) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date dataFormatada = new Date();
