@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import managers.SimpleEntityManager;
 
 public class TemplateWS extends SimpleEntityManager {
@@ -26,6 +28,24 @@ public class TemplateWS extends SimpleEntityManager {
 		try {
 			beginTransaction();
 			object = entityManager.find(type, ID);
+			commit();
+			return object;
+		} catch (Exception e) {
+			rollBack();
+			return null;
+		} finally {
+			object = null;
+			close();
+			entityManager = null;
+			clean();
+		}
+	}
+	
+	protected <T> List<T> findAll(Class<T> type) {
+		List<T> object;
+		try {
+			beginTransaction();
+			object = ((TemplateWS) entityManager).findAll(type);
 			commit();
 			return object;
 		} catch (Exception e) {

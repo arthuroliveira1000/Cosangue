@@ -2,6 +2,8 @@ package services;
 
 import gcm.GoogleCloudMessaging;
 
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,10 +17,13 @@ import javax.ws.rs.core.Response;
 
 import json.Json;
 import pojos.Acao;
+import daos.AcaoDAO;
 
 @Path("acao")
 public class AcaoWS extends TemplateWS {
-
+	
+	AcaoDAO acaoDAO = new AcaoDAO();
+	
 	@POST
 	@Produces(Json.UTF8JSON)
 	@Consumes(Json.UTF8JSON)
@@ -41,6 +46,21 @@ public class AcaoWS extends TemplateWS {
 	public Acao buscaPorId(@PathParam("ID") Long ID) {
 		try {
 			Acao acao = selectOne(Acao.class, ID);
+			if (acao != null) {
+				return acao;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GET
+	@Produces(Json.UTF8JSON)
+	public ArrayList<Acao> buscaAcoes() {
+		try {
+			ArrayList<Acao> acao = new ArrayList<Acao>();
+			acao = acaoDAO.listaAcoes();
 			if (acao != null) {
 				return acao;
 			}
