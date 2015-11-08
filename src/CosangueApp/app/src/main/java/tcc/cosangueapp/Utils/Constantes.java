@@ -13,6 +13,7 @@ public interface Constantes {
 
 
 
+    final String ROOT_ELEMENT_ACAO = "acao";
     final static String NOME_SHARED_PREFERENCIES = "preferencias_usuario";
 
 

@@ -379,7 +379,7 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
             Gson gson = new Gson();
             try {
                 JSONObject resposta = Json.get(Constantes.URL_ACAO);
-                JSONArray array = resposta.getJSONArray("acao");
+                JSONArray array = resposta.getJSONArray(Constantes.ROOT_ELEMENT_ACAO);
                 for (int i = 0; i < array.length(); i++) {
                     listaAcoes.add(gson.fromJson(array.get(i).toString(), Acao.class));
                 }
