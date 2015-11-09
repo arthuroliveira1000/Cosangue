@@ -10,7 +10,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -40,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tcc.cosangueapp.R;
+import tcc.cosangueapp.adapters.RVAdapter;
 import tcc.cosangueapp.daos.AcaoDAO;
 import tcc.cosangueapp.daos.UsuarioDAO;
 import tcc.cosangueapp.fragments.EventosDetalhesFragment;
@@ -69,6 +73,10 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
     private String nome;
     private String login;
     private Long id;
+    private RecyclerView rv;
+    private LinearLayoutManager llm;
+    private RVAdapter adapter;
+    private List<Acao> listaAcoes;
 
 
     @Override
@@ -89,9 +97,7 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
             new HttpRequestTaskVerificaRegistrationId().execute(getApplicationContext());
         }
 
-        new HttpRequestTaskGetAllAcoes().execute();
-
-
+        iniciaCards();
     }
 
     public void inicializaComponentes() {
@@ -106,7 +112,6 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
         login = spPreferencias.getString("login", null);
         genero = spPreferencias.getString("genero", null);
         id = Long.parseLong(spPreferencias.getString("id", null));
-
     }
 
     private void verificaBundle() {
@@ -280,7 +285,6 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
         //you can leave it empty
     }
 
-
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -392,9 +396,11 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
         }
 
         @Override
-        protected void onPostExecute(List<Acao> listaAcoes) {
-            if (listaAcoes != null) {
+        protected void onPostExecute(List<Acao> retornoListaAcoes) {
+            if (retornoListaAcoes != null) {
                 Toast.makeText(PaginaInicial.this, "Não tá vazia", Toast.LENGTH_LONG).show();
+               // Log.d("Lista de Ações ", listaAcoes.get(0).getNome());
+                listaAcoes = retornoListaAcoes;
             } else {
                 Toast.makeText(PaginaInicial.this, "Tá vazia", Toast.LENGTH_LONG).show();
             }
@@ -403,5 +409,20 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
 
     }
 
+    private void iniciaCards() {
+
+        listaAcoes = new ArrayList<Acao>();
+        new HttpRequestTaskGetAllAcoes().execute();
+
+        if(listaAcoes != null) {
+            rv = (RecyclerView) findViewById(R.id.rv);
+            llm = new LinearLayoutManager(this);
+            rv.setLayoutManager(llm);
+            adapter = new RVAdapter(listaAcoes);
+            rv.setAdapter(adapter);
+        } else {
+            Toast.makeText(this, "lista de Ações vazia!", Toast.LENGTH_LONG).show();
+        }
+    }
 }
 
