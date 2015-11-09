@@ -10,7 +10,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.folderselector.FolderChooserDialog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.gson.Gson;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -30,14 +34,24 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import tcc.cosangueapp.R;
+import tcc.cosangueapp.adapters.RVAdapter;
+import tcc.cosangueapp.daos.AcaoDAO;
 import tcc.cosangueapp.daos.UsuarioDAO;
 import tcc.cosangueapp.fragments.EventosDetalhesFragment;
 import tcc.cosangueapp.fragments.HemocentroFragment;
 import tcc.cosangueapp.fragments.PaginaInicialFragment;
 import tcc.cosangueapp.gcm.GCloudMessaging;
+import tcc.cosangueapp.json.Json;
+import tcc.cosangueapp.pojos.Acao;
 import tcc.cosangueapp.pojos.Usuario;
 import tcc.cosangueapp.utils.Constantes;
 
@@ -59,6 +73,10 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
     private String nome;
     private String login;
     private Long id;
+    private RecyclerView rv;
+    private LinearLayoutManager llm;
+    private RVAdapter adapter;
+    private List<Acao> listaAcoes;
 
 
     @Override
@@ -70,40 +88,16 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
         setSupportActionBar(mToolbar);
         inicializaComponentes();
 
-
         criaHeaderParaNavegationDrawer();
         criaNavegationDrawer(savedInstanceState);
         addItemsNoNavegationDrawer();
 
-        //verificaRegistrationId();
-
         String registrationId = spPreferencias.getString(Constantes.PROPERTY_REG_ID, null);
-
-        // caso o reg_id ainda não esteja salvo no shared preferences, chamar a async task pra coloca-lo dentro
         if (registrationId == null) {
             new HttpRequestTaskVerificaRegistrationId().execute(getApplicationContext());
-            // verificaRegistrationId();
-          /*  boolean ok = checkPlayServices();
-            if (ok) {
-                // Já está registrado
-                Usuario usuario = new Usuario();
-                usuario.setId(id);
-                usuario.setregistrationId(spPreferencias.getString(Constantes.PROPERTY_REG_ID, null));
-                new HttpRequestTask().execute(usuario);
-            }*/
-
         }
 
-
-       /* if (registrationId != null) {
-            usuarioLogado.setId(id);
-            new HttpRequestTask().execute(usuarioLogado);
-        }
-*/
-        // Quando iniciar, lê a msg da notification
-        //String msg = getIntent().getStringExtra("msg");
-        //Log.d("Mensagem recebida", msg);
-
+        iniciaCards();
     }
 
     public void inicializaComponentes() {
@@ -118,7 +112,6 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
         login = spPreferencias.getString("login", null);
         genero = spPreferencias.getString("genero", null);
         id = Long.parseLong(spPreferencias.getString("id", null));
-
     }
 
     private void verificaBundle() {
@@ -279,8 +272,9 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
     }
 
     private void replaceFragment(Fragment frag) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_pagina_inicial, frag, "TAG").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_pagina_inicial, frag, "TAG");
         getSupportFragmentManager().beginTransaction().addToBackStack(null);
+        getSupportFragmentManager().beginTransaction().commit();
     }
 
     public void onFragmentInteractionListener() {
@@ -289,23 +283,6 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
 
     public void onFragmentInteraction(Uri uri) {
         //you can leave it empty
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-
-        // Quando receber uma nova notificação, vai substituir a fragment da pagina inicial pela dos eventos
-        // depois vai pega e evento da bundle e passar junto pra fragment
-        // daí lá na fragment vai criar um card view com o evento e seus dados
-
-
-        // Quando iniciar, lê a msg da notification
-        // pegar o json e mostrar na tela
-        String msg = intent.getStringExtra("msg");
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-
     }
 
     private boolean checkPlayServices() {
@@ -326,7 +303,6 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
 
     @Override
     public void onFolderSelection(File file) {
-
     }
 
     private void limparSharedPreferences() {
@@ -398,5 +374,55 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
 
     }
 
+    private class HttpRequestTaskGetAllAcoes extends AsyncTask<Void, Void, List<Acao>> {
+
+        @Override
+        protected List<Acao> doInBackground(Void... params) {
+            AcaoDAO acaoDao = new AcaoDAO();
+            ArrayList<Acao> listaAcoes = new ArrayList<Acao>();
+            Gson gson = new Gson();
+            try {
+                JSONObject resposta = Json.get(Constantes.URL_ACAO);
+                JSONArray array = resposta.getJSONArray(Constantes.ROOT_ELEMENT_ACAO);
+                for (int i = 0; i < array.length(); i++) {
+                    listaAcoes.add(gson.fromJson(array.get(i).toString(), Acao.class));
+                }
+
+                return listaAcoes;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<Acao> retornoListaAcoes) {
+            if (retornoListaAcoes != null) {
+                Toast.makeText(PaginaInicial.this, "Não tá vazia", Toast.LENGTH_LONG).show();
+               // Log.d("Lista de Ações ", listaAcoes.get(0).getNome());
+                listaAcoes = retornoListaAcoes;
+            } else {
+                Toast.makeText(PaginaInicial.this, "Tá vazia", Toast.LENGTH_LONG).show();
+            }
+        }
+
+
+    }
+
+    private void iniciaCards() {
+
+        listaAcoes = new ArrayList<Acao>();
+        new HttpRequestTaskGetAllAcoes().execute();
+
+        if(listaAcoes != null) {
+            rv = (RecyclerView) findViewById(R.id.rv);
+            llm = new LinearLayoutManager(this);
+            rv.setLayoutManager(llm);
+            adapter = new RVAdapter(listaAcoes);
+            rv.setAdapter(adapter);
+        } else {
+            Toast.makeText(this, "lista de Ações vazia!", Toast.LENGTH_LONG).show();
+        }
+    }
 }
 

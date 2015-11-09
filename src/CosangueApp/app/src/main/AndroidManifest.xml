@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tcc.cosangueapp" >
 
-    <!--Permite que o celular vibre quando receber uma notificação-->
+    <!-- Permite que o celular vibre quando receber uma notificação -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- PERMISSIONS TO GOOGLE MAPS -->
@@ -14,6 +14,7 @@
     <!-- Allows the API to use WiFi or mobile cell data (or both) to determine the device's location. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- PERMISSIONS TO GOOGLE MAPS -->
+
 
     <!-- PERMISSIONS TO GOOGLE CLOUD MESSAGING -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -36,10 +37,8 @@
     <uses-permission android:name="tcc.cosangueapp.gcm.permission.C2D_MESSAGE" />
     <!-- Declara a permissão para se registrar no GCM e receber mensagens -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
     <!-- PERMISSIONS TO GOOGLE CLOUD MESSAGING -->
-
-
-
     <application
         android:allowBackup="true"
         android:debuggable="true"
@@ -55,15 +54,15 @@
         <!-- Maps V2 -->
         <uses-feature
             android:glEsVersion="0x00020000"
-            android:required="true"/>
+            android:required="true" />
 
         <!--
        API Key (Coloque a sua aqui)
        https://console.developers.google.com
-       -->
+        -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/CHAVE_ACESSO_GOOGLE_MAPS"/>
+            android:value="@string/CHAVE_ACESSO_GOOGLE_MAPS" />
 
         <!-- Main Activity -->
         <activity
@@ -119,7 +118,17 @@ Este receiver precisa estar ser declarado no manifesto, para que as mensagens se
         <activity
             android:name=".activities.Informacoes"
             android:label="@string/title_activity_informacoes"
-            android:theme="@style/AppTheme"
+            android:parentActivityName=".activities.PaginaInicial"
+            android:theme="@style/AppTheme" >
+
+            <!-- Parent activity meta-data to support API level 7+ -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.PaginaInicial" />
+        </activity>
+        <activity
+            android:name=".activities.DetalhesEventos"
+            android:label="@string/title_activity_detalhes_eventos"
             android:parentActivityName=".activities.PaginaInicial" >
 
             <!-- Parent activity meta-data to support API level 7+ -->

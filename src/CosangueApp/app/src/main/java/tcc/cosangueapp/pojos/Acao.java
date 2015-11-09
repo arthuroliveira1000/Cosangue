@@ -1,18 +1,21 @@
 package tcc.cosangueapp.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import tcc.cosangueapp.utils.DateUtils;
-
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Acao implements Serializable {
 
     private Long id;
     private String nome;
     private String descricao;
-    private String dataHorario;
+    private String data;
+    private String horario;
     private int nParticipantes;
     private int nReportacoes;
     private Categoria categoria;
@@ -31,21 +34,22 @@ public class Acao implements Serializable {
         super();
     }
 
-    public Acao(Long id, String nome, String descricao, String dataHorario,
+    public Acao(Long id, String nome, String descricao, String data,
                 int nParticipantes, int nReportacoes, Categoria categoria,
                 TipoSanguineo tipo, Endereco endereco, Usuario usuario,
-                List<Comentario> comentario, Hemocentro hemocentro, Hemocomponentes hemocomponente) {
+                List<Comentario> comentario, Hemocentro hemocentro, Hemocomponentes hemocomponente, String horario) {
         super();
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.dataHorario = dataHorario;
+        this.data = data;
         this.nParticipantes = nParticipantes;
         this.nReportacoes = nReportacoes;
         this.categoria = categoria;
         this.tipo = tipo;
         this.endereco = endereco;
         this.usuario = usuario;
+        this.horario = horario;
         this.comentario = comentario;
         this.hemocentro = hemocentro;
         this.hemocomponente = hemocomponente;
@@ -75,12 +79,21 @@ public class Acao implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getDataHorario() {
-        return dataHorario;
+    public String getData() {
+        return this.data;
     }
 
-    public void setDataHorario(Date dataHorario) {
-        this.dataHorario = DateUtils.dateTimeToString(dataHorario);
+    public void setData(String data) {
+        //DateUtils.dateToString(date);
+        this.data = data;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 
     public int getnParticipantes() {

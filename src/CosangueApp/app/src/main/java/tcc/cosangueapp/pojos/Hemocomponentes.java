@@ -10,8 +10,20 @@ public enum Hemocomponentes {
         this.descricao = descricao;
     }
 
+    public static Hemocomponentes fromString(String text) {
+        if (text != null) {
+            for (Hemocomponentes b : Hemocomponentes.values()) {
+                if (text.equalsIgnoreCase(b.descricao)) {
+                    return b;
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return this.descricao;
     }
+
 }

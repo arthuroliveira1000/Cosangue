@@ -13,6 +13,17 @@ public enum Categoria {
         this.nome = nome;
     }
 
+    public static Categoria fromString(String text) {
+        if (text != null) {
+            for (Categoria b : Categoria.values()) {
+                if (text.equalsIgnoreCase(b.nome)) {
+                    return b;
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return this.nome;

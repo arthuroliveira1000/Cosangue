@@ -15,4 +15,17 @@ public enum TipoSanguineo {
     public String toString() {
         return this.descricao;
     }
+
+
+    public static TipoSanguineo fromString(String text) {
+        if (text != null) {
+            for (TipoSanguineo b : TipoSanguineo.values()) {
+                if (text.equalsIgnoreCase(b.descricao)) {
+                    return b;
+                }
+            }
+        }
+        return null;
+    }
+
 }

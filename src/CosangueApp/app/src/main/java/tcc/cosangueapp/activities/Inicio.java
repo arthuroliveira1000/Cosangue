@@ -121,7 +121,7 @@ public class Inicio extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario) {
             if (usuario != null) {
-                preferences =  getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, 0);
+                preferences = getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, 0);
                 editor = preferences.edit();
 
                 editor.putString("id", Long.toString(usuario.getId()));

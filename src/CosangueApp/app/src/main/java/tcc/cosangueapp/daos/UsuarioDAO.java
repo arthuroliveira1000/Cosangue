@@ -1,5 +1,11 @@
 package tcc.cosangueapp.daos;
 
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import tcc.cosangueapp.pojos.Usuario;
 import tcc.cosangueapp.utils.Constantes;
 
