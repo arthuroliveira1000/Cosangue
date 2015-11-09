@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -147,7 +148,7 @@ public class Endereco implements Serializable {
 	public void setHemocentro(Hemocentro hemocentro) {
 		this.hemocentro = hemocentro;
 	}
-
+	
 	public Acao getAcao() {
 		return acao;
 	}

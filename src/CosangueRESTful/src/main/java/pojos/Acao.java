@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -146,7 +147,7 @@ public class Acao implements Serializable {
 	public void setTipo(TipoSanguineo tipo) {
 		this.tipo = tipo;
 	}
-
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
