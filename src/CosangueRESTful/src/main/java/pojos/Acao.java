@@ -17,6 +17,9 @@ import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @XmlRootElement
 @Entity
 public class Acao implements Serializable {
@@ -44,17 +47,24 @@ public class Acao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Hemocomponentes hemocomponente;
 
-	@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "acao", fetch = FetchType.EAGER)
+	//@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
 	private Endereco endereco;
 
-	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	// @ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "acao", fetch = FetchType.LAZY)
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	 @OneToMany(mappedBy = "acao", targetEntity = Comentario.class)
+	//@OneToMany(mappedBy = "acao", fetch = FetchType.LAZY)
 	private List<Comentario> comentario;
 
-	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	// @ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;
 

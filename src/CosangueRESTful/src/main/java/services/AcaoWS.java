@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import json.Json;
 import pojos.Acao;
+import pojos.Usuario;
 import daos.AcaoDAO;
 
 @Path("acao")
@@ -30,9 +31,9 @@ public class AcaoWS extends TemplateWS {
 	public Acao inserir(Acao acao) {
 		try {
 			Acao novaAcao = insert(acao);
-			if (novaAcao != null) {
+			/*if (novaAcao != null) {
 				GoogleCloudMessaging.ExecutaPost(novaAcao);
-			}
+			}*/
 			return novaAcao;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,6 +55,7 @@ public class AcaoWS extends TemplateWS {
 		}
 		return null;
 	}
+	
 	
 	@GET
 	@Produces(Json.UTF8JSON)

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+
+<!-- precisa ter esse meta para o site ser responsivo -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cosangue</title>
+<link rel="stylesheet"
+	href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.red-deep_orange.min.css" />
+<script
+	src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+<style>
+.centraliza {
+	width: 100px;
+	height: 50px;
+	position: absolute;
+	top: 25%;
+	left: 45%;
+	margin-top: -50px;
+	margin-left: -50px;
+}
+
+.centraliza1 {
+	width: 250px;
+	height: 50px;
+	position: absolute;
+	top: 35%;
+	left: 45%;
+	margin-top: -50px;
+	margin-left: -50px;
+}
+
+.centraliza2 {
+	width: 250px;
+	height: 50px;
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	margin-top: -50px;
+	margin-left: -50px;
+}
+
+.centraliza3 {
+	position: absolute;
+	top: 55%;
+	left: 45%;
+	margin-top: -50px;
+	margin-left: -50px;
+}
+
+.background-branco {
+	background-color: #FFFFFF;
+	width: 350px;
+	height: 300px;
+	left: 43%;
+}
+</style>
+
+<body bgcolor="#F44336">
+	<div class="mdl-layout mdl-js-layout">
+		<main class="mdl-layout__content">
+		<div class="mdl-grid">
+			<div class="mdl-cell background-branco centraliza">
+				<center>
+					<h4>Login</h4>
+				</center>
+			</div>
+			<div class="mdl-cell mdl-cell--12-col mdl-grid mdl-grid--no-spacing">
+				<form action="/entrar" method="POST" name="form_identificacao">
+		 			<div class="mdl-cell mdl-cell--8-col centraliza1">
+						<div
+							class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<input class="mdl-textfield__input" type="email" id="email" name="login"
+								required /> 
+							<label class="mdl-textfield__label" for="email">Email</label>
+						</div>
+					</div>
+					<div class="mdl-cell mdl-cell--8-col centraliza2">
+						<div
+							class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<input class="mdl-textfield__input" type="password" id="password" name="senha" required /> 
+							<label class="mdl-textfield__label" for="password">Senha</label>
+						</div>
+					</div>
+					<div class="mdl-cell mdl-cell--8-col centraliza3">
+						<button
+							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+							type="submit" >Login
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		</main>
+	</div>
+</body>
+</html>
