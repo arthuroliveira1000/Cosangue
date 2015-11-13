@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -44,19 +44,16 @@ import java.util.List;
 
 import tcc.cosangueapp.R;
 import tcc.cosangueapp.adapters.RVAdapter;
-import tcc.cosangueapp.daos.AcaoDAO;
 import tcc.cosangueapp.daos.UsuarioDAO;
 import tcc.cosangueapp.fragments.EventosDetalhesFragment;
 import tcc.cosangueapp.fragments.HemocentroFragment;
-import tcc.cosangueapp.fragments.PaginaInicialFragment;
 import tcc.cosangueapp.gcm.GCloudMessaging;
 import tcc.cosangueapp.json.Json;
 import tcc.cosangueapp.pojos.Acao;
 import tcc.cosangueapp.pojos.Usuario;
 import tcc.cosangueapp.utils.Constantes;
 
-public class PaginaInicial extends AppCompatActivity implements PaginaInicialFragment.OnFragmentInteractionListener,
-        FolderChooserDialog.FolderCallback {
+public class PaginaInicial extends AppCompatActivity implements FolderChooserDialog.FolderCallback {
 
     UsuarioDAO usuarioDAO;
     private Bundle bdUsuarioLogado;
@@ -77,6 +74,7 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
     private LinearLayoutManager llm;
     private RVAdapter adapter;
     private List<Acao> listaAcoes;
+    FloatingActionButton fabInseriAcao;
 
 
     @Override
@@ -97,7 +95,8 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
             new HttpRequestTaskVerificaRegistrationId().execute(getApplicationContext());
         }
 
-        iniciaCards();
+        new HttpRequestTaskGetAllAcoes().execute();
+
     }
 
     public void inicializaComponentes() {
@@ -112,6 +111,16 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
         login = spPreferencias.getString("login", null);
         genero = spPreferencias.getString("genero", null);
         id = Long.parseLong(spPreferencias.getString("id", null));
+        fabInseriAcao = (FloatingActionButton) findViewById(R.id.fab_inseri_acao);
+    }
+
+    public void acaoFab() {
+        fabInseriAcao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), InseriEventos.class);
+            }
+        });
     }
 
     private void verificaBundle() {
@@ -378,7 +387,6 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
 
         @Override
         protected List<Acao> doInBackground(Void... params) {
-            AcaoDAO acaoDao = new AcaoDAO();
             ArrayList<Acao> listaAcoes = new ArrayList<Acao>();
             Gson gson = new Gson();
             try {
@@ -398,31 +406,39 @@ public class PaginaInicial extends AppCompatActivity implements PaginaInicialFra
         @Override
         protected void onPostExecute(List<Acao> retornoListaAcoes) {
             if (retornoListaAcoes != null) {
-                Toast.makeText(PaginaInicial.this, "Não tá vazia", Toast.LENGTH_LONG).show();
-               // Log.d("Lista de Ações ", listaAcoes.get(0).getNome());
+                Toast.makeText(PaginaInicial.this, "Não tá vazia, onPostExecute", Toast.LENGTH_LONG).show();
                 listaAcoes = retornoListaAcoes;
+                //colocar a lista aqui se não der certo e testar
+                rv = (RecyclerView) findViewById(R.id.rv);
+                llm = new LinearLayoutManager(getContext());
+                rv.setLayoutManager(llm);
+                adapter = new RVAdapter(listaAcoes, PaginaInicial.this);
+                //rv.setOnClickListener(PaginaInicial.this);
+                rv.setAdapter(adapter);
             } else {
-                Toast.makeText(PaginaInicial.this, "Tá vazia", Toast.LENGTH_LONG).show();
+                Toast.makeText(PaginaInicial.this, "Tá vazia, onPostExecute", Toast.LENGTH_LONG).show();
             }
         }
-
-
     }
 
-    private void iniciaCards() {
-
-        listaAcoes = new ArrayList<Acao>();
-        new HttpRequestTaskGetAllAcoes().execute();
-
-        if(listaAcoes != null) {
-            rv = (RecyclerView) findViewById(R.id.rv);
-            llm = new LinearLayoutManager(this);
-            rv.setLayoutManager(llm);
-            adapter = new RVAdapter(listaAcoes);
-            rv.setAdapter(adapter);
-        } else {
-            Toast.makeText(this, "lista de Ações vazia!", Toast.LENGTH_LONG).show();
+   /* @Override
+    public void onClick(View v) {
+        Toast.makeText(this, "Entro no onCLick", Toast.LENGTH_LONG).show();
+        //int position = v.getId();
+     int position = rv.getChildLayoutPosition(v);
+        int listaAcoesSize = listaAcoes.size();
+        for(int x = 0; x < listaAcoesSize; x++) {
+            if(position == x) {
+                Intent intent = new Intent(this, DetalhesEventos.class);
+                intent.putExtra("acao", listaAcoes.get(x));
+                startActivity(intent);
+                break;
+            }
         }
-    }
+    }*/
+
+
+
 }
+
 
