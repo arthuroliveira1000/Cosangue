@@ -6,6 +6,8 @@ import javax.persistence.Query;
 
 import managers.SimpleEntityManager;
 import pojos.Acao;
+import pojos.Endereco;
+import pojos.Usuario;
 
 public class AcaoDAO extends SimpleEntityManager {
 	
@@ -28,5 +30,6 @@ public class AcaoDAO extends SimpleEntityManager {
 			return null;
 		}
 	}
-
+	
+	
 }
