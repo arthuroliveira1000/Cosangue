@@ -18,8 +18,10 @@ public class ApplicationConfig extends Application {
 	}
 
 	private void addRestResourceClasses(Set<Class<?>> resources) {
-		resources.add(TemplateWS.class);
 		resources.add(UsuarioWS.class);
+		resources.add(AcaoWS.class);
+		resources.add(EnderecoWS.class);
+		resources.add(HemocentroWS.class);
 	}
 
 }
