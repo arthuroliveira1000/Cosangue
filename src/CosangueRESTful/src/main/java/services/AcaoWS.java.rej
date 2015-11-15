@@ -1,9 +1,0 @@
-diff a/src/CosangueRESTful/src/main/java/services/AcaoWS.java b/src/CosangueRESTful/src/main/java/services/AcaoWS.java	(rejected hunks)
-@@ -25,6 +25,7 @@
- 	public Acao inserir(Acao acao) {
- 		try {
- 			Acao novaAcao = insert(acao);
-+<<<<<<< HEAD
- 			if (novaAcao != null) {
- 				GoogleCloudMessaging.ExecutaPost(novaAcao);
- 			}
