@@ -1,7 +1,5 @@
 package services;
 
-import gcm.GoogleCloudMessaging;
-
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
@@ -17,7 +15,6 @@ import javax.ws.rs.core.Response;
 
 import json.Json;
 import pojos.Acao;
-import pojos.Usuario;
 import daos.AcaoDAO;
 
 @Path("acao")
@@ -55,7 +52,7 @@ public class AcaoWS extends TemplateWS {
 		}
 		return null;
 	}
-	
+
 	
 	@GET
 	@Produces(Json.UTF8JSON)
@@ -85,11 +82,26 @@ public class AcaoWS extends TemplateWS {
 		return null;
 	}
 
-	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
+	/*@DELETE
+	@Consumes(Json.UTF8JSON)
 	public Response deletar(Acao acao) {
 		try {
 			delete(acao);
+			return Response.status(200).entity("Açao excluída com sucesso")
+					.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}*/
+	
+	@DELETE
+	@Path("/{ID}")
+	
+	public Response deletar(@PathParam("ID") Long id) {
+		try {
+			AcaoDAO acaoDAO = new AcaoDAO();
+			acaoDAO.excluiAcao(id);
 			return Response.status(200).entity("Açao excluída com sucesso")
 					.build();
 		} catch (Exception e) {

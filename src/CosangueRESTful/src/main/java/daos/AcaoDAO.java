@@ -1,6 +1,7 @@
 package daos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -31,5 +32,20 @@ public class AcaoDAO extends SimpleEntityManager {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void excluiAcao(Long id) {
+		try {
+			beginTransaction();
+			Acao retorno = entityManager.find(Acao.class, id);
+			entityManager.remove(retorno);
+			commit();
+			//return retorno;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollBack();
+			//return null;
+		}
+	}
 	
 }

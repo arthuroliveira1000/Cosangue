@@ -9,8 +9,8 @@ public enum TipoSanguineo {
             "AB+"), AB_NEGATIVO("AB-"), O_POSITIVO("O+"), O_NEGATIVO("O-"), NAO_SEI("Não Sei");
 
     private String descricao;
-
-    private TipoSanguineo(String descricao) {
+    
+	private TipoSanguineo(String descricao) {
         this.descricao = descricao;
     }
 
@@ -18,4 +18,13 @@ public enum TipoSanguineo {
     public String toString() {
         return this.descricao;
     }
+    
+    public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 }

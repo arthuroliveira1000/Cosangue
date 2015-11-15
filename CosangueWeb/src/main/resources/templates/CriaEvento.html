@@ -15,25 +15,33 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Cosangue">
-    <link rel="apple-touch-icon-precomposed" href="/img/ios-desktop.png">
+    <link rel="apple-touch-icon-precomposed" href="../img/ios-desktop.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="/img/logo_android.png" />
+    <link rel="shortcut icon" href="../img/logo_android.png" />
 
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
+	<!-- <script type="text/javascript" src="../bootstrap/js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css "> -->
+	
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.red-deep_orange.min.css" />
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+	<script src="../js/material.min.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+  <style type="text/css">
+  	.campo1 {
+   float:left;
+	}
+  </style>  
+   
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -53,65 +61,88 @@
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--red-800">
           <a class="mdl-navigation__link" href="/listaEventos"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">home</i>Eventos</a>
-          <a class="mdl-navigation__link" href="/criar"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">people</i>Criar Evento</a>
+          <a class="mdl-navigation__link" href="/telaCriaEvento"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">event</i>Criar Evento</a>
           <a class="mdl-navigation__link" href="/sair"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">power_settings_new</i>Sair</a>
           <div class="mdl-layout-spacer"></div>
         </nav>
       </div>
+
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-        <form action="/criar" method="POST" name="form_cadastro">
-	   	  <div class=" mdl-select demo-charts mdl-color--white mdl-cell mdl-cell--6-col mdl-grid mdl-grid--no-spacing">
-			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" />
-	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
-			 </div> 		
-			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-	 			 <input class="mdl-textfield__input" type="text" id="descricao" name="descricao" />
-	  			 <label class="mdl-textfield__label" for="descricao">Descrição</label>
-			</div> 
-			 <div>
-			   <select name="categoria" required>
-     				 {{#categoria}}
-              		<option value="{{name}}">{{nome}}</option>
-            		{{/categoria}}
-    			</select>
-			 </div>
-		 	 <div>
-		 		<h6>Hemocomponente:</h6>
-				{{#hemocomponente}}
-				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}">
-		  			 <input class="mdl-radio__button" id="{{name}}" name="hemocomponente" type="radio" value="{{name}}">
-		  			 <span class="mdl-radio__label">{{descricao}} &nbsp; </span>
-				</label>
-				{{/hemocomponente}}				
-			 </div>   	
-			 
-			 
-    	     
-    	     <input id="street_number" name="nr" type="hidden"></input>
-			 <input id="route" name="logradouro" type="hidden"></input>
-			 <input id="locality" name="cidade" type="hidden"></input>
-			 <input id="administrative_area_level_1" name="uf" type="hidden"></input>	
-			 			
-			 <div class="mdl-cell mdl-cell--8-col">
-			 	<button	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-					type="submit">Enviar
-				</button>
-		     </div>
-		   </div>	   	  
-	   	 </form>
-	   	 <div id="locationField">
-     			 <input id="autocomplete" placeholder="Digite o endereço do evento aqui"
-             	onFocus="geolocate()" type="text"></input>
-    	 </div>
-	   	</div>
-      </main>
-      </div>
-      <script src="../js/material.min.js"></script>
+         <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--10-col mdl-grid">
+          <form action="/criar" method="POST" name="form_cadastro">
+    			
+    			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 800px;">
+    	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" />
+    	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
+    			 </div>
+
+      			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 800px;">
+      	 			 <textarea class="mdl-textfield__input" type="text" id="descricao" name="descricao" rows="1"></textarea> 
+                     <label class="mdl-textfield__label" for="descricao">Descrição</label>
+      			</div> 
+              
+      		 	 <div class="mdl-radio-group">
+      		 		<h6>Categoria:
+      				{{#categoria}}
+        				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
+        		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}">
+        		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
+        				</label>
+      				{{/categoria}}	
+              		</h6>			
+      			 </div>   	
+
+	             <div class="mdl-radio-group">
+	              <h6>Tipo Sanguíneo:
+	              {{#tipo}}
+	                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}">
+	                     <input class="mdl-radio__button" id="{{name}}" name="tipo" type="radio" value="{{name}}">
+	                     <span class="mdl-radio__label">{{descricao}} &nbsp; </span>
+	                </label>
+	              {{/tipo}}  
+	              </h6>     
+	             </div>     
+			  	   
+				 <div>
+					 <h6>Data:<input type=date name="data"></input></h6>
+	      	     </div>
+	      	     
+	      	     <div>
+	      	     	<h6>Horário:<input type=time name="horario"></input></h6>
+	      	     </div>
+	      	     
+	      	     <input id="street_number" name="nr" type="hidden"></input>
+	  			 <input id="route" name="logradouro" type="hidden"></input>
+	  			 <input id="locality" name="cidade" type="hidden"></input>
+	  			 <input id="administrative_area_level_1" name="uf" type="hidden"></input>	
+  			 			
+	      		 <div class="mdl-cell mdl-cell--8-col">
+	      			<button	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"	type="submit">Enviar
+	      		    </button>
+	      		 </div>	  
+	   	 	</form>
+  	   		<div id="locationField">
+       			 <input id="autocomplete" placeholder="Digite o endereço do evento aqui"
+               	onFocus="geolocate()" type="text"></input>
+      	     </div> 
+	   </div>
+   </div>
+  </main>
+ </div>
+ 
       
+  <!-- scrip datapiker --> 
+<script>
+
+$('#datepicker').datepicker(function() {
+	language:"pt-BR"
+
+});
+</script>
+   
       <!-- começa aqui script endereco -->
-       <script>
+ <script>
 // This example displays an address form, using the autocomplete feature
 // of the Google Places API to help users fill in the information.
 

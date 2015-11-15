@@ -8,7 +8,7 @@ public enum Categoria {
 	PALESTRA("Palestra"),
 	CAMPANHA("Campanha"),
 	SOLICITACAO("Solicitação"),
-	OUTRO("");
+	OUTRO("Outro");
 	
 	private String nome;
 	

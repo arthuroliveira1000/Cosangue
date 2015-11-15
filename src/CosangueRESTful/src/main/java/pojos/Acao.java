@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -48,6 +50,7 @@ public class Acao implements Serializable {
 	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", fetch = FetchType.EAGER)
+	@Cascade(value = CascadeType.DELETE)
 	//@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
 	private Endereco endereco;
 

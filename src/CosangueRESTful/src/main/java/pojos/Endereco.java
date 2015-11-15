@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @XmlRootElement
 @Entity
@@ -47,6 +49,7 @@ public class Endereco implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_acao")
+	@Cascade(value = CascadeType.DELETE)
 	private Acao acao;
 
 	public Endereco() {

@@ -13,7 +13,7 @@ public class EnderecoDAO extends SimpleRestTemplate {
 	 public Endereco buscaEndereco(Endereco... params) {
 		  return restTemplate.getForObject(Constantes.URL_BUSCA_ENDERECO, Endereco.class, params[0].getId());
 	  }
-	 
+	
 	 public void atualizaEndereco(String... params) {
 		  restTemplate.put(Constantes.URL_ATUALIZA_ENDERECO, Endereco.class, params);
 	}

@@ -1,6 +1,7 @@
 package cosangue.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import cosangue.model.Categoria;
 import cosangue.model.Endereco;
 import cosangue.model.Hemocentro;
 import cosangue.model.Hemocomponentes;
+import cosangue.model.TipoSanguineo;
 
 @Controller
 public class EventoController {
@@ -28,6 +30,7 @@ public class EventoController {
 		} else {
 			model.addAttribute("categoria", Categoria.values());
 			model.addAttribute("hemocomponente", Hemocomponentes.values());
+			model.addAttribute("tipo", TipoSanguineo.values());
 			return "CriaEvento";
 		}
 		
@@ -53,9 +56,47 @@ public class EventoController {
 			Acao acaoRetornada = acaoDAO.inserir(acao);
 			Endereco enderecoInserido = enderecoDAO.inserir(endereco);
 			enderecoDAO.atualizaEndereco(enderecoInserido.getId().toString(), acaoRetornada.getId().toString());
-			
-
 		    return "PaginaInicial";
+		}
+	}
+	
+	@RequestMapping(value = "/visualizaEvento", method = {RequestMethod.POST, RequestMethod.GET})
+	public String visualizaEvento(Long id, HttpSession session, Model model) {
+		Hemocentro hemocentroLogado = (Hemocentro) session.getAttribute("hemocentroLogado");
+		AcaoDAO acaoDAO = new AcaoDAO();
+		if (hemocentroLogado == null) {
+			return "Login";
+		} else {
+			model.addAttribute("hemocentro", hemocentroLogado);
+			 
+			Acao acaoRetornada = acaoDAO.buscaAcao(id);
+			if (acaoRetornada != null) {
+				model.addAttribute("acao", acaoRetornada);
+				model.addAttribute("categoria", Categoria.values());
+				model.addAttribute("tipo", TipoSanguineo.values());
+			}
+			return "VisualizaEvento";
+		}
+	}
+	
+	@RequestMapping(value = "/excluiEvento", method = {RequestMethod.POST, RequestMethod.GET})
+	public String excluiEvento(Long id, HttpSession session, Model model) {
+		Hemocentro hemocentroLogado = (Hemocentro) session.getAttribute("hemocentroLogado");
+		AcaoDAO acaoDAO = new AcaoDAO();
+		AcaoDAO acaoDAO1 = new AcaoDAO();
+		if (hemocentroLogado == null) {
+			return "Login";
+		} else {
+			model.addAttribute("hemocentro", hemocentroLogado);	 
+		//	Acao acaoRetornada = acaoDAO.buscaAcao(id);
+			/*if (acaoRetornada != null) {
+				acaoDAO1.excluir(acaoRetornada);
+			}
+			*/
+			acaoDAO.excluir(id);
+			model.addAttribute("acao", acaoDAO1.listaEventos());
+			return "PaginaInicial";
+			
 		}
 	}
 }

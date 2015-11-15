@@ -21,12 +21,16 @@ public class AcaoDAO extends SimpleRestTemplate {
 		  return restTemplate.postForObject(Constantes.URL_CRIA_EVENTO, params[0], Acao.class);
 	    }
 	  
-	  public Acao excluir(Acao... params) {
-		  return restTemplate.getForObject(Constantes.URL_EXCLUI_EVENTO, Acao.class, params);
+	/*  public void excluir(Acao... params) {
+		   restTemplate.delete(Constantes.URL_EXCLUI_EVENTO, Acao.class, params);
+	  }*/
+	  
+	  public void excluir(Long id) {
+		  restTemplate.delete(Constantes.URL_EXCLUI_EVENTO, id);
 	  }
 	  
-	  public Acao buscaAcao(Acao... params) {
-		  return restTemplate.getForObject(Constantes.URL_BUSCA_ACAO, Acao.class, params[0].getId());
+	  public Acao buscaAcao(Long id) {
+		  return restTemplate.getForObject(Constantes.URL_BUSCA_ACAO, Acao.class, id);
 	  }
 	  
 	  public ArrayList<Acao> listaEventos() {
@@ -52,7 +56,6 @@ public class AcaoDAO extends SimpleRestTemplate {
 			  e.printStackTrace();
 		  }
 		return null;
-		  
 		  
 	  }
 	  

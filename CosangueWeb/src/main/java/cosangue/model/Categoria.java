@@ -4,8 +4,8 @@ public enum Categoria {
 	COLETA_EXTERNA("Coleta Externa"),
 	PALESTRA("Palestra"),
 	CAMPANHA("Campanha"),
-	SOLICITACAO("Solicita��o"),
-	OUTRO("");
+	SOLICITACAO("Solicitação"),
+	OUTRO("Outro");
 	
 	private String nome;
 	
