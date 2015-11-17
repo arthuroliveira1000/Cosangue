@@ -6,7 +6,6 @@ import pojos.Endereco;
 
 public class EnderecoDAO extends SimpleEntityManager {
 	
-	@SuppressWarnings("unchecked")
 	public Endereco inseriAcaoNoEndereco(Long idEndereco, Long idAcao) {
 		try {
 			beginTransaction();

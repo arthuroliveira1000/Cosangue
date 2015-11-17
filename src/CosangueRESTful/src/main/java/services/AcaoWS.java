@@ -15,21 +15,20 @@ import javax.ws.rs.core.Response;
 import json.Json;
 import pojos.Acao;
 import daos.AcaoDAO;
+import daos.UsuarioDAO;
 
 @Path("acao")
 public class AcaoWS extends TemplateWS {
-	
-	AcaoDAO acaoDAO = new AcaoDAO();
-	
+
+	AcaoDAO daoAcao = new AcaoDAO();
+	UsuarioDAO daoUsuario = new UsuarioDAO();
+
 	@POST
 	@Produces(Json.UTF8JSON)
 	@Consumes(Json.UTF8JSON)
 	public Acao inserir(Acao acao) {
 		try {
 			Acao novaAcao = insert(acao);
-			/*if (novaAcao != null) {
-				GoogleCloudMessaging.ExecutaPost(novaAcao);
-			}*/
 			return novaAcao;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,13 +51,12 @@ public class AcaoWS extends TemplateWS {
 		return null;
 	}
 
-	
 	@GET
 	@Produces(Json.UTF8JSON)
 	public ArrayList<Acao> buscaAcoes() {
 		try {
 			ArrayList<Acao> acao = new ArrayList<Acao>();
-			acao = acaoDAO.listaAcoes();
+			acao = daoAcao.listaAcoes();
 			if (acao != null) {
 				return acao;
 			}
@@ -94,4 +92,22 @@ public class AcaoWS extends TemplateWS {
 		}
 		return null;
 	}
+
+	@PUT
+	@Produces(Json.UTF8JSON)
+	@Consumes(Json.UTF8JSON)
+	@Path("/{idAcao}/{idUsuario}")
+	public Acao atualizaAcao(@PathParam("idAcao") Long idAcao,
+			@PathParam("idUsuario") Long idUsuario) {
+		try {
+			Acao acaoRetornada = daoAcao.inseriAcaoNoUsuario(idAcao, idUsuario);
+			if (acaoRetornada != null) {
+				return acaoRetornada;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
