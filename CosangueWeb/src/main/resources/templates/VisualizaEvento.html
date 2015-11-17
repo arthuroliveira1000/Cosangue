@@ -34,12 +34,25 @@
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/styles.css">
+    <script type="text/javascript" src="../js/javascript.js"></script>
+    <script type="text/javascript" src="../js/jquery-2.1.4.js"></script>
   </head>
+  
+  <style type="text/css">
+  	.campo1 {
+   float:left;
+	}
+	
+	.mdl-cell {
+    padding: 1cm 1cm 1cm 1cm;
+	}
+	
+  </style>  
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Eventos</span>
+          <span class="mdl-layout-title">Evento</span>
           <div class="mdl-layout-spacer"></div>
         </div>
       </header>
@@ -59,9 +72,59 @@
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-      	<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--10-col mdl-grid">
-	        	<div><h5><i class="material-icons">event</i> Evento: </h5>
-    		</div>
+        <div class="mdl-grid demo-content">
+         <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col mdl-grid">
+
+			<p><h4> Evento cadastrado</h4></p>
+				{{#acao}}
+					 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 700px;">
+    	 				 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" value="{{nome}}" readonly="readonly"/>
+    	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
+    			 </div>
+				
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 700px;">
+      	 			 <input class="mdl-textfield__input" type="text" id="descricao" name="descricao" value="{{descricao}}" readonly="readonly"></input> 
+                     <label class="mdl-textfield__label" for="descricao">Descrição</label>
+      			</div> 
+              
+      		 	 <div>
+      		 		<h6><b> Categoria: </b>
+      				{{#categoria}}
+        				<label>
+        		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
+        				</label>
+      				{{/categoria}}	
+              		</h6>			
+      			 </div>   	
+				
+	            <div>
+	              <h6><b>Tipo Sanguíneo:</b>
+	              {{#tipo}}
+	                <label>
+	                     <span class="mdl-radio__label">{{descricao}} &nbsp; </span>
+	                </label>
+	              {{/tipo}}  
+	              </h6>     
+	             </div>   
+			  	   
+				 <div>
+					 <h6><b>Data: </b> {{data}} &nbsp;</h6>
+	      	     </div>
+	      	     
+	      	     <div>
+	      	     	<h6><b>Horário:</b> {{horario}} </h6>
+	      	     </div>
+	      	     	 <div>
+	      	     	{{#endereco}}
+	      	     	<h6><b>Local:</b> {{logradouro}}, {{nr}} - {{cidade}}, RS </h6>
+	      	     	{{/endereco}}
+	      	     </div>
+		       {{/acao}}
+				
+				<div class="mdl-card__actions mdl-card--border">
+					<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" onclick="history.go(-1)" >Voltar</button>
+			    </div>
+			</div>
         </div>  
       </main>
       <script src="../js/material.min.js"></script>

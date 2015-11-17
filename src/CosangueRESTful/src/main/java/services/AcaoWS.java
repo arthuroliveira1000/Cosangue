@@ -10,7 +10,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import json.Json;
@@ -81,23 +80,9 @@ public class AcaoWS extends TemplateWS {
 		}
 		return null;
 	}
-
-	/*@DELETE
-	@Consumes(Json.UTF8JSON)
-	public Response deletar(Acao acao) {
-		try {
-			delete(acao);
-			return Response.status(200).entity("Açao excluída com sucesso")
-					.build();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}*/
 	
 	@DELETE
-	@Path("/{ID}")
-	
+	@Path("/{ID}")	
 	public Response deletar(@PathParam("ID") Long id) {
 		try {
 			AcaoDAO acaoDAO = new AcaoDAO();

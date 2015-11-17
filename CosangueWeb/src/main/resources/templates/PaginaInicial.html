@@ -36,7 +36,9 @@
     <link rel="stylesheet" href="/css/styles.css">
     <script type="text/javascript" src="../js/javascript.js"></script>
     <script type="text/javascript" src="../js/jquery-2.1.4.js"></script>
-    
+    <style type="text/css">
+ 
+    </style>
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -63,10 +65,11 @@
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 	  		<thead>
 	    		<tr>
 	      			<th class="mdl-data-table__cell--non-numeric">Evento</th>
+	      			<th>Descriçao</th>
 	      			<th>Categoria</th>
 	      			<th>Participantes</th>
 	       		</tr>		
@@ -75,13 +78,34 @@
 		  {{#acao}}
 	    	<tr>
 	      		<td class="mdl-data-table__cell--non-numeric">{{nome}}</td>
+	      		<td>{{descricao}}</td>
 	      		<td>{{categoria}}</td>
 	      		<td>{{nParticipantes}}</td>
-	      		<td><a class="mdl-color-text--grey-400 material-icons" href="/visualizaEvento" onclick="return buscaAcao({{id}})">visibility</a></td>
-	      		<td><a class="mdl-color-text--grey-400 material-icons" href="">mode_edit</a></td>
+			    
+			    <td>
+				    <form action="/buscaEventoTeste" method="POST" name="form">
+					    <div class="mdl-card__actions">
+							 <input type="hidden" id="id" name="id" value="{{id}}" />
+							<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect material-icons" type="submit" >visibility</button>
+					    </div>
+				    </form>
+			    </td>
+			    
+			    <td>
+				    <form action="/atualizaEvento" method="POST" name="form2">
+					    <div class="mdl-card__actions">
+							 <input type="hidden" id="id2" name="id" value="{{id}}" />
+							<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect material-icons" type="submit" >mode_edit</button>
+					    </div>
+				    </form>
+			    </td>
+			    
 	      		<td><a class="mdl-color-text--grey-400 material-icons" href="/excluiEvento" onclick="return excluiEvento({{id}})">clear</a></td>
 	    	</tr>
-	      {{/acao}} 
+	      {{/acao}}
+	      <div class="mdl-oi">
+	      
+	      </div> 
 	  	</tbody>
 		</table>
 	   	</div>
