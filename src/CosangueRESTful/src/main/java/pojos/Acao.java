@@ -54,11 +54,7 @@ public class Acao implements Serializable {
 	private Endereco endereco;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-<<<<<<< HEAD
-	@ManyToOne(optional = true, fetch = FetchType.LAZY)
-=======
 	@ManyToOne(optional = true)
->>>>>>> 55be6fb15d25a73baf30b2f66a22e98569f657f9
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 

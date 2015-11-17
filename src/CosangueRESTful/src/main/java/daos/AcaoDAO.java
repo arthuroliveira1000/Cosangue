@@ -41,7 +41,13 @@ public class AcaoDAO extends SimpleEntityManager {
 			entityManager.merge(acaoRetornada);
 			commit();
 			return acaoRetornada;
-	
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollBack();
+		}
+		return null;
+	}
+
 	public void excluiAcao(Long id) {
 		try {
 			beginTransaction();
@@ -53,8 +59,5 @@ public class AcaoDAO extends SimpleEntityManager {
 			e.printStackTrace();
 			rollBack();
 		}
-		return null;
 	}
-
-	}	
 }
