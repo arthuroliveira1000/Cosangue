@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -24,6 +23,7 @@ public class Endereco implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_endereco")
 	private Long id;
+	String endereco;
 	@Column(length = 200)
 	private String logradouro;
 	@Column(length = 100)
@@ -55,7 +55,7 @@ public class Endereco implements Serializable {
 
 	public Endereco(Long id, String logradouro, String bairro, int nr,
 			String cidade, String uf, String latitude, String longitude,
-			Usuario usuario, Hemocentro hemocentro, Acao acao) {
+			Usuario usuario, Hemocentro hemocentro, Acao acao, String endereco) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -68,6 +68,7 @@ public class Endereco implements Serializable {
 		this.usuario = usuario;
 		this.hemocentro = hemocentro;
 		this.acao = acao;
+		this.endereco = endereco;
 	}
 
 	public Long getId() {
@@ -149,14 +150,22 @@ public class Endereco implements Serializable {
 	public void setHemocentro(Hemocentro hemocentro) {
 		this.hemocentro = hemocentro;
 	}
-	
+
 	@XmlTransient
 	public Acao getAcao() {
 		return acao;
-	}	
- 
+	}
+
 	public void setAcao(Acao acao) {
 		this.acao = acao;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public static long getSerialversionuid() {

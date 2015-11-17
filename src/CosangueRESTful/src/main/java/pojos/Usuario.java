@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -23,7 +24,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 5286418095498767539L;
@@ -45,6 +45,7 @@ public class Usuario implements Serializable {
 	private TipoSanguineo tipoSanguineo;
 	@Column(name = "registration_id")
 	private String registrationId;
+	private int quantidadeDoacao;
 
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private Endereco endereco;
@@ -68,7 +69,8 @@ public class Usuario implements Serializable {
 	public Usuario(Long id, String nome, String dataNascimento, Genero genero,
 			String senha, String login, TipoSanguineo tipoSanguineo,
 			Endereco endereco, List<Acao> acao, List<Doacao> doacao,
-			List<Comentario> comentario, String registrationId) {
+			List<Comentario> comentario, String registrationId,
+			int quantidadeDoacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -82,6 +84,7 @@ public class Usuario implements Serializable {
 		this.doacao = doacao;
 		this.comentario = comentario;
 		this.registrationId = registrationId;
+		this.quantidadeDoacao = quantidadeDoacao;
 	}
 
 	public Long getId() {
@@ -178,6 +181,14 @@ public class Usuario implements Serializable {
 
 	public void setRegistrationId(String registrationId) {
 		this.registrationId = registrationId;
+	}
+
+	public int getQuantidadeDoacao() {
+		return quantidadeDoacao;
+	}
+
+	public void setQuantidadeDoacao(int quantidadeDoacao) {
+		this.quantidadeDoacao = quantidadeDoacao;
 	}
 
 	public static long getSerialversionuid() {

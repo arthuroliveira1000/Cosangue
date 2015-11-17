@@ -6,11 +6,10 @@ import javax.persistence.Query;
 
 import managers.SimpleEntityManager;
 import pojos.Acao;
-import pojos.Endereco;
 import pojos.Usuario;
 
 public class AcaoDAO extends SimpleEntityManager {
-	
+
 	public ArrayList<Acao> listaAcoes() {
 		try {
 			beginTransaction();
@@ -30,6 +29,23 @@ public class AcaoDAO extends SimpleEntityManager {
 			return null;
 		}
 	}
-	
-	
+
+	public Acao inseriAcaoNoUsuario(Long idAcao, Long idUsuario) {
+		try {
+			beginTransaction();
+			Acao acaoRetornada = entityManager.find(Acao.class, idAcao);
+			Usuario usuarioRetornado = entityManager.find(Usuario.class,
+					idUsuario);
+			acaoRetornada.setUsuario(usuarioRetornado);
+			entityManager.merge(acaoRetornada);
+			commit();
+			return acaoRetornada;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollBack();
+		}
+		return null;
+	}
+
 }

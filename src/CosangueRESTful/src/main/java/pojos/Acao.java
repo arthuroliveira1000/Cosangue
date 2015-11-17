@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -52,7 +51,7 @@ public class Acao implements Serializable {
 	private Endereco endereco;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	// @ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 

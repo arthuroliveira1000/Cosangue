@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -22,11 +23,9 @@ public class Doacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_doacao")
 	private Long id;
-	@Column(length = 10)
-	private int quantidadeDoacao;
 	private String dataDoacao;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
@@ -34,11 +33,9 @@ public class Doacao implements Serializable {
 		super();
 	}
 
-	public Doacao(Long id, int quantidadeDoacao, String dataDoacao,
-			Usuario usuario) {
+	public Doacao(Long id, String dataDoacao, Usuario usuario) {
 		super();
 		this.id = id;
-		this.quantidadeDoacao = quantidadeDoacao;
 		this.dataDoacao = dataDoacao;
 		this.usuario = usuario;
 	}
@@ -51,22 +48,15 @@ public class Doacao implements Serializable {
 		this.id = id;
 	}
 
-	public int getQuantidadeDoacao() {
-		return quantidadeDoacao;
-	}
-
-	public void setQuantidadeDoacao(int quantidadeDoacao) {
-		this.quantidadeDoacao = quantidadeDoacao;
-	}
-
 	public String getDataDoacao() {
 		return dataDoacao;
 	}
-	//yyyy-MM-dd
+
 	public void setDataDoacao(String dataDoacao) {
 		this.dataDoacao = dataDoacao;
 	}
 
+	@XmlTransient
 	public Usuario getUsuario() {
 		return usuario;
 	}

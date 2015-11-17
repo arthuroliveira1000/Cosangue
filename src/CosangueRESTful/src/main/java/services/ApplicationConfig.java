@@ -22,6 +22,7 @@ public class ApplicationConfig extends Application {
 		resources.add(AcaoWS.class);
 		resources.add(EnderecoWS.class);
 		resources.add(HemocentroWS.class);
+		resources.add(DoacaoWS.class);
 	}
 
 }

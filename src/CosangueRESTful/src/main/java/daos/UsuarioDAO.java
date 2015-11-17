@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import managers.SimpleEntityManager;
+import pojos.Doacao;
 import pojos.Usuario;
 
 public class UsuarioDAO extends SimpleEntityManager {
@@ -54,6 +55,28 @@ public class UsuarioDAO extends SimpleEntityManager {
 		}
 	}
 
+	public Usuario incrementaDoacaoDoUsuario(Long idUsuario, Long idDoacao) {
+		try {
+			beginTransaction();
+			Usuario usuarioRetornado = entityManager.find(Usuario.class,
+					idUsuario);
+			Doacao doacaoRetornada = entityManager.find(Doacao.class, idDoacao);
+			if (doacaoRetornada != null) {
+				Integer qtdadeDoacao = usuarioRetornado.getQuantidadeDoacao();
+				qtdadeDoacao = qtdadeDoacao + 1;
+				usuarioRetornado.setQuantidadeDoacao(qtdadeDoacao);
+				entityManager.merge(usuarioRetornado);
+			}
+			commit();
+			return usuarioRetornado;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollBack();
+			return null;
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public Usuario inseriRegistrationId(Long id, String registrationId) {
 		try {
@@ -70,7 +93,7 @@ public class UsuarioDAO extends SimpleEntityManager {
 			return null;
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Usuario removeRegistrationId(Long id) {
 		try {
