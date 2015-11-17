@@ -78,7 +78,7 @@
           <form action="/criar" method="POST" name="form_cadastro">
     			
     			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 800px;">
-    	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" />
+    	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome"/>
     	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
     			 </div>
 
@@ -91,14 +91,14 @@
       		 		<h6>Categoria:
       				{{#categoria}}
         				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
-        		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}">
+        		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}" onclick="habilitar();">
         		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
         				</label>
       				{{/categoria}}	
               		</h6>			
       			 </div>   	
-				
-	             <div class="mdl-radio-group">
+				 					
+	             <div class="mdl-radio-group" id="tipos" style="display:none;">
 	              <h6>Tipo Sanguíneo:
 	              {{#tipo}}
 	                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}">
@@ -140,28 +140,18 @@
 
 <script type="text/javascript">  
 function habilitar(){  
-    if(document.getElementById('solicitacao').checked){  
-        document.getElementById('textArea').disabled = true;  
-    } else {  
-        document.getElementById('textArea').disabled = false;  
-    }  
+	var tipoSan = document.getElementById("tipos");
+	
+    if(document.getElementById("SOLICITACAO").checked){  
+        tipoSan.style.display = "block";
+    } else {
+    	tipoSan.style.display = "none";
+    }
 }  
 </script> 
-      
-<!-- scrip datapiker --> 
-<script>
-
-$('#datepicker').datepicker(function() {
-	language:"pt-BR"
-
-});
-</script>
-   
-      <!-- começa aqui script endereco -->
+         
+      <!-- script endereco -->
  <script>
-// This example displays an address form, using the autocomplete feature
-// of the Google Places API to help users fill in the information.
-
 var placeSearch, autocomplete;
 var componentForm = {
   street_number: 'short_name',

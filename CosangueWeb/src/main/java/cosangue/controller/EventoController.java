@@ -1,7 +1,9 @@
 package cosangue.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -52,7 +54,20 @@ public class EventoController {
 		} else {
 			acao.setHemocentro(hemocentroLogado);
 			model.addAttribute("hemocentro", hemocentroLogado);
-
+			System.out.println("data" + acao.getData());
+	
+			SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formata2 = new SimpleDateFormat("yyyy-MM-dd");
+			
+			try {
+				Date data = formata2.parse(acao.getData());
+				acao.setData(formata.format(data));
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			Acao acaoRetornada = acaoDAO.inserir(acao);
 			Endereco enderecoInserido = enderecoDAO.inserir(endereco);
 			enderecoDAO.atualizaEndereco(enderecoInserido.getId().toString(),
@@ -76,8 +91,6 @@ public class EventoController {
 			model.addAttribute("hemocentroLogado", hemocentroLogado);
 			if (id != null ) {
 				Acao acaoRetornada = acaoDAO.buscaAcao(id);
-				SimpleDateFormat formatData = new SimpleDateFormat("dd/mm/yyyy");
-				acaoRetornada.setData(formatData.format(acaoRetornada.getData()));
 				model.addAttribute("acao", acaoRetornada);
 				model.addAttribute("categoria", Categoria.values());
 				model.addAttribute("hemocomponente", Hemocomponentes.values());
@@ -90,7 +103,7 @@ public class EventoController {
 		}
 	}
 	
-	@RequestMapping(value = "/atualizaEvento", method = RequestMethod.GET)
+	@RequestMapping(value = "/atualizaEvento", method = {RequestMethod.GET, RequestMethod.POST})
 	public String atualizaEvento(Long id, Model model, HttpSession session) {
 		AcaoDAO acaoDAO = new AcaoDAO();
 		Hemocentro hemocentroLogado = (Hemocentro) session.getAttribute("hemocentroLogado");
@@ -100,10 +113,18 @@ public class EventoController {
 			model.addAttribute("hemocentroLogado", hemocentroLogado);
 			if (id != null ) {
 				Acao acaoRetornada = acaoDAO.buscaAcao(id);
+				/*SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat formata2 = new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					Date data = formata.parse(acaoRetornada.getData());
+					acaoRetornada.setData(formata2.format(data));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
 				model.addAttribute("acao", acaoRetornada);
-				model.addAttribute("categoria", Categoria.values());
-				model.addAttribute("hemocomponente", Hemocomponentes.values());
-				model.addAttribute("tipo", TipoSanguineo.values());
+				model.addAttribute("categorias", Categoria.values());
+				model.addAttribute("tipos", TipoSanguineo.values());
 				return "AtualizaEvento";
 			}
 			else {

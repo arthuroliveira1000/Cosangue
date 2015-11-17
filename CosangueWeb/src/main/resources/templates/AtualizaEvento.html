@@ -89,8 +89,43 @@
               
       		 	 <div class="mdl-radio-group">
       		 		<h6>Categoria:
+      				{{#categorias}}
+        				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
+        		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}">
+        		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
+        				</label>
+      				{{/categorias}}	
+              		</h6>			
+      			 </div>   	
+				
+	             <div class="mdl-radio-group">
+	              <h6>Tipo Sanguíneo:
+	              {{#tipos}}
+	                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}">
+	                     <input class="mdl-radio__button" id="{{name}}" name="tipo" type="radio" value="{{name}}">
+	                     <span class="mdl-radio__label">{{descricao}} &nbsp; </span>
+	                </label>
+	              {{/tipos}}  
+	              </h6>     
+	             </div>     
+			  	   
+				 <div>
+					 <h6>Data:<input type=date name="data" value="{{data}}"></input></h6>
+	      	     </div>
+	      	     
+	      	     <div>
+	      	     	<h6>Horário:<input type=time name="horario" value="{{horario}}"></input></h6>
+	      	     </div>
+	      	     
+	      	     <input id="street_number" name="nr" type="hidden"></input>
+	  			 <input id="route" name="logradouro" type="hidden"></input>
+	  			 <input id="locality" name="cidade" type="hidden"></input>
+	  			 <input id="administrative_area_level_1" name="uf" type="hidden"></input>	
+  			 	{{/acao}}	
+  			 	
+  			 	 <div class="mdl-radio-group">
+      		 		<h6>Categoria:
       				{{#categoria}}
-      
         				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
         		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}">
         		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
@@ -108,21 +143,7 @@
 	                </label>
 	              {{/tipo}}  
 	              </h6>     
-	             </div>     
-			  	   
-				 <div>
-					 <h6>Data:<input type=date name="data" value="{{data}}"></input></h6>
-	      	     </div>
-	      	     
-	      	     <div>
-	      	     	<h6>Horário:<input type=time name="horario" value="{{horario}}"></input></h6>
-	      	     </div>
-	      	     
-	      	     <input id="street_number" name="nr" type="hidden"></input>
-	  			 <input id="route" name="logradouro" type="hidden"></input>
-	  			 <input id="locality" name="cidade" type="hidden"></input>
-	  			 <input id="administrative_area_level_1" name="uf" type="hidden"></input>	
-  			 	{{/acao}}		
+	              	
 	      		 <div >
 	      			<button	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"	type="submit">Enviar
 	      		    </button>
