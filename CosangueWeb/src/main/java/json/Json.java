@@ -13,8 +13,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cosangue.model.Acao;
+import cosangue.model.Categoria;
 import cosangue.model.Endereco;
 import cosangue.model.Hemocentro;
+import cosangue.model.Hemocomponentes;
+import cosangue.model.TipoSanguineo;
 
 public class Json {
 	public static JSONObject hemocentroToJson(Hemocentro hemocentro) {
@@ -49,7 +52,8 @@ public class Json {
 		jsonAcao.put("id", acao.getId());
 		jsonAcao.put("nome", acao.getNome());
 		jsonAcao.put("descricao", acao.getDescricao());
-		jsonAcao.put("dataHorario", acao.getDataHorario());
+		jsonAcao.put("data", acao.getData());
+		jsonAcao.put("horario", acao.getHorario());
 		jsonAcao.put("nParticipantes", acao.getnParticipantes());
 		jsonAcao.put("nReportacoes", acao.getnReportacoes());
 		jsonAcao.put("categoria", acao.getCategoria());

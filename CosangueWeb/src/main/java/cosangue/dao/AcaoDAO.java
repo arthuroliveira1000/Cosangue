@@ -21,23 +21,16 @@ public class AcaoDAO extends SimpleRestTemplate {
 		  return restTemplate.postForObject(Constantes.URL_CRIA_EVENTO, params[0], Acao.class);
 	    }
 	  
-	  public Acao excluir(Acao... params) {
-		  return restTemplate.getForObject(Constantes.URL_EXCLUI_EVENTO, Acao.class, params);
+	  
+	  public void excluir(Long id) {
+		  restTemplate.delete(Constantes.URL_EXCLUI_EVENTO, id);
 	  }
 	  
-	  public Acao buscaAcao(Acao... params) {
-		  return restTemplate.getForObject(Constantes.URL_BUSCA_ACAO, Acao.class, params[0].getId());
+	  public Acao buscaAcao(Long id) {
+		  return restTemplate.getForObject(Constantes.URL_BUSCA_ACAO, Acao.class, id);
 	  }
 	  
 	  public ArrayList<Acao> listaEventos() {
-		 // ResponseEntity<Acao[]> responseEntity = restTemplate.getForEntity(Constantes.URL_LISTA_EVENTOS, Acao[].class);
-		 // List<Acao> acoes = Arrays.asList(responseEntity.getBody());
-		 // return acoes;  
-		  //return (List<Acao>) restTemplate.getForEntity(Constantes.URL_LISTA_EVENTOS, Acao[].class);
-		 // List<Acao> acoes = (List<Acao>) restTemplate.getForObject(Constantes.URL_LISTA_EVENTOS, ListaAcoes.class);
-		
-		//  ResponseEntity<AcoesJson[]> entity = restTemplate.getForEntity(Constantes.URL_LISTA_EVENTOS, AcoesJson[].class);
-	      //  List<AcoesJson> acoes = Arrays.asList(entity.getBody());
 		  ArrayList<Acao> acao = new ArrayList<Acao>();
 		  Gson gson = new Gson();
 		  
@@ -52,7 +45,6 @@ public class AcaoDAO extends SimpleRestTemplate {
 			  e.printStackTrace();
 		  }
 		return null;
-		  
 		  
 	  }
 	  

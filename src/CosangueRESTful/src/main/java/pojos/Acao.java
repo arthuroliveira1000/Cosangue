@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -47,11 +49,16 @@ public class Acao implements Serializable {
 	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", fetch = FetchType.EAGER)
+	@Cascade(value = CascadeType.DELETE)
 	//@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
 	private Endereco endereco;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
+<<<<<<< HEAD
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+=======
+	@ManyToOne(optional = true)
+>>>>>>> 55be6fb15d25a73baf30b2f66a22e98569f657f9
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 

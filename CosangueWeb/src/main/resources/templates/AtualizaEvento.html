@@ -75,21 +75,22 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--10-col mdl-grid">
-          <form action="/criar" method="POST" name="form_cadastro">
-    			
+          <form action="/atualizarEvento" method="POST" name="form_cadastro">
+    			{{#acao}}
     			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 800px;">
-    	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" />
+    	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" value="{{nome}}" />
     	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
     			 </div>
 
       			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 800px;">
-      	 			 <textarea class="mdl-textfield__input" type="text" id="descricao" name="descricao" rows="1"></textarea> 
+      	 			 <input class="mdl-textfield__input" type="text" id="descricao" name="descricao" rows="1" value="descricao"></input> 
                      <label class="mdl-textfield__label" for="descricao">Descrição</label>
       			</div> 
               
       		 	 <div class="mdl-radio-group">
       		 		<h6>Categoria:
       				{{#categoria}}
+      
         				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
         		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}">
         		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
@@ -110,18 +111,18 @@
 	             </div>     
 			  	   
 				 <div>
-					 <h6>Data:<input type=date name="data"></input></h6>
+					 <h6>Data:<input type=date name="data" value="{{data}}"></input></h6>
 	      	     </div>
 	      	     
 	      	     <div>
-	      	     	<h6>Horário:<input type=time name="horario"></input></h6>
+	      	     	<h6>Horário:<input type=time name="horario" value="{{horario}}"></input></h6>
 	      	     </div>
 	      	     
 	      	     <input id="street_number" name="nr" type="hidden"></input>
 	  			 <input id="route" name="logradouro" type="hidden"></input>
 	  			 <input id="locality" name="cidade" type="hidden"></input>
 	  			 <input id="administrative_area_level_1" name="uf" type="hidden"></input>	
-  			 			
+  			 	{{/acao}}		
 	      		 <div >
 	      			<button	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"	type="submit">Enviar
 	      		    </button>

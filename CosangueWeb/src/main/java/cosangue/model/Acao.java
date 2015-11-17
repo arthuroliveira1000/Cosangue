@@ -1,16 +1,19 @@
 package cosangue.model;
 
-public class Acao  {
-	
+
+public class Acao {
+
 	private Long id;
 	private String nome;
 	private String descricao;
-	private String dataHorario;
+	private String data;
+	private String horario;
 	private int nParticipantes;
 	private int nReportacoes;
 	private Categoria categoria;
 	private TipoSanguineo tipo;
 	private Hemocomponentes hemocomponente;
+
 	private Endereco endereco;
 	private Hemocentro hemocentro;
 
@@ -18,15 +21,15 @@ public class Acao  {
 		super();
 	}
 
-	public Acao(Long id, String nome, String descricao, String dataHorario,
+	public Acao(Long id, String nome, String descricao, String data,
 			int nParticipantes, int nReportacoes, Categoria categoria,
 			TipoSanguineo tipo, Endereco endereco, Hemocentro hemocentro,
-			Hemocomponentes hemocomponente) {
+			Hemocomponentes hemocomponente, String horario) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.dataHorario = dataHorario;
+		this.data = data;
 		this.nParticipantes = nParticipantes;
 		this.nReportacoes = nReportacoes;
 		this.categoria = categoria;
@@ -34,6 +37,7 @@ public class Acao  {
 		this.endereco = endereco;
 		this.hemocentro = hemocentro;
 		this.hemocomponente = hemocomponente;
+		this.horario = horario;
 	}
 
 	public Long getId() {
@@ -60,13 +64,12 @@ public class Acao  {
 		this.descricao = descricao;
 	}
 
-	public String getDataHorario() {
-		return dataHorario;
+	public String getData() {
+		return data;
 	}
 
-	// //"05/09/2013 06:30:07"
-	public void setDataHorario(String dataHorario) {
-		this.dataHorario = dataHorario;
+	public void setData(String data) {
+		this.data = data;
 	}
 
 	public int getnParticipantes() {
@@ -100,7 +103,7 @@ public class Acao  {
 	public void setTipo(TipoSanguineo tipo) {
 		this.tipo = tipo;
 	}
-
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -123,6 +126,14 @@ public class Acao  {
 
 	public void setHemocomponente(Hemocomponentes hemocomponente) {
 		this.hemocomponente = hemocomponente;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
 	}
 
 }

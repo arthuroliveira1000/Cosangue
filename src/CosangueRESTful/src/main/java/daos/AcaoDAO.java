@@ -6,6 +6,7 @@ import javax.persistence.Query;
 
 import managers.SimpleEntityManager;
 import pojos.Acao;
+
 import pojos.Usuario;
 
 public class AcaoDAO extends SimpleEntityManager {
@@ -40,6 +41,13 @@ public class AcaoDAO extends SimpleEntityManager {
 			entityManager.merge(acaoRetornada);
 			commit();
 			return acaoRetornada;
+	
+	public void excluiAcao(Long id) {
+		try {
+			beginTransaction();
+			Acao retorno = entityManager.find(Acao.class, id);
+			entityManager.remove(retorno);
+			commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,4 +56,5 @@ public class AcaoDAO extends SimpleEntityManager {
 		return null;
 	}
 
+	}	
 }
