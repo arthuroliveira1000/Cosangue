@@ -40,7 +40,6 @@ public class UsuarioDAO extends SimpleEntityManager {
 					.createQuery("SELECT u FROM Usuario u WHERE u.login LIKE :login AND senha LIKE :senha");
 			query.setParameter("login", login);
 			query.setParameter("senha", senha);
-			// System.out.println(login);
 			List<Usuario> retorno = query.getResultList();
 			commit();
 			if (retorno.isEmpty()) {

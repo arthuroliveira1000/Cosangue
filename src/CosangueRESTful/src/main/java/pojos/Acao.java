@@ -49,7 +49,7 @@ public class Acao implements Serializable {
 	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", fetch = FetchType.EAGER)
-	@Cascade(value = CascadeType.DELETE)
+	@Cascade(value = {CascadeType.DELETE, CascadeType.MERGE})
 	//@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
 	private Endereco endereco;
 
@@ -57,7 +57,6 @@ public class Acao implements Serializable {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	 @OneToMany(mappedBy = "acao", targetEntity = Comentario.class)

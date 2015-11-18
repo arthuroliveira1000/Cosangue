@@ -26,15 +26,30 @@ public class EnderecoWS extends TemplateWS {
 	@Produces(Json.UTF8JSON)
 	@Consumes(Json.UTF8JSON)
 	@Path("/{idEndereco}/{idAcao}")
-	public Endereco atualizaEndereco(@PathParam("idEndereco") Long idEndereco,
+	public Endereco insereAcaoNoEndereco(@PathParam("idEndereco") Long idEndereco,
 			@PathParam("idAcao") Long idAcao) {
 		try {
-			Endereco enderecoRetornado = enderecoDAO.inseriAcaoNoEndereco(idEndereco, idAcao);
+			Endereco enderecoRetornado = enderecoDAO.insereAcaoNoEndereco(idEndereco, idAcao);
 			if (enderecoRetornado != null) {
 				Acao acaoRetornada = selectOne(Acao.class, idAcao);
 				if (acaoRetornada != null) {
 					GoogleCloudMessaging.ExecutaPost(acaoRetornada);
 				}
+				return enderecoRetornado;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@PUT
+	@Produces(Json.UTF8JSON)
+	@Consumes(Json.UTF8JSON)
+	public Endereco atualizaEndereco(Endereco endereco) {
+		try {
+			Endereco enderecoRetornado = enderecoDAO.atualizaEndereco(endereco);
+			if (enderecoRetornado != null) {
 				return enderecoRetornado;
 			}
 		} catch (Exception e) {

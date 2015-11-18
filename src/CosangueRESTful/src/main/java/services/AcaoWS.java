@@ -65,14 +65,36 @@ public class AcaoWS extends TemplateWS {
 		}
 		return null;
 	}
+	
+	@GET
+	@Path("/listaAcao/{ID}")
+	@Produces(Json.UTF8JSON)
+	public ArrayList<Acao> buscaAcoesPorHemocentro(@PathParam("ID") Long ID) {
+		try {
+			ArrayList<Acao> acao = new ArrayList<Acao>();
+			acao = daoAcao.buscaAcaoPorHemocentro(ID);
+			if (acao != null) {
+				return acao;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@PUT
 	@Produces(Json.UTF8JSON)
 	@Consumes(Json.UTF8JSON)
 	public Acao atualizar(Acao acao) {
 		try {
-			Acao atualizaAcao = update(acao);
-			return atualizaAcao;
+			AcaoDAO acaoDAO = new AcaoDAO();
+			Acao atualizaAcao = acaoDAO.atualizaAcao(acao);
+			if (atualizaAcao != null) {
+				return atualizaAcao;				
+			} else {
+				return null;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

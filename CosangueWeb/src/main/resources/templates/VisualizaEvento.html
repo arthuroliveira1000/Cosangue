@@ -60,77 +60,77 @@
         <header class="demo-drawer-header">
           <img src="/img/user.jpg" class="demo-avatar">
           <div class="demo-avatar-dropdown">
-            <span>projetocosangue@gmail.com</span>
+            <span class="mdl-color-text--white">projetocosangue</span>
             <div class="mdl-layout-spacer"></div>
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--red-800">
-          <a class="mdl-navigation__link" href="/listaEventos"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">home</i>Eventos</a>
-          <a class="mdl-navigation__link" href="/telaCriaEvento"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">event</i>Criar Evento</a>
-          <a class="mdl-navigation__link" href="/sair"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">power_settings_new</i>Sair</a>
+          <a class="mdl-navigation__link mdl-color-text--white" href="/listaEventos"><i class="mdl-color-text--white material-icons" role="presentation">home</i>Eventos</a>
+          <a class="mdl-navigation__link mdl-color-text--white" href="/telaCriaEvento"><i class="mdl-color-text--white material-icons" role="presentation">event</i>Criar Evento</a>
+          <a class="mdl-navigation__link mdl-color-text--white" href="/sair"><i class="mdl-color-text--white material-icons" role="presentation">power_settings_new</i>Sair</a>
           <div class="mdl-layout-spacer"></div>
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-         <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col mdl-grid">
-
-			<p><h4> Evento cadastrado</h4></p>
-				{{#acao}}
-					 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 700px;">
-    	 				 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" value="{{nome}}" readonly="readonly"/>
-    	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
-    			 </div>
-				
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 700px;">
-      	 			 <input class="mdl-textfield__input" type="text" id="descricao" name="descricao" value="{{descricao}}" readonly="readonly"></input> 
-                     <label class="mdl-textfield__label" for="descricao">Descrição</label>
-      			</div> 
-              
-      		 	 <div>
-      		 		<h6><b> Categoria: </b>
-      				{{#categoria}}
-        				<label>
-        		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
-        				</label>
-      				{{/categoria}}	
-              		</h6>			
-      			 </div>   	
-				
-	            <div>
-	              <h6><b>Tipo Sanguíneo:</b>
-	              {{#tipo}}
-	                <label>
-	                     <span class="mdl-radio__label">{{descricao}} &nbsp; </span>
-	                </label>
-	              {{/tipo}}  
-	              </h6>     
-	             </div>   
-			  	   
-				 <div>
-				 	
-					 <div>
-						 <h6>Data:<input type=date name="data" value="{{data}}" disabled></input></h6>
-	      	         </div>
-					 <h6><b>Data: </b> {{data}} &nbsp;</h6>
-	      	     </div>
-	      	     
-	      	     <div>
-	      	     	<h6><b>Horário:</b> {{horario}} </h6>
-	      	     </div>
-	      	     	 <div>
-	      	     	{{#endereco}}
-	      	     	<h6><b>Local:</b> {{logradouro}}, {{nr}} - {{cidade}}, RS </h6>
-	      	     	{{/endereco}}
-	      	     </div>
-		       {{/acao}}
-				
-				<div class="mdl-card__actions mdl-card--border">
-					<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" onclick="history.go(-1)" >Voltar</button>
-			    </div>
+        <div class="mdl-card mdl-shadow--6dp mdl-cell mdl-cell--8-col">
+		{{#acao}}
+			<div class="mdl-card__title mdl-color--primary mdl-color-text--white demo-card-square" id={{categoria}} >
+				<h2>{{categoria}}</h2>
 			</div>
-        </div>  
-      </main>
-      <script src="../js/material.min.js"></script>
+         <!-- <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col mdl-grid"> -->
+	      <div class="mdl-cell mdl-cell--10-col mdl-card__supporting-text">
+				
+			<div>	
+				<p><h4> {{nome}} </h4></p>
+			</div>
+      	    <div>
+      			<h6>{{descricao}}</h6>			
+      		 </div>   	
+	      	
+	      	 <div>
+	      		{{#endereco}}
+	      		   <h6><b>Local:</b> {{enderecoCompleto}} </h6>
+	      		{{/endereco}}
+	      	 </div>	
+	         
+	         <div id="tipos">
+	           <h6><b>Tipo Sanguíneo:</b>
+	         	    {{#tipo}}
+	              <label><span class="mdl-radio__label">{{descricao}} &nbsp; </span></label>
+	              {{/tipo}}  </h6>     
+	         </div>   
+			  	   
+			<div> 	
+				 <h6><b>Data: </b> {{data}} &nbsp;</h6>
+	      	</div>
+	      	     
+	      	<div>
+	      		<h6><b>Horário:</b> {{horario}} </h6>
+		    
+		  {{/acao}}
+				
+		   <div class="mdl-card__actions mdl-card--border">
+			  <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" onclick="history.go(-1)" >Voltar</button>
+		   </div>
+	       
+	       </div>
+       	 </div>
+        </div> 
+      </div> 
+    </main>
+  <script src="../js/material.min.js"></script>
+      
+<script type="text/javascript">  
+function habilitar(){  
+	var tipoSan = document.getElementById("tipos");
+	
+    if(document.getElementById("SOLICITACAO").value()){  
+        tipoSan.style.display = "block";
+    } else {
+    	tipoSan.style.display = "none";
+    }
+}  
+</script> 
   </body>
 </html>

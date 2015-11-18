@@ -1,5 +1,7 @@
 package cosangue.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,12 @@ public class HomeController {
 		if (hemocentroLogado == null) {
 			return "Login";
 		} else {
-		   
-		    model.addAttribute("acao", acao);
-			model.addAttribute("categoria", Categoria.values());
-			model.addAttribute("hemocomponente", Hemocomponentes.values());
-			model.addAttribute("acao", acaoDAO.listaEventos());
+			ArrayList<Acao> eventos = acaoDAO.buscaAcoesPorHemocentro(hemocentroLogado.getId());
+			if (eventos != null) { 
+				model.addAttribute("acao", eventos);
+				model.addAttribute("categoria", Categoria.values());
+				model.addAttribute("hemocomponente", Hemocomponentes.values());
+			}
 			return "PaginaInicial";
 		}
 	}

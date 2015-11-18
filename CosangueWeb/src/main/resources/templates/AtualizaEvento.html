@@ -1,186 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cosangue</title>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description"
+	content="A front-end template that helps you build fast, modern mobile web apps.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cosangue</title>
 
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/img/android-desktop.png">
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" sizes="192x192" href="/img/android-desktop.png">
 
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Cosangue">
-    <link rel="apple-touch-icon-precomposed" href="../img/ios-desktop.png">
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Cosangue">
+<link rel="apple-touch-icon-precomposed" href="../img/ios-desktop.png">
 
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage"
+	content="images/touch/ms-touch-icon-144x144-precomposed.png">
+<meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="../img/logo_android.png" />
+<link rel="shortcut icon" href="../img/logo_android.png" />
 
-	<!-- <script type="text/javascript" src="../bootstrap/js/jquery-1.11.3.js"></script>
-	<script type="text/javascript" src="../bootstrap/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-datepicker.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css "> -->
-	
-    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.red-deep_orange.min.css" />
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
-	<script src="../js/material.min.js"></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../css/styles.css">
-  <style type="text/css">
-  	.campo1 {
-   float:left;
-	}
-	
-	.mdl-cell {
-    padding: 1cm 1cm 1cm 1cm;
-	}
-	
-  </style>  
-   
-  </head>
-  <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-      <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
-        <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Eventos</span>
-          <div class="mdl-layout-spacer"></div>
-        </div>
-      </header>
-      <div class="demo-drawer mdl-layout__drawer mdl-color--red-900 mdl-color-text--blue-grey-50">
-        <header class="demo-drawer-header">
-          <img src="/img/user.jpg" class="demo-avatar">
-          <div class="demo-avatar-dropdown">
-            <span>projetocosangue@gmail.com</span>
-            <div class="mdl-layout-spacer"></div>
-          </div>
-        </header>
-        <nav class="demo-navigation mdl-navigation mdl-color--red-800">
-          <a class="mdl-navigation__link" href="/listaEventos"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">home</i>Eventos</a>
-          <a class="mdl-navigation__link" href="/telaCriaEvento"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">event</i>Criar Evento</a>
-          <a class="mdl-navigation__link" href="/sair"><i class="mdl-color-text--red-grey-400 material-icons" role="presentation">power_settings_new</i>Sair</a>
-          <div class="mdl-layout-spacer"></div>
-        </nav>
-      </div>
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.red-deep_orange.min.css" />
+<script
+	src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+<script src="../js/material.min.js"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="../css/styles.css">
+<style type="text/css">
+.campo1 {
+	float: left;
+}
 
-      <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-         <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--10-col mdl-grid">
-          <form action="/atualizarEvento" method="POST" name="form_cadastro">
-    			{{#acao}}
-    			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 800px;">
-    	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome" value="{{nome}}" />
-    	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
-    			 </div>
+.mdl-cell {
+	padding: 1cm 1cm 1cm 1cm;
+}
+</style>
 
-      			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 800px;">
-      	 			 <input class="mdl-textfield__input" type="text" id="descricao" name="descricao" rows="1" value="descricao"></input> 
-                     <label class="mdl-textfield__label" for="descricao">Descrição</label>
-      			</div> 
-              
-      		 	 <div class="mdl-radio-group">
-      		 		<h6>Categoria:
-      				{{#categorias}}
-        				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
-        		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}">
-        		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
-        				</label>
-      				{{/categorias}}	
-              		</h6>			
-      			 </div>   	
-				
-	             <div class="mdl-radio-group">
-	              <h6>Tipo Sanguíneo:
-	              {{#tipos}}
-	                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}">
-	                     <input class="mdl-radio__button" id="{{name}}" name="tipo" type="radio" value="{{name}}">
-	                     <span class="mdl-radio__label">{{descricao}} &nbsp; </span>
-	                </label>
-	              {{/tipos}}  
-	              </h6>     
-	             </div>     
-			  	   
-				 <div>
-					 <h6>Data:<input type=date name="data" value="{{data}}"></input></h6>
-	      	     </div>
-	      	     
-	      	     <div>
-	      	     	<h6>Horário:<input type=time name="horario" value="{{horario}}"></input></h6>
-	      	     </div>
-	      	     
-	      	     <input id="street_number" name="nr" type="hidden"></input>
-	  			 <input id="route" name="logradouro" type="hidden"></input>
-	  			 <input id="locality" name="cidade" type="hidden"></input>
-	  			 <input id="administrative_area_level_1" name="uf" type="hidden"></input>	
-  			 	{{/acao}}	
-  			 	
-  			 	 <div class="mdl-radio-group">
-      		 		<h6>Categoria:
-      				{{#categoria}}
-        				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
-        		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}">
-        		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
-        				</label>
-      				{{/categoria}}	
-              		</h6>			
-      			 </div>   	
-				
-	             <div class="mdl-radio-group">
-	              <h6>Tipo Sanguíneo:
-	              {{#tipo}}
-	                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}">
-	                     <input class="mdl-radio__button" id="{{name}}" name="tipo" type="radio" value="{{name}}">
-	                     <span class="mdl-radio__label">{{descricao}} &nbsp; </span>
-	                </label>
-	              {{/tipo}}  
-	              </h6>     
-	              	
-	      		 <div >
-	      			<button	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"	type="submit">Enviar
-	      		    </button>
-	      		 </div>	  
-	   	 	</form>
-  	   		<div id="locationField">
-       			 <input id="autocomplete" placeholder="Digite o endereço do evento aqui"
-               	onFocus="geolocate()" type="text"></input>
-      	     </div> 
-	   </div>
-   </div>
-  </main>
- </div>
- 
-<!-- script habilita radio -->
+</head>
+<body>
+	<div
+		class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+		<header
+			class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+			<div class="mdl-layout__header-row">
+				<span class="mdl-layout-title">Eventos</span>
+				<div class="mdl-layout-spacer"></div>
+			</div>
+		</header>
+		<div
+			class="demo-drawer mdl-layout__drawer mdl-color--red-900 mdl-color-text--blue-grey-50">
+			<header class="demo-drawer-header">
+				<img src="/img/user.jpg" class="demo-avatar">
+				<div class="demo-avatar-dropdown">
+					<span class="mdl-color-text--white">projetocosangue</span>
+					<div class="mdl-layout-spacer"></div>
+				</div>
+			</header>
+			<nav class="demo-navigation mdl-navigation mdl-color--red-800">
+				<a class="mdl-navigation__link mdl-color-text--white"
+					href="/listaEventos"><i
+					class="mdl-color-text--white material-icons" role="presentation">home</i>Eventos</a>
+				<a class="mdl-navigation__link mdl-color-text--white"
+					href="/telaCriaEvento"><i
+					class="mdl-color-text--white material-icons" role="presentation">event</i>Criar
+					Evento</a> <a class="mdl-navigation__link mdl-color-text--white"
+					href="/sair"><i class="mdl-color-text--white material-icons"
+					role="presentation">power_settings_new</i>Sair</a>
+				<div class="mdl-layout-spacer"></div>
+			</nav>
+		</div>
 
-<script type="text/javascript">  
+		<main class="mdl-layout__content mdl-color--grey-100">
+		<div class="mdl-grid demo-content">
+			<div
+				class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--10-col mdl-grid">
+				<form action="/atualizar" method="POST" name="form_cadastro">
+					{{#acao}}
+					<input id="id" name="id" value={{id}} type="hidden"></input>
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+						style="width: 800px;">
+						<input class="mdl-textfield__input" type="text" id="titulo"
+							name="nome" value="{{nome}}" /> <label
+							class="mdl-textfield__label" for="titulo">Título Evento</label>
+					</div>
+
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+						style="width: 800px;">
+						<input class="mdl-textfield__input" type="text" id="descricao"
+							name="descricao" rows="1" value="{{descricao}}"></input> <label
+							class="mdl-textfield__label" for="descricao">Descrição</label>
+					</div>
+					{{#endereco}}
+					<div class="mdl-textfield mdl-js-textfield" id="locationField"
+						style="width: 700px;">
+						<input class="mdl-textfield__input" name="enderecoCompleto"
+							id="autocomplete" onFocus="geolocate()" type="text"
+							value="{{enderecoCompleto}}"></input> <label
+							class="mdl-textfield__label" for="descricao"></label>
+					</div>
+					<input
+						id="street_number" name="nr" type="hidden"></input> <input
+						id="route" name="logradouro" type="hidden"></input> <input
+						id="locality" name="cidade" type="hidden"></input> <input
+						id="administrative_area_level_1" name="uf" type="hidden"></input>
+					{{/endereco}}
+					<div class="mdl-radio-group">
+						<h6>
+							Categoria: {{#categorias}} <label
+								class="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+								for="{{name}}" required> <input
+								class="mdl-radio__button" id="{{name}}" name="categoria"
+								type="radio" value="{{name}}" onclick="habilitar();"> <span
+								class="mdl-radio__label">{{nome}} &nbsp; </span>
+							</label> {{/categorias}}
+						</h6>
+					</div>
+
+					<div class="mdl-radio-group" id="tipos" style="display: none;">
+						<h6>
+							Tipo Sanguíneo: {{#tipos}} <label
+								class="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+								for="{{name}}"> <input class="mdl-radio__button"
+								id="{{name}}" name="tipo" type="radio" value="{{name}}">
+								<span class="mdl-radio__label">{{descricao}} &nbsp; </span>
+							</label> {{/tipos}}
+						</h6>
+					</div>
+
+					<div>
+						<h6>
+							Data:<input type=date name="data" value="{{data}}"></input>
+						</h6>
+					</div>
+
+					<div>
+						<h6>
+							Horário:<input type=time name="horario" value="{{horario}}"></input>
+						</h6>
+					</div>
+					{{/acao}}
+					
+				    <div class="mdl-card__actions mdl-card--border">
+						<button
+							class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+							type="submit">ATUALIZAR</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		</main>
+	</div>
+
+	<script type="text/javascript">  
 function habilitar(){  
-    if(document.getElementById('solicitacao').checked){  
-        document.getElementById('textArea').disabled = true;  
-    } else {  
-        document.getElementById('textArea').disabled = false;  
-    }  
+	var tipoSan = document.getElementById("tipos");
+	
+    if(document.getElementById("SOLICITACAO").checked){  
+        tipoSan.style.display = "block";
+    } else {
+    	tipoSan.style.display = "none";
+    }
 }  
-</script> 
-      
-<!-- scrip datapiker --> 
-<script>
-
-$('#datepicker').datepicker(function() {
-	language:"pt-BR"
-
-});
 </script>
-   
-      <!-- começa aqui script endereco -->
- <script>
+
+
+	<!-- começa aqui script endereco -->
+	<script>
 // This example displays an address form, using the autocomplete feature
 // of the Google Places API to help users fill in the information.
 
@@ -242,8 +241,9 @@ function geolocate() {
 // [END region_geolocation]
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApKcpBbux4Wedj7kn06Tmts9eRqtEwuSM&amp&signed_in=true&libraries=places&callback=initAutocomplete"
-        async defer></script>
-        
-  </body>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApKcpBbux4Wedj7kn06Tmts9eRqtEwuSM&amp&signed_in=true&libraries=places&callback=initAutocomplete"
+		async defer></script>
+
+</body>
 </html>
