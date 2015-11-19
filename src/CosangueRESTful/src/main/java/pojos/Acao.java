@@ -49,8 +49,7 @@ public class Acao implements Serializable {
 	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", fetch = FetchType.EAGER)
-	@Cascade(value = CascadeType.DELETE)
-	//@OneToOne(mappedBy = "acao", optional = true, fetch = FetchType.LAZY)
+	@Cascade(value = { CascadeType.DELETE, CascadeType.MERGE })
 	private Endereco endereco;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -58,14 +57,11 @@ public class Acao implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	
 	@LazyCollection(LazyCollectionOption.FALSE)
-	 @OneToMany(mappedBy = "acao", targetEntity = Comentario.class)
-	//@OneToMany(mappedBy = "acao", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "acao", targetEntity = Comentario.class)
 	private List<Comentario> comentario;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	// @ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "id_hemocentro")
 	private Hemocentro hemocentro;
@@ -132,16 +128,16 @@ public class Acao implements Serializable {
 		return nParticipantes;
 	}
 
-	public void setnParticipantes(int nParticipantes) {
-		this.nParticipantes = nParticipantes;
+	public void setnParticipantes(Integer nParticipantes) {
+		this.nParticipantes = nParticipantes == null ? 0 : nParticipantes;
 	}
 
 	public int getnReportacoes() {
 		return nReportacoes;
 	}
 
-	public void setnReportacoes(int nReportacoes) {
-		this.nReportacoes = nReportacoes;
+	public void setnReportacoes(Integer nReportacoes) {
+		this.nReportacoes = nReportacoes == null ? 0 : nReportacoes;
 	}
 
 	public Categoria getCategoria() {
@@ -159,7 +155,7 @@ public class Acao implements Serializable {
 	public void setTipo(TipoSanguineo tipo) {
 		this.tipo = tipo;
 	}
-	
+
 	public Endereco getEndereco() {
 		return endereco;
 	}

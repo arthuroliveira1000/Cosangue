@@ -29,7 +29,7 @@ public class AcaoDAO extends SimpleEntityManager {
 			rollBack();
 			return null;
 		}
-		
+
 	}
 
 	public Acao inseriAcaoNoUsuario(Long idAcao, Long idUsuario) {

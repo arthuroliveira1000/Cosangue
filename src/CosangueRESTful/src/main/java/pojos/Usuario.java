@@ -186,8 +186,8 @@ public class Usuario implements Serializable {
 		return quantidadeDoacao;
 	}
 
-	public void setQuantidadeDoacao(int quantidadeDoacao) {
-		this.quantidadeDoacao = quantidadeDoacao;
+	public void setQuantidadeDoacao(Integer quantidadeDoacao) {
+		this.quantidadeDoacao = quantidadeDoacao == null ? 0 : quantidadeDoacao;
 	}
 
 	public static long getSerialversionuid() {
