@@ -1,74 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tcc.cosangueapp" >
+    package="tcc.cosangueapp">
 
-    <!-- Permite que o celular vibre quando receber uma notificação -->
     <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!-- PERMISSIONS TO GOOGLE MAPS -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- Allows the API to use the Global Positioning System (GPS) to determine the device's location to within a very small area. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- Allows the API to use WiFi or mobile cell data (or both) to determine the device's location. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- PERMISSIONS TO GOOGLE MAPS -->
-
-
-    <!-- PERMISSIONS TO GOOGLE CLOUD MESSAGING -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!-- permite acesso do aplicativo a internet -->
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- O GCM precisa se conectar a uma conta do Google. -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <!-- Permissão utilizada para travar a tela, e evitar o modo de espera. -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--
-         Permissão customizada necessária para receber as mensagens.
-        Ela precisa ser chamada PACOTE.permission.C2D_MESSAGE
-         !!!!!!!!!!!!!!!!!!!!O PACOTE DEVE SER O PACOTE ONDE ESTA A CLASSE BROADCASTRECEIVER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-    -->
+
     <permission
         android:name="tcc.cosangueapp.gcm.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="tcc.cosangueapp.gcm.permission.C2D_MESSAGE" />
-    <!-- Declara a permissão para se registrar no GCM e receber mensagens -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <!-- PERMISSIONS TO GOOGLE CLOUD MESSAGING -->
     <application
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@drawable/logo_materialdesign"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-
-        <!-- Versão do Google Play Services. -->
+        android:theme="@style/PrimayAndAccentColorsEqual">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!-- Maps V2 -->
         <uses-feature
             android:glEsVersion="0x00020000"
             android:required="true" />
 
-        <!--
-       API Key (Coloque a sua aqui)
-       https://console.developers.google.com
-        -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/CHAVE_ACESSO_GOOGLE_MAPS" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/CHAVE_ACESSO_GOOGLE_MAPS" />
 
-        <!-- Main Activity -->
         <activity
             android:name=".activities.Abertura"
             android:label="@string/app_name"
-            android:theme="@style/NoActionBarTheme" >
+            android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,46 +60,34 @@
         <activity
             android:name=".activities.Cadastro"
             android:label="@string/title_activity_cadastro"
-            android:parentActivityName=".activities.Inicio" >
-
-            <!-- Parent activity meta-data to support API level 7+ -->
+            android:parentActivityName=".activities.Inicio">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.Inicio" />
         </activity>
-        <!-- Adicionar essa configuração a activity que for aberta pela notificação:  android:launchMode="singleTop" -->
         <activity
             android:name=".activities.PaginaInicial"
             android:label="@string/title_activity_pagina_inicial"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme" />
 
-        <!--
-BroadcastReceiver para receber as mensagens do GCM, por meio de Intents.
-Este receiver precisa estar ser declarado no manifesto, para que as mensagens sejam interceptadas mesmo com o aplicativo fechado. Este receiver vai iniciar o service GcmIntentService, que está declarado mais abaixo.
-        -->
         <receiver
             android:name=".gcm.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-
-                <!-- Filtrar as ações para receber mensagens. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
                 <category android:name="tcc.cosangueapp" />
             </intent-filter>
         </receiver>
-        <!-- Service chamado pelo receiver acima. Deve conter o código para ler as mensagens. -->
+
         <service android:name=".gcm.GcmIntentService" />
 
         <activity
             android:name=".activities.Informacoes"
             android:label="@string/title_activity_informacoes"
             android:parentActivityName=".activities.PaginaInicial"
-            android:theme="@style/AppTheme" >
-
-            <!-- Parent activity meta-data to support API level 7+ -->
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.PaginaInicial" />
@@ -129,12 +95,22 @@ Este receiver precisa estar ser declarado no manifesto, para que as mensagens se
         <activity
             android:name=".activities.DetalhesEventos"
             android:label="@string/title_activity_detalhes_eventos"
-            android:parentActivityName=".activities.PaginaInicial" >
-
-            <!-- Parent activity meta-data to support API level 7+ -->
+            android:parentActivityName=".activities.PaginaInicial">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.PaginaInicial" />
+        </activity>
+
+
+        <activity
+            android:name=".activities.AdicionaEvento"
+            android:label="@string/title_activity_adiciona_evento"
+            android:parentActivityName=".activities.PaginaInicial"
+            android:theme="@style/PrimayAndAccentColorsEqual">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.PaginaInicial" />
+
         </activity>
     </application>
 

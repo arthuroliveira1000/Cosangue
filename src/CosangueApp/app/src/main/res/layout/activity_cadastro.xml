@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="0dp"
+    android:background="@color/primary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:paddingBottom="20dp"
     android:weightSum="1">
 
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tb_cadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/primary"
-        app:theme="@style/AppTheme"/>
+        android:title="Faça parte da comunidade!"
+        android:titleTextColor="@color/accentColor" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -27,7 +28,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        app:theme="@style/MaterialDrawerTheme.Light">
+        android:backgroundTint="@color/accentColor"
+        android:theme="@style/Material.Widget.EditText.Light">
 
         <EditText
             android:id="@+id/et_nome"
@@ -35,9 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/primary"
-            android:elegantTextHeight="false"
             android:hint="@string/nome"
             android:inputType="textPersonName"
             android:maxLength="50"
@@ -58,8 +57,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/primary"
             android:hint="@string/login"
             android:inputType="text"
             android:maxLength="20"
@@ -68,51 +65,28 @@
     </android.support.design.widget.TextInputLayout>
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TextView
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingTop="13dp"
+        android:text="Tipo Sanguíneo"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_tipo_sanguineo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp">
-
-            <EditText
-                android:id="@+id/et_idade"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="@string/idade"
-                android:inputType="number"
-                android:maxLength="2"
-                android:orientation="horizontal"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
-                android:drawablePadding="16dp"
-                android:elegantTextHeight="false" />
-        </android.support.design.widget.TextInputLayout>
-
-        <Spinner
-            android:drawablePadding="16dp"
-            android:id="@+id/sp_tipo_sanguineo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="13dp" />
-
-
-    </LinearLayout>
+        android:drawablePadding="16dp"
+        android:padding="5dp" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginRight="10dp">
 
         <EditText
             android:id="@+id/et_senha"
@@ -120,8 +94,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/primary"
             android:hint="@string/senha"
             android:inputType="textPassword"
             android:maxLength="20"
@@ -134,50 +106,57 @@
         android:id="@+id/rg_sexo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="15dp"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
+        android:paddingTop="5dp"
         android:textAlignment="center"
-        android:theme="@style/AppTheme"
-        android:layout_gravity="center_horizontal">
+        android:theme="@style/AppTheme">
 
 
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/rb_masculino"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/primary"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
             android:hint="@string/masculino"
             android:orientation="horizontal"
             android:paddingBottom="16dp"
             android:paddingTop="20dp"
-            android:textSize="18dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal" />
+            android:textSize="18dp" />
 
 
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/rb_feminino"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawablePadding="16dp"
-            android:drawableTint="@color/primary"
+            android:layout_weight="1"
             android:hint="@string/feminino"
             android:orientation="horizontal"
             android:paddingBottom="16dp"
             android:paddingTop="16dp"
             android:textAlignment="center"
-            android:textSize="18dp"
-            android:layout_weight="1" />
+            android:textSize="18dp" />
 
     </RadioGroup>
 
-    <DatePicker
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dt_nascimento"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
-
+        <EditText
+            android:id="@+id/et_nascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/data_nascimento"
+            android:inputType="date"
+            android:maxLength="10"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" />
+    </android.support.design.widget.TextInputLayout>
 </LinearLayout>

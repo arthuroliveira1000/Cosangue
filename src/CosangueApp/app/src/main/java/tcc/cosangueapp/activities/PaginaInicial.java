@@ -3,7 +3,6 @@ package tcc.cosangueapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,9 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.folderselector.FolderChooserDialog;
@@ -45,8 +44,8 @@ import java.util.List;
 import tcc.cosangueapp.R;
 import tcc.cosangueapp.adapters.RVAdapter;
 import tcc.cosangueapp.daos.UsuarioDAO;
-import tcc.cosangueapp.fragments.EventosDetalhesFragment;
-import tcc.cosangueapp.fragments.HemocentroFragment;
+import tcc.cosangueapp.fragments.AcoesNaoEncontradasFragment;
+import tcc.cosangueapp.fragments.PaginaInicialFragment;
 import tcc.cosangueapp.gcm.GCloudMessaging;
 import tcc.cosangueapp.json.Json;
 import tcc.cosangueapp.pojos.Acao;
@@ -56,6 +55,7 @@ import tcc.cosangueapp.utils.Constantes;
 public class PaginaInicial extends AppCompatActivity implements FolderChooserDialog.FolderCallback {
 
     UsuarioDAO usuarioDAO;
+    FloatingActionButton fabInseriAcao;
     private Bundle bdUsuarioLogado;
     private Usuario usuarioLogado;
     private FragmentManager fm;
@@ -63,7 +63,6 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
     private Toolbar mToolbar;
     private Drawer navegationDrawer;
     private AccountHeader headerNavegationDrawer;
-    private FrameLayout flContent;
     private SharedPreferences spPreferencias;
     private SharedPreferences.Editor editarPreferencias;
     private String genero;
@@ -74,8 +73,6 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
     private LinearLayoutManager llm;
     private RVAdapter adapter;
     private List<Acao> listaAcoes;
-    FloatingActionButton fabInseriAcao;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +81,10 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
         mToolbar = (Toolbar) findViewById(R.id.tb_pagina_inicial);
         mToolbar.setTitle("Feed de Eventos");
         setSupportActionBar(mToolbar);
+
         inicializaComponentes();
+
+        replaceFragment(new PaginaInicialFragment());
 
         criaHeaderParaNavegationDrawer();
         criaNavegationDrawer(savedInstanceState);
@@ -96,76 +96,25 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
         }
 
         new HttpRequestTaskGetAllAcoes().execute();
-
     }
 
     public void inicializaComponentes() {
 
-        usuarioLogado = new Usuario();
-        bdUsuarioLogado = getIntent().getExtras();
-        verificaBundle();
-        flContent = (FrameLayout) findViewById(R.id.fl_pagina_inicial);
+        //usuarioLogado = new Usuario();
+        //bdUsuarioLogado = getIntent().getExtras();
+        // verificaBundle();
         spPreferencias = getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, MODE_APPEND);
         editarPreferencias = spPreferencias.edit();
         nome = spPreferencias.getString("nome", null);
         login = spPreferencias.getString("login", null);
         genero = spPreferencias.getString("genero", null);
         id = Long.parseLong(spPreferencias.getString("id", null));
-        fabInseriAcao = (FloatingActionButton) findViewById(R.id.fab_inseri_acao);
-    }
-
-    public void acaoFab() {
-        fabInseriAcao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), InseriEventos.class);
-            }
-        });
-    }
-
-    private void verificaBundle() {
-
-        if (bdUsuarioLogado != null) {
-            if (bdUsuarioLogado.containsKey("usuario")) {
-                usuarioLogado = (Usuario) bdUsuarioLogado.getSerializable("usuario");
-            }
-        }
-    }
-
-    private void verificaRegistrationId() {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-
-                String registrationId = GCloudMessaging.register(getApplicationContext(), Constantes.SENDER_ID);
-
-                SharedPreferences spPreferencias = getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, MODE_APPEND);
-                SharedPreferences.Editor editarPreferencias = spPreferencias.edit();
-                // adiciona o registration_id no shared preferences
-                editarPreferencias.putString(Constantes.PROPERTY_REG_ID, registrationId).apply();
-
-            }
-        }.start();
+        //  fabInseriAcao = (FloatingActionButton) findViewById(R.id.fab_inseri_acao);
     }
 
     private Context getContext() {
         return this;
     }
-
-    /*private String retornaRegistrationId() {
-
-        boolean ok = checkPlayServices();
-        if (ok) {
-            // Já está registrado
-            return GCloudMessaging.getRegistrationId(getContext());
-
-        } else {
-            return null;
-        }
-        //fazer put no usuário  para adicionar seu novo registration_id
-        //criar método para receber o json recebido na mensagem
-    }*/
 
     private int imagemPerfil() {
         if (genero == "M") {
@@ -217,13 +166,15 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
                         if (drawerItem != null) {
 
                             if (position == 1) { // Perfil
-                                Toast.makeText(PaginaInicial.this, "Testando Perfil", Toast.LENGTH_LONG).show();
+
                             }
                             if (position == 2) { // Hemocentro
-                                replaceFragment(new HemocentroFragment());
+
+
                             }
                             if (position == 3) { // Eventos
-                                replaceFragment(new EventosDetalhesFragment());
+                                replaceFragment(new PaginaInicialFragment());
+
 
                             }
                             if (position == 4) { // Doações
@@ -232,11 +183,6 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
                             if (position == 6) { // Doação de Sangue
 
                                 startActivity(new Intent(getApplicationContext(), Informacoes.class));
-                                // start activity(informacoes)
-
-
-                                // /replaceFragment(new InformacoesFragment());
-                                //Toast.makeText(PaginaInicial.this, "Informações", Toast.LENGTH_LONG).show();
                             }
                             if (position == 8) { // Configuração
                                 Toast.makeText(PaginaInicial.this, "Configurações", Toast.LENGTH_LONG).show();
@@ -275,23 +221,13 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
         navegationDrawer.addItem(new SectionDrawerItem().withName("Ajustes"));
         navegationDrawer.addItem(iConfiguracoes);
         navegationDrawer.addItem(iLogout);
-        // Exemplo switchDrawerItem  -> navegationDrawerLeft.addItem(new SwitchDrawerItem().withName("Notificação").withChecked(true).withOnCheckedChangeListener(mOnOnCheckedChangeListener));
-        //Exemplo ToggleDrawerItem - > navegationDrawerLeft.addItem(new ToggleDrawerItem().withName("News").withChecked(true).withOnCheckedChangeListener(mOnOnCheckedChangeListener));
-
     }
 
     private void replaceFragment(Fragment frag) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_pagina_inicial, frag, "TAG");
-        getSupportFragmentManager().beginTransaction().addToBackStack(null);
-        getSupportFragmentManager().beginTransaction().commit();
-    }
-
-    public void onFragmentInteractionListener() {
-        //you can leave it empty
-    }
-
-    public void onFragmentInteraction(Uri uri) {
-        //you can leave it empty
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fl_pagina_inicial, frag);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
     private boolean checkPlayServices() {
@@ -301,9 +237,7 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
                 int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
-                //toast("Este aparelho não suporta o Google Play Services.");
-                // resolver o que fazer quando o celular não tem suporte pro google play services, ele não receberá as notificações
-                // dos eventos, terá que entrar no aplicativo para ver se tem novos eventos ou não
+
             }
             return false;
         }
@@ -391,14 +325,25 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
             Gson gson = new Gson();
             try {
                 JSONObject resposta = Json.get(Constantes.URL_ACAO);
-                JSONArray array = resposta.getJSONArray(Constantes.ROOT_ELEMENT_ACAO);
-                for (int i = 0; i < array.length(); i++) {
-                    listaAcoes.add(gson.fromJson(array.get(i).toString(), Acao.class));
+                if (resposta != null) {
+                    Log.i("DEBUG", "JSON da lista não está vazio!");
+                    JSONArray array = resposta.getJSONArray(Constantes.ROOT_ELEMENT_ACAO);
+                    for (int i = 0; i < array.length(); i++) {
+                        listaAcoes.add(gson.fromJson(array.get(i).toString(), Acao.class));
+                    }
+                    return listaAcoes;
                 }
 
-                return listaAcoes;
+                return null;
             } catch (JSONException e) {
-                e.printStackTrace();
+                try {
+                    JSONObject resposta = Json.get(Constantes.URL_ACAO);
+                    String unicaAcao = resposta.getJSONObject("acao").toString();
+                    listaAcoes.add(gson.fromJson(unicaAcao, Acao.class));
+
+                } catch (JSONException jE) {
+                    jE.printStackTrace();
+                }
             }
             return null;
         }
@@ -406,39 +351,19 @@ public class PaginaInicial extends AppCompatActivity implements FolderChooserDia
         @Override
         protected void onPostExecute(List<Acao> retornoListaAcoes) {
             if (retornoListaAcoes != null) {
-                Toast.makeText(PaginaInicial.this, "Não tá vazia, onPostExecute", Toast.LENGTH_LONG).show();
+                Log.i("DEBUG", "Lista contém eventos!");
                 listaAcoes = retornoListaAcoes;
-                //colocar a lista aqui se não der certo e testar
                 rv = (RecyclerView) findViewById(R.id.rv);
                 llm = new LinearLayoutManager(getContext());
                 rv.setLayoutManager(llm);
                 adapter = new RVAdapter(listaAcoes, PaginaInicial.this);
-                //rv.setOnClickListener(PaginaInicial.this);
                 rv.setAdapter(adapter);
             } else {
-                Toast.makeText(PaginaInicial.this, "Tá vazia, onPostExecute", Toast.LENGTH_LONG).show();
+                Log.i("DEBUG", "Lista de eventos vazia!");
+                replaceFragment(new AcoesNaoEncontradasFragment());
             }
         }
     }
-
-   /* @Override
-    public void onClick(View v) {
-        Toast.makeText(this, "Entro no onCLick", Toast.LENGTH_LONG).show();
-        //int position = v.getId();
-     int position = rv.getChildLayoutPosition(v);
-        int listaAcoesSize = listaAcoes.size();
-        for(int x = 0; x < listaAcoesSize; x++) {
-            if(position == x) {
-                Intent intent = new Intent(this, DetalhesEventos.class);
-                intent.putExtra("acao", listaAcoes.get(x));
-                startActivity(intent);
-                break;
-            }
-        }
-    }*/
-
-
-
 }
 
 

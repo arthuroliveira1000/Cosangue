@@ -48,7 +48,6 @@ public class Inicio extends AppCompatActivity {
         btEntrarComFacebook = (Button) findViewById(R.id.btn_entrar_com_facebook);
     }
 
-
     private void acaoBtCadastrar() {
         tvCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +77,7 @@ public class Inicio extends AppCompatActivity {
         btEntrarComFacebook.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent abreTela = new Intent(Inicio.this, PaginaInicial.class);
-                startActivity(abreTela);
+                Toast.makeText(Inicio.this, "Em construção", Toast.LENGTH_LONG).show();
             }
         });
     }

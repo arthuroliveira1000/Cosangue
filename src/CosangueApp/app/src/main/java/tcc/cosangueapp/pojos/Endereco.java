@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class Endereco implements Serializable {
 
     private Long id;
+    private String enderecoCompleto;
     private String logradouro;
     private String bairro;
     private int nr;
@@ -24,7 +25,7 @@ public class Endereco implements Serializable {
 
     public Endereco(Long id, String logradouro, String bairro, int nr,
                     String cidade, String uf, String latitude, String longitude,
-                    Usuario usuario, Hemocentro hemocentro, Acao acao) {
+                    Usuario usuario, Hemocentro hemocentro, Acao acao, String endereco) {
         super();
         this.id = id;
         this.logradouro = logradouro;
@@ -37,6 +38,7 @@ public class Endereco implements Serializable {
         this.usuario = usuario;
         this.hemocentro = hemocentro;
         this.acao = acao;
+        this.enderecoCompleto = endereco;
     }
 
     public Long getId() {
@@ -78,6 +80,16 @@ public class Endereco implements Serializable {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
+    public String getEnderecoCompleto() {
+        return enderecoCompleto;
+    }
+
+    public void setEnderecoCompleto(String enderecoCompleto) {
+        this.enderecoCompleto = enderecoCompleto;
+    }
+
+
 
     public String getUf() {
         return uf;

@@ -8,7 +8,6 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import tcc.cosangueapp.activities.DetalhesEventos;
-import tcc.cosangueapp.activities.PaginaInicial;
 import tcc.cosangueapp.pojos.Acao;
 import tcc.cosangueapp.pojos.Categoria;
 import tcc.cosangueapp.pojos.Endereco;
@@ -31,21 +30,14 @@ public class GcmIntentService extends IntentService {
         Log.i(TAG, "GcmIntentService.onHandleIntent: " + extras);
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
         if (!extras.isEmpty()) {
-            // Verifica o tipo da mensagem
             String messageType = gcm.getMessageType(intent);
-            // O extras.isEmpty() precisa ser chamado para ler o bundle
-            // Verifica o tipo da mensagem, no futuro podemos ter mais tipos
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                // Erro
                 onError(extras);
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-                // Mensagem do tipo normal. Faz a leitura do parâmetro "msg"
-                // enviado pelo servidor
                 onMessage(extras);
             }
         }
-        // Libera o wake lock, que foi bloqueado pela classe
-        // "GcmBroadcastReceiver".
+
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
@@ -54,10 +46,6 @@ public class GcmIntentService extends IntentService {
     }
 
     private void onMessage(Bundle extras) {
-        // Lê a mensagem e mostra uma notificação
-        // pegar todos as tags do que vier e setar numa nova ção
-        //ex:    Long id = extras.getLong("id");
-        // faz isso pra todos os campos
         Acao acao = new Acao();
         Endereco endereco = new Endereco();
 
@@ -92,27 +80,13 @@ public class GcmIntentService extends IntentService {
             acao.setTipo(TipoSanguineo.fromString(extras.getString("tiposanguineo")));
         }
 
-
-        // SETANDO ENDEREÇO
-
         if (extras.getString("id_endereco") != null) {
             endereco.setId(Long.valueOf(extras.getString("id_endereco")));
         }
-        if (extras.getString("logradouro") != null) {
-            endereco.setLogradouro(extras.getString("logradouro"));
+        if (extras.getString("enderecoCompleto") != null) {
+            endereco.setLogradouro(extras.getString("enderecoCompleto"));
         }
-        if (extras.getString("bairro") != null) {
-            endereco.setBairro(extras.getString("bairro"));
-        }
-        if (extras.getString("numero") != null) {
-            endereco.setNr(extras.getInt("numero"));
-        }
-        if (extras.getString("cidade") != null) {
-            endereco.setCidade(extras.getString("cidade"));
-        }
-        if (extras.getString("uf") != null) {
-            endereco.setUf(extras.getString("uf"));
-        }
+
         if (extras.getString("latitude") != null) {
             endereco.setLatitude(extras.getString("latitude"));
         }
@@ -124,7 +98,6 @@ public class GcmIntentService extends IntentService {
         }
 
         Log.d(TAG, acao.toString());
-        //Log.d(TAG, endereco.toString());
         Intent intent = new Intent(this, DetalhesEventos.class);
         intent.putExtra("acao", acao);
         NotificationUtils.create(this, intent, "Novo Evento", acao.getNome(), 1);

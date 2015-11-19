@@ -30,6 +30,7 @@ public class AcaoDAO extends SimpleEntityManager {
 			return null;
 		}
 
+
 	}
 
 	public ArrayList<Acao> buscaAcaoPorHemocentro(Long idHemocentro) {

@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="primary" type="color">#F44336</item>
-    <item name="primarydark" type="color">#D32F2F</item>
-    <item name="accent" type="color">#FAFAFA</item>
+    <item name="primaryColor" type="color">#F44336</item>
+    <item name="primarydarkColor" type="color">#D32F2F</item>
+    <item name="accentColor" type="color">#FAFAFA</item>
     <item name="navegationbar" type="color">#212121</item>
     <item name="facebook" type="color">#3b5998</item>
-    <color name="primary_text_material_light">#37474f</color>
+    <color name="primary_text_material_light">#f8f8f8</color>
     <color name="primary_text_default_material_dark">#f9f9f9</color>
     <color name="windowBackground">#fcfcfc</color>
+    <color name="primary">#f44336</color>
+    <color name="primarydark">#d32f2f</color>
+    <color name="accent_material_light">#fafafa</color>
+    <color name="secondary_text_default_material_light">#8a000000</color>
+    <color name="accent_material_dark">#ff5252</color>
+    <color name="primary_material_light">#f44336</color>
+    <color name="primary_dark_material_light">#d32f2f</color>
+    <color name="accent">#ff5252</color>
+    <color name="foreground_material_light">#fafafa</color>
+    <color name="primary_text_default_material_light">#defafafa</color>
+    <color name="background_material_dark">#f8f8f8</color>
+    <color name="material_drawer_hint_text">#96757575</color>
 </resources>

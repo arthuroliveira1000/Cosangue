@@ -19,6 +19,7 @@ public class Usuario implements Serializable {
     private String login;
     private TipoSanguineo tipoSanguineo;
     private String registrationId;
+    private int quantidadeDoacao;
 
     private Endereco endereco;
 
@@ -35,7 +36,7 @@ public class Usuario implements Serializable {
     public Usuario(Long id, String nome, String dataNascimento, Genero genero,
                    String senha, String login, TipoSanguineo tipoSanguineo,
                    Endereco endereco, List<Acao> acao, List<Doacao> doacao,
-                   List<Comentario> comentario, String registrationId) {
+                   List<Comentario> comentario, String registrationId, int quantidadeDoacao) {
         super();
         this.id = id;
         this.nome = nome;
@@ -49,6 +50,7 @@ public class Usuario implements Serializable {
         this.doacao = doacao;
         this.comentario = comentario;
         this.registrationId = registrationId;
+        this.quantidadeDoacao = quantidadeDoacao;
     }
 
     public Long getId() {
@@ -71,8 +73,8 @@ public class Usuario implements Serializable {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = DateUtils.dateToString(dataNascimento);
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getregistrationId() {
@@ -97,6 +99,14 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public int getQuantidadeDoacao() {
+        return quantidadeDoacao;
+    }
+
+    public void setQuantidadeDoacao(int quantidade) {
+        this.quantidadeDoacao = quantidade;
     }
 
     public String getLogin() {

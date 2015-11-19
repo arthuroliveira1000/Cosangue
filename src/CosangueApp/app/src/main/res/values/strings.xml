@@ -89,4 +89,11 @@
     <string name="tv_evento_local">Local</string>
     <string name="tv_evento_solicitacoes">Solicitações</string>
     <string name="title_activity_detalhes_eventos">DetalhesEventos</string>
+    <string name="nome_evento">Nome do Evento</string>
+    <string name="text_view_endereco">Endereço</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_places_auto_complete">PlacesAutoCompleteActivity</string>
+    <string name="data_nascimento">Data de Nascimento</string>
+    <string name="title_activity_adiciona_evento">AdicionaEvento</string>
+    <string name="local_doacao">Onde doar?</string>
 </resources>

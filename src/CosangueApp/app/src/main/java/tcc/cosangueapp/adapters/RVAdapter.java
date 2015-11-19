@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -41,9 +42,23 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.AcaoViewHolder> {
     //aqui tu seta  todos os dados que serao inseridos nos campos
     @Override
     public void onBindViewHolder(AcaoViewHolder holder, int position) {
+        Log.i("DEBUG", acoes.get(position).getCategoria().toString());
         holder.nomeAcao.setText(acoes.get(position).getNome());
-        holder.descricaoAcao.setText(acoes.get(position).getDescricao());
-        //holder.personPhoto.setImageResource(persons.get(i).photoId);
+
+
+
+        if (acoes.get(position).getCategoria().toString() == "Coleta Externa") {
+            holder.fotoTipoEvento.setImageResource(R.drawable.coleta_externa_icone);
+        } else if (acoes.get(position).getCategoria().toString() == "Palestra") {
+            holder.fotoTipoEvento.setImageResource(R.drawable.palestra_icone);
+        } else if (acoes.get(position).getCategoria().toString() == "Campanha") {
+            holder.fotoTipoEvento.setImageResource(R.drawable.campanha_icone);
+        } else if (acoes.get(position).getCategoria().toString() == "Solicitação") {
+            holder.fotoTipoEvento.setImageResource(R.drawable.solicitacao_icone);
+        } else if (acoes.get(position).getCategoria().toString() == "") {
+            holder.fotoTipoEvento.setImageResource(R.drawable.outro_icone);
+        }
+
     }
 
     @Override
@@ -61,8 +76,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.AcaoViewHolder> {
 
         CardView cardViewAcao;
         TextView nomeAcao;
-        TextView descricaoAcao;
-        //ImageView personPhoto;
+        ImageView fotoTipoEvento;
 
 
         AcaoViewHolder(View itemView) {
@@ -71,8 +85,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.AcaoViewHolder> {
             itemView.setOnClickListener(this);
             cardViewAcao = (CardView) itemView.findViewById(R.id.cv_evento);
             nomeAcao = (TextView) itemView.findViewById(R.id.nome_acao);
-            descricaoAcao = (TextView) itemView.findViewById(R.id.descricao_acao);
-            //personPhoto = (ImageView)itemView.findViewById(R.id.tv_dado_categoria_evento);
+            fotoTipoEvento = (ImageView) itemView.findViewById(R.id.iv_tipo_evento);
 
         }
 
