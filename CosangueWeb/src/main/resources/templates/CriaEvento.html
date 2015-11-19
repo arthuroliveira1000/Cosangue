@@ -9,25 +9,19 @@
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/img/android-desktop.png">
+    <link rel="icon" sizes="192x192" href="../img/ic_opacity_black_24dp.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Cosangue">
-    <link rel="apple-touch-icon-precomposed" href="../img/ios-desktop.png">
+    <link rel="apple-touch-icon-precomposed" href="../img/ic_opacity_black_24dp">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="../img/logo_android.png" />
-
-	<!-- <script type="text/javascript" src="../bootstrap/js/jquery-1.11.3.js"></script>
-	<script type="text/javascript" src="../bootstrap/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-datepicker.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css "> -->
+    <link rel="shortcut icon" href="../img/ic_opacity_black_24dp" />
 	
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -49,11 +43,11 @@
   </style>  
    
   </head>
-  <body>
+  <body background="../img/cream_pixels.png">
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Eventos</span>
+          <span class="mdl-layout-title">Criar evento</span>
           <div class="mdl-layout-spacer"></div>
         </div>
       </header>
@@ -73,21 +67,21 @@
         </nav>
       </div>
 
-      <main class="mdl-layout__content mdl-color--grey-100">
+      <main class="mdl-layout__content ">
         <div class="mdl-grid demo-content">
          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--9-col mdl-grid">
           <form action="/criar" method="POST" name="form_cadastro">
-    			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 700px;">
+    			 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col mdl-cell--6-col-phone mdl-cell--8-col-tablet">
     	 			 <input class="mdl-textfield__input" type="text" id="titulo" name="nome"/>
     	  			 <label class="mdl-textfield__label" for="titulo">Título Evento</label>
     			 </div>
 
-      			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 700px;">
-      	 			 <textarea class="mdl-textfield__input" type="text" id="descricao" name="descricao" rows="1"></textarea> 
+      			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col mdl-cell--6-col-phone mdl-cell--8-col-tablet">
+      	 			 <textarea class="mdl-textfield__input" id="descricao" name="descricao" rows="1"></textarea> 
                      <label class="mdl-textfield__label" for="descricao">Descrição</label>
       			</div> 
               	
-              	 <div class="mdl-textfield mdl-js-textfield" id="locationField" style="width: 700px;">
+              	 <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col mdl-cell--6-col-phone mdl-cell--8-col-tablet" id="locationField" >
 		       			 <input class="mdl-textfield__input" name="enderecoCompleto" id="autocomplete"
 		               	onFocus="geolocate()" type="text"></input>
 		               	<label class="mdl-textfield__label" for="descricao"></label>
@@ -96,7 +90,7 @@
       		 	 <div class="mdl-radio-group">
       		 		<h6>Categoria:
       				{{#categoria}}
-        				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}" required>
+        				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{name}}">
         		  			 <input class="mdl-radio__button" id="{{name}}" name="categoria" type="radio" value="{{name}}" onclick="habilitar();">
         		  			 <span class="mdl-radio__label">{{nome}} &nbsp; </span>
         				</label>
@@ -127,11 +121,13 @@
 	  			 <input id="route" name="logradouro" type="hidden"></input>
 	  			 <input id="locality" name="cidade" type="hidden"></input>
 	  			 <input id="administrative_area_level_1" name="uf" type="hidden"></input>	
-  			 			
-	      		 <div >
-	      			<button	class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"	type="submit" onclick="return validaFormulario()">Enviar
-	      		    </button>
-	      		 </div>	  
+  			 	
+  			 	
+  			 	<div class="mdl-card__actions mdl-card--border">
+					<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" onclick="history.go(-1)" >Voltar</button>				 
+					<input class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" onclick="return validaFormulario()" value="Criar">	
+				</div>			
+	      		
 	   	 	</form>
   	   		
 	   </div>
@@ -152,7 +148,23 @@ function habilitar(){
     }
 }  
 </script> 
-         
+
+<script type="text/javascript">
+function validaFormulario() {
+	var formulario = document.form_cadastro;
+
+	if (formulario.nome.value == "" || formulario.descricao.value == ""
+			|| formulario.enderecoCompleto.value == ""
+			|| formulario.categoria.value == ""
+			|| formulario.horario.value == "" || formulario.nr.value == ""
+			|| formulario.data.value == "" || formulario.logradouro.value =="" || formulario.cidade.value =="" || formulario.uf.value =="" ) {	 
+		alert("Preencha todos os campos!");
+	} else {
+		document.form_cadastro.submit();
+	}
+}
+
+</script>         
       <!-- script endereco -->
  <script>
 var placeSearch, autocomplete;

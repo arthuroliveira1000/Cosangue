@@ -1,6 +1,6 @@
 function validaFormulario() {
 	var formulario = document.form_cadastro;
-	var testaAnoLancamento = isNaN(formulario.anoLancamento.value);
+
 
 	if (formulario.nome.value == "" || formulario.descricao.value == ""
 			|| formulario.enderecoCompleto.value == ""
