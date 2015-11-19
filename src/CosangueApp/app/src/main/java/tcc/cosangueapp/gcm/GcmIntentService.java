@@ -84,7 +84,10 @@ public class GcmIntentService extends IntentService {
             endereco.setId(Long.valueOf(extras.getString("id_endereco")));
         }
         if (extras.getString("enderecoCompleto") != null) {
-            endereco.setLogradouro(extras.getString("enderecoCompleto"));
+            endereco.setEnderecoCompleto(extras.getString("enderecoCompleto"));
+        }
+        if (extras.getString("logradouro") != null) {
+            endereco.setLogradouro(extras.getString("logradouro"));
         }
 
         if (extras.getString("latitude") != null) {

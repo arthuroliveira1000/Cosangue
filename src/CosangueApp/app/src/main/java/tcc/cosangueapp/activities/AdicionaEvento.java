@@ -234,17 +234,17 @@ public class AdicionaEvento extends AppCompatActivity implements View.OnClickLis
                 if (acaoRetornada != null && enderecoRetornado != null) {
                     enderecoDao.atualizaEndereco(enderecoRetornado.getId().toString(), acaoRetornada.getId().toString());
                     acaoDao.put(acaoRetornada.getId().toString(), params[0].toString());
+                    Toast.makeText(AdicionaEvento.this, "Evento criado!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AdicionaEvento.this, PaginaInicial.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(AdicionaEvento.this, "Erro ao criar o evento!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AdicionaEvento.this, PaginaInicial.class);
+                    startActivity(intent);
                 }
             }
             return null;
         }
-
-        protected void OnPostExecute(Void result) {
-            Intent intent = new Intent(AdicionaEvento.this, PaginaInicial.class);
-            startActivity(intent);
-        }
-
-
     }
 
 }
