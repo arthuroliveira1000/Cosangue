@@ -13,11 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cosangue.model.Acao;
-import cosangue.model.Categoria;
 import cosangue.model.Endereco;
 import cosangue.model.Hemocentro;
-import cosangue.model.Hemocomponentes;
-import cosangue.model.TipoSanguineo;
 
 public class Json {
 	public static JSONObject hemocentroToJson(Hemocentro hemocentro) {

@@ -49,7 +49,7 @@ public class Acao implements Serializable {
 	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", fetch = FetchType.EAGER)
-	@Cascade(value = { CascadeType.DELETE, CascadeType.MERGE })
+	@Cascade(value = {CascadeType.DELETE, CascadeType.MERGE})
 	private Endereco endereco;
 
 	@LazyCollection(LazyCollectionOption.FALSE)

@@ -1,5 +1,7 @@
 package cosangue.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cosangue.dao.AcaoDAO;
+import cosangue.model.Acao;
 import cosangue.model.Hemocentro;
 
 @Controller
@@ -20,8 +23,11 @@ public class PaginaInicialController {
 		AcaoDAO acaoDAO = new AcaoDAO();
 		
 		if (hemocentroLogado != null) {
-			model.addAttribute("hemocentroLogado", hemocentroLogado);
-			model.addAttribute("acao", acaoDAO.listaEventos());
+			ArrayList<Acao> eventos = acaoDAO.buscaAcoesPorHemocentro(hemocentroLogado.getId());
+			if (eventos != null) { 
+				model.addAttribute("hemocentroLogado", hemocentroLogado);
+				model.addAttribute("acao", eventos);
+			}
 			return "PaginaInicial";
 		}
 		return "Login";

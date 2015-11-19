@@ -8,14 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import cosangue.dao.AcaoDAO;
 import cosangue.dao.HemocentroDAO;
 import cosangue.model.Acao;
-import cosangue.model.Categoria;
 import cosangue.model.Hemocentro;
-import cosangue.model.Hemocomponentes;
 
 @Controller
 public class LoginController {
@@ -37,10 +34,11 @@ public class LoginController {
 			session.setAttribute("hemocentroLogado",
 					hemocentro);
 			model.addAttribute("hemocentro", hemocentro);
-			ArrayList<Acao> eventos = acaoDAO.listaEventos();
+			ArrayList<Acao> eventos = acaoDAO.buscaAcoesPorHemocentro(hemocentro.getId());
 			if (eventos != null) { 
 				model.addAttribute("acao", eventos);
 			}
+			
 			return "PaginaInicial";
 		} else {
 			return "Login";

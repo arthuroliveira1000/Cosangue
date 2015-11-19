@@ -32,7 +32,6 @@ public class Hemocentro implements Serializable {
 	private String login;
 	@Column(length = 30)
 	private String senha;
-
 	@OneToOne(mappedBy = "hemocentro", fetch = FetchType.LAZY, optional = true)
 	private Endereco endereco;
 

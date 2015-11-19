@@ -50,7 +50,8 @@ public class Endereco implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "id_acao")
-	@Cascade(value = { CascadeType.DELETE, CascadeType.MERGE })
+
+	@Cascade(value = {CascadeType.DELETE, CascadeType.MERGE})
 	private Acao acao;
 
 	public Endereco() {

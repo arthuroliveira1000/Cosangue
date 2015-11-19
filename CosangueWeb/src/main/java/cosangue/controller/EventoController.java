@@ -54,7 +54,6 @@ public class EventoController {
 		} else {
 			acao.setHemocentro(hemocentroLogado);
 			model.addAttribute("hemocentro", hemocentroLogado);
-			System.out.println("data" + acao.getData());
 	
 			SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
 			SimpleDateFormat formata2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,10 +69,10 @@ public class EventoController {
 			
 			Acao acaoRetornada = acaoDAO.inserir(acao);
 			Endereco enderecoInserido = enderecoDAO.inserir(endereco);
-			enderecoDAO.atualizaEndereco(enderecoInserido.getId().toString(),
+			enderecoDAO.inseriAcaoNoEndereco(enderecoInserido.getId().toString(),
 					acaoRetornada.getId().toString());
 
-			ArrayList<Acao> eventos = acaoDAO.listaEventos();
+			ArrayList<Acao> eventos = acaoDAO.buscaAcoesPorHemocentro(hemocentroLogado.getId());
 			if (eventos != null) {
 				model.addAttribute("acao", eventos);
 			}
@@ -98,7 +97,7 @@ public class EventoController {
 				return "VisualizaEvento";
 			}
 			else {
-				return "Login";
+				return "PaginaInicial";
 			}
 		}
 	}
@@ -113,7 +112,7 @@ public class EventoController {
 			model.addAttribute("hemocentroLogado", hemocentroLogado);
 			if (id != null ) {
 				Acao acaoRetornada = acaoDAO.buscaAcao(id);
-				/*SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
 				SimpleDateFormat formata2 = new SimpleDateFormat("yyyy-MM-dd");
 				try {
 					Date data = formata.parse(acaoRetornada.getData());
@@ -121,18 +120,54 @@ public class EventoController {
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}*/
+				}
 				model.addAttribute("acao", acaoRetornada);
 				model.addAttribute("categorias", Categoria.values());
 				model.addAttribute("tipos", TipoSanguineo.values());
 				return "AtualizaEvento";
 			}
 			else {
-				return "Login";
+				return "PaginaInicial";
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/atualizar", method = RequestMethod.POST)
+	public String enviaEventoAtualizado(Acao acao, Endereco endereco, HttpSession session, Model model) {
+		Hemocentro hemocentroLogado = (Hemocentro) session
+				.getAttribute("hemocentroLogado");
 		
+		AcaoDAO acaoDAO = new AcaoDAO();
+		EnderecoDAO enderecoDAO = new EnderecoDAO();
+		
+		if (hemocentroLogado == null) {
+			return "Login";
+		} else {
+			model.addAttribute("hemocentro", hemocentroLogado);
+			SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formata2 = new SimpleDateFormat("yyyy-MM-dd");
+			
+			try {
+				Date data = formata2.parse(acao.getData());
+				acao.setData(formata.format(data));	
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			Acao acaoRetornada = acaoDAO.buscaAcao(acao.getId());
+			acaoDAO.atualizar(acao);
+			endereco.setId(acaoRetornada.getEndereco().getId());
+			enderecoDAO.atualizaEndereco(endereco);
+			
+			ArrayList<Acao> eventos = acaoDAO.buscaAcoesPorHemocentro(hemocentroLogado.getId());
+			if (eventos != null) {
+				model.addAttribute("acao", eventos);
+			}
+			return "PaginaInicial";
+		}
+	}
+	
 	@RequestMapping(value = "/excluiEvento", method = { RequestMethod.POST,
 			RequestMethod.GET })
 	public String excluiEvento(Long id, HttpSession session, Model model) {
@@ -147,7 +182,7 @@ public class EventoController {
 				acaoDAO.excluir(id);
 			}
 
-			ArrayList<Acao> eventos = acaoDAO.listaEventos();
+			ArrayList<Acao> eventos = acaoDAO.buscaAcoesPorHemocentro(hemocentroLogado.getId());
 			if (eventos != null) {
 				model.addAttribute("acao", eventos);
 			}

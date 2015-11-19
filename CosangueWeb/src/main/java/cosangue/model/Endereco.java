@@ -4,6 +4,7 @@ package cosangue.model;
 public class Endereco {
 
 	private Long id;
+	private String enderecoCompleto;
 	private String logradouro;
 	private String bairro;
 	private int nr;
@@ -18,11 +19,12 @@ public class Endereco {
 		super();
 	}
 
-	public Endereco(Long id, String logradouro, String bairro, int nr,
+	public Endereco(Long id, String enderecoCompleto, String logradouro, String bairro, int nr,
 			String cidade, String uf, String latitude, String longitude,
 			Hemocentro hemocentro, Acao acao) {
 		super();
 		this.id = id;
+		this.enderecoCompleto = enderecoCompleto;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
 		this.nr = nr;
@@ -113,5 +115,14 @@ public class Endereco {
 	public void setAcao(Acao acao) {
 		this.acao = acao;
 	}
+	
+	public String getEnderecoCompleto() {
+		return enderecoCompleto;
+	}
+
+	public void setEnderecoCompleto(String enderecoCompleto) {
+		this.enderecoCompleto = enderecoCompleto;
+	}
+
 
 }
