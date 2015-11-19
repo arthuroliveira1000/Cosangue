@@ -11,13 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.Calendar;
 
 import tcc.cosangueapp.R;
 import tcc.cosangueapp.daos.UsuarioDAO;
@@ -32,14 +29,13 @@ public class Cadastro extends AppCompatActivity {
     EditText etLogin;
     EditText etSenha;
     EditText etNome;
-    EditText etIdade;
     RadioButton rbMasculino;
     RadioButton rbFeminino;
     boolean valid;
     Usuario usuario;
     UsuarioDAO usuarioDAO;
     Spinner spTipoSanguineo;
-    DatePicker dpDataNascimento;
+    EditText etNascimento;
     ArrayAdapter<TipoSanguineo> adapter;
     private Toolbar mToolbar;
 
@@ -78,17 +74,17 @@ public class Cadastro extends AppCompatActivity {
 
     private void inicializaComponentes() {
         mToolbar = (Toolbar) findViewById(R.id.tb_cadastro);
-        mToolbar.setTitle("Cadastre-se");
+        mToolbar.setTitle("Cadastre-se!");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.up_indicator);
         etLogin = (EditText) findViewById(R.id.et_login);
         etSenha = (EditText) findViewById(R.id.et_senha);
         etNome = (EditText) findViewById(R.id.et_nome);
-        etIdade = (EditText) findViewById(R.id.et_idade);
         rbMasculino = (RadioButton) findViewById(R.id.rb_masculino);
         rbFeminino = (RadioButton) findViewById(R.id.rb_feminino);
         spTipoSanguineo = (Spinner) findViewById(R.id.sp_tipo_sanguineo);
-        dpDataNascimento = (DatePicker) findViewById(R.id.dt_nascimento);
+        etNascimento = (EditText) findViewById(R.id.et_nascimento);
         adapter = new ArrayAdapter<TipoSanguineo>(this, android.R.layout.simple_spinner_item, TipoSanguineo.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTipoSanguineo.setAdapter(adapter);
@@ -126,18 +122,6 @@ public class Cadastro extends AppCompatActivity {
             }
         });
 
-        // VERIFICANDO SE IDADE NÃO ESTA IGUAL A ZERO
-        etIdade.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (etIdade.equals("00") || etIdade.equals("0")) {
-                    etSenha.setError("Idade Inválida!");
-                    valid = false;
-                }
-            }
-        });
-
-
         // VERIFICANDO SE NOME CONTEM SÓ LETRAS
         etNome.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -168,7 +152,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     public void efetuaCadastro() {
-        if (generoSelecionado() == null || validaCampos() == false || etSenha.getText().length() == 0) {
+        if (generoSelecionado() == null || validaCampos() == false || etSenha.getText().length() == 0 || etLogin.getText().length() == 0 || etNome.getText().length() == 0 || etNascimento.getText().length() == 0) {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_LONG).show();
         } else {
             new HttpRequestTask().execute(novoUsuario());
@@ -184,9 +168,7 @@ public class Cadastro extends AppCompatActivity {
         TipoSanguineo tipoSelecionado = TipoSanguineo.values()[idTipoSanguineo];
         usuario.setTipoSanguineo(tipoSelecionado);
         usuario.setGenero(generoSelecionado());
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(this.dpDataNascimento.getYear(), this.dpDataNascimento.getMonth(), this.dpDataNascimento.getDayOfMonth());
-        usuario.setDataNascimento(calendar.getTime());
+        usuario.setDataNascimento(etNascimento.getText().toString());
         Log.i("DEBUG", usuario.getGenero().toString());
         Log.i("DEBUG", usuario.getDataNascimento().toString());
         Log.i("DEBUG", usuario.getTipoSanguineo().toString());
@@ -220,7 +202,7 @@ public class Cadastro extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario) {
             if (usuario != null) {
-                SharedPreferences preferences =  getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, 0);
+                SharedPreferences preferences = getApplicationContext().getSharedPreferences(Constantes.NOME_SHARED_PREFERENCIES, 0);
                 SharedPreferences.Editor editor = preferences.edit();
 
                 editor.putString("id", Long.toString(usuario.getId()));

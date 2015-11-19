@@ -6,11 +6,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import tcc.cosangueapp.utils.DateUtils;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Doacao implements Serializable {
 
     private Long id;
-    private int quantidadeDoacao;
     private String dataDoacao;
     private Usuario usuario;
 
@@ -18,11 +18,10 @@ public class Doacao implements Serializable {
         super();
     }
 
-    public Doacao(Long id, int quantidadeDoacao, String dataDoacao,
+    public Doacao(Long id, String dataDoacao,
                   Usuario usuario) {
         super();
         this.id = id;
-        this.quantidadeDoacao = quantidadeDoacao;
         this.dataDoacao = dataDoacao;
         this.usuario = usuario;
     }
@@ -33,14 +32,6 @@ public class Doacao implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getQuantidadeDoacao() {
-        return quantidadeDoacao;
-    }
-
-    public void setQuantidadeDoacao(int quantidadeDoacao) {
-        this.quantidadeDoacao = quantidadeDoacao;
     }
 
     public String getDataDoacao() {
