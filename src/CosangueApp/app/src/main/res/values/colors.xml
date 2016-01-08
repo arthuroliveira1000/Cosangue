@@ -6,7 +6,7 @@
     <item name="accentColor" type="color">#FAFAFA</item>
     <item name="navegationbar" type="color">#212121</item>
     <item name="facebook" type="color">#3b5998</item>
-    <color name="primary_text_material_light">#f8f8f8</color>
+    <color name="primary_text_material_light">#000000</color>
     <color name="primary_text_default_material_dark">#f9f9f9</color>
     <color name="windowBackground">#fcfcfc</color>
     <color name="primary">#f44336</color>

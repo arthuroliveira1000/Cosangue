@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -49,9 +50,9 @@ public class Usuario implements Serializable {
 	@OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private Endereco endereco;
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "usuario", targetEntity = Acao.class)
-	private List<Acao> acao;
+	// @LazyCollection(LazyCollectionOption.TRUE)
+	// @OneToMany(mappedBy = "usuario", targetEntity = Acao.class)
+	// private List<Acao> acao;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "usuario", targetEntity = Doacao.class)
@@ -67,9 +68,9 @@ public class Usuario implements Serializable {
 
 	public Usuario(Long id, String nome, String dataNascimento, Genero genero,
 			String senha, String login, TipoSanguineo tipoSanguineo,
-			Endereco endereco, List<Acao> acao, List<Doacao> doacao,
-			List<Comentario> comentario, String registrationId,
-			int quantidadeDoacao) {
+			// Endereco endereco, List<Acao> acao,
+			List<Doacao> doacao, List<Comentario> comentario,
+			String registrationId, int quantidadeDoacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -79,7 +80,7 @@ public class Usuario implements Serializable {
 		this.login = login;
 		this.tipoSanguineo = tipoSanguineo;
 		this.endereco = endereco;
-		this.acao = acao;
+		// this.acao = acao;
 		this.doacao = doacao;
 		this.comentario = comentario;
 		this.registrationId = registrationId;
@@ -150,6 +151,7 @@ public class Usuario implements Serializable {
 		this.endereco = endereco;
 	}
 
+	@XmlTransient
 	public List<Doacao> getDoacao() {
 		return doacao;
 	}
@@ -158,6 +160,7 @@ public class Usuario implements Serializable {
 		this.doacao = doacao;
 	}
 
+	@XmlTransient
 	public List<Comentario> getComentario() {
 		return comentario;
 	}
@@ -166,13 +169,14 @@ public class Usuario implements Serializable {
 		this.comentario = comentario;
 	}
 
-	public List<Acao> getAcao() {
-		return acao;
-	}
+	// @XmlTransient
+	// public List<Acao> getAcao() {
+	// return acao;
+	// }
 
-	public void setAcao(List<Acao> acao) {
-		this.acao = acao;
-	}
+	// public void setAcao(List<Acao> acao) {
+	// this.acao = acao;
+	// }
 
 	public String getRegistrationId() {
 		return registrationId;

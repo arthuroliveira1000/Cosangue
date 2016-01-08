@@ -89,7 +89,7 @@ public class AdicionaEvento extends AppCompatActivity implements View.OnClickLis
             try {
                 List<Address> geoCoderEndereco = geoCoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
 
-                Toast.makeText(getApplicationContext(),
+             /*   Toast.makeText(getApplicationContext(),
                         "Endereço place: " + place.getAddress().toString(),
                         Toast.LENGTH_LONG).show();
 
@@ -100,7 +100,7 @@ public class AdicionaEvento extends AppCompatActivity implements View.OnClickLis
 
                 Toast.makeText(getApplicationContext(),
                         "Estado: " + geoCoderEndereco.get(0).getAdminArea(),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_LONG).show();*/
 
             } catch (java.io.IOException e) {
                 e.printStackTrace();
@@ -234,11 +234,11 @@ public class AdicionaEvento extends AppCompatActivity implements View.OnClickLis
                 if (acaoRetornada != null && enderecoRetornado != null) {
                     enderecoDao.atualizaEndereco(enderecoRetornado.getId().toString(), acaoRetornada.getId().toString());
                     acaoDao.put(acaoRetornada.getId().toString(), params[0].toString());
-                    Toast.makeText(AdicionaEvento.this, "Evento criado!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(AdicionaEvento.this, PaginaInicial.class);
+                    Log.i("EVENTO", "Evento criado!");
                     startActivity(intent);
                 } else {
-                    Toast.makeText(AdicionaEvento.this, "Erro ao criar o evento!", Toast.LENGTH_LONG).show();
+                  Log.i("EVENTO", "Evento não criado!");
                     Intent intent = new Intent(AdicionaEvento.this, PaginaInicial.class);
                     startActivity(intent);
                 }

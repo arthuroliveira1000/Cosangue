@@ -43,9 +43,9 @@ public class DetalhesEventos extends AppCompatActivity {
             if (acao.getDescricao() != null) {
                 descricaoEvento.setText(acao.getDescricao());
             }
-            if (acao.getEndereco().getEnderecoCompleto() != null) {
+          /*  if (acao.getEndereco().getEnderecoCompleto() != null) {
                 localEvento.setText(acao.getEndereco().getEnderecoCompleto());
-            }
+            }*/
             if (acao.getData() != null) {
                 dataEvento.setText(acao.getData());
             }

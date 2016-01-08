@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -49,13 +50,18 @@ public class Acao implements Serializable {
 	private Hemocomponentes hemocomponente;
 
 	@OneToOne(mappedBy = "acao", fetch = FetchType.EAGER)
-	@Cascade(value = {CascadeType.DELETE, CascadeType.MERGE})
+	@Cascade(value = { CascadeType.DELETE, CascadeType.MERGE })
 	private Endereco endereco;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
+	
+   /* @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "usuario", targetEntity = Acao.class)
+    private List<Acao> acao;*/
+
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "acao", targetEntity = Comentario.class)
@@ -91,7 +97,12 @@ public class Acao implements Serializable {
 		this.hemocomponente = hemocomponente;
 		this.horario = horario;
 	}
+	
+   /* Endereco endereco, List<Acao> acao, List<Doacao> doacao,
+    List<Comentario> comentario, String registrationId,
+    int quantidadeDoacao) {
 
+*/
 	public Long getId() {
 		return id;
 	}
@@ -164,6 +175,7 @@ public class Acao implements Serializable {
 		this.endereco = endereco;
 	}
 
+	@XmlTransient
 	public Usuario getUsuario() {
 		return usuario;
 	}
