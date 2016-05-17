@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cosangue</title>
+	
+	  <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../img/ic_opacity_black_24dp.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Cosangue">
+    <link rel="apple-touch-icon-precomposed" href="../img/ic_opacity_black_24dp.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="../img/ic_opacity_black_24dp.png" />
+    
+	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.red-deep_orange.min.css" /> 
+	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="../css/login.css">
+</head>
+<body background="../img/cream_pixels.png">
+    <div class="mdl-layout mdl-js-layout">
+	<main class="mdl-layout__content" bgcolor="../img/cream_pixels.png">
+		<div class="mdl-card mdl-shadow--6dp">
+			<div class="mdl-card__title mdl-color--primary mdl-color-text--white demo-card-square">
+				<img src="../img/MarcaHorizontalMaterial.png" height="80" width="200">
+			</div>
+	  	<div class="mdl-card__supporting-text">
+				<form action="/entrar" method="POST" name="form_identificacao">
+					<div class="mdl-textfield mdl-js-textfield ">
+						<input class="mdl-textfield__input" type="text" id="login" name="login"
+								required /> 
+						<label class="mdl-textfield__label" for="login">Usuário</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input" type="password" id="password" name="senha" required /> 
+						<label class="mdl-textfield__label" for="password">Senha</label>
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" >Entrar</button>
+			     	</div>
+				</form>
+			</div>
+			
+		</div>
+	</main>
+</div>	
+</body>
+</html>
